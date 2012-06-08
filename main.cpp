@@ -41,7 +41,7 @@ struct _environment
     int health = 100, lives = 3, score = 30, position = 0, moves = 1, kills = 0, kills_needed = 0,
         levels_completed = 0;
     string savefile = "save.dat";
-    color bgcolor = NORMAL;
+    color bgcolor = NORMAL, playercolor = RED;
 };
 char getch_()
 {
@@ -112,19 +112,17 @@ void enginecmd(string c, string d)
             env.bgcolor = NORMAL;
         move(NIL);
     }
-/*    if (c == "env->pcolor")
+    if (c == "env->pcolor")
     {
         if (d == "red")
-            env.playercolor = "\33[31m";
+            env.playercolor = RED;
         if (d == "green")
-            env.playercolor = "\33[32m";
-        if (d == "yellow")
-            env.playercolor = "\33[33m";
+            env.playercolor = GREEN;
         if (d == "blue")
-            env.playercolor = "\33[34m";
+            env.playercolor = BLUE;
         if (d == "normal")
-            env.playercolor = "\33[31m";
-    }*/
+            env.playercolor = RED;
+    }
     if (c == "gam")
     {
         if (d == "save")
@@ -363,7 +361,7 @@ void showmap(void)
         }
         else
         {
-            colorify(RED);
+            colorify(env.playercolor);
             cout <<  "@";
             colorify();
             cout << "  ";
