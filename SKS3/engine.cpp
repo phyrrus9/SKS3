@@ -199,34 +199,31 @@ void display(void)
 void kill(int p)
 {
     env.map[p] = env.grid[p] = echar;
+    env.kills++;
 }
 void eat(int p)
 {
     bool ate = false;
     if (env.map[p] == '%')
     {
-        env.kills++;
         env.health -= 5;
         env.score += targetnoms::SMALLBUG;
         ate = true;
     }
     if (env.map[p] == '&')
     {
-        env.kills++;
         env.health -= 4;
         env.score += targetnoms::LARGEBUG;
         ate = true;
     }
     if (env.map[p] == '$')
     {
-        env.kills++;
         env.health -= 3;
         env.score += targetnoms::WORM;
         ate = true;
     }
     if (env.map[p] == '!')
     {
-        env.kills++;
         env.health -= 25;
         env.score += targetnoms::PITBULL;
         ate = true;
