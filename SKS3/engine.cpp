@@ -193,7 +193,9 @@ void display(void)
 {
     colorify(NORMAL);
     env.totalscore = (((((env.score * (env.levels_completed * 2)) + (env.health / 3)) + env.kills) + env.lives) - (env.moves / 3));
-    cout << left << setw(12) << "SKS3 (PR1)" << setw(7) << "Health:" << setw(5) << env.health << setw(7) << "Lives:" << setw(4) << env.lives <<  setw(7) << "Kills:" << setw(3) << env.kills << setw(14) << "Kills needed:" << setw(5) << env.kills_needed << setw(20) << "Levels completed:" << setw(5) << env.levels_completed << setw(7) << "Attack:" << setw(3) << env.attack << setw(7) << setprecision(6) << fixed << "Score:" << setw(9) << env.totalscore << endl;
+    cout << left << setw(12) << "SKS3 (PR1)" << setw(7) << "Health:" << setw(5) << env.health << setw(7) << "Lives:" << setw(4) << env.lives <<  setw(7) << "Kills:" << setw(3) << env.kills << setw(14) << "Kills needed:" << setw(5) << env.kills_needed << setw(20) << "Levels completed:" << setw(5) << env.levels_completed << setw(7) << "Attack:" << setw(3) << env.attack << setw(8) << "Weapon:" << setw(3) << (env.attack * (env.selectedweapon + 1)) << setw(7) << setprecision(6) << fixed << "Score:" << setw(9) << env.totalscore;
+    showweapons();
+    cout << endl;
     colorify();
 }
 void kill(int p)
@@ -411,7 +413,7 @@ void light(int p)
     if ((p + 31) < 900)
         env.grid[p + 31] = env.map[p + 31];
 }
-void throw_star(void)
+void attack(void)
 {
     int location = -1, gain = 0, pos = env.position;
     character::target t;
@@ -451,7 +453,9 @@ void throw_star(void)
     }
     int strength = env.levels_completed * t;
     //cout << strength << endl; //debug
-    if (env.attack >= strength)
+    int attack = env.attack;
+    attack *= env.selectedweapon + 1; //add a little boost
+    if (attack >= strength)
     {
         kill(location);
         env.score += gain;
@@ -465,4 +469,48 @@ void increment_attack(void)
         env.attack += increment;
         env.health -= env.score / divisor;
     }
+}
+void showweapons(void)
+{
+    //D(fist) x(throwing star) |(sword) ©(gun) {}(cannon)
+    if (env.weapons[0])
+    {
+        if (env.selectedweapon == 0)
+            colorify(RED);
+        cout << "D ";
+        colorify();
+    }
+    if (env.weapons[1])
+    {
+        if (env.selectedweapon == 1)
+            colorify(RED);
+        cout << "x ";
+        colorify();
+    }
+    if (env.weapons[2])
+    {
+        if (env.selectedweapon == 2)
+            colorify(RED);
+        cout << "| ";
+        colorify();
+    }
+    if (env.weapons[3])
+    {
+        if (env.selectedweapon == 3)
+            colorify(RED);
+        cout << "© ";
+        colorify();
+    }
+    if (env.weapons[4])
+    {
+        if (env.selectedweapon == 4)
+            colorify(RED);
+        cout << "{} ";
+        colorify();
+    }
+}
+void setselectedweapon(int w)
+{
+    if (env.weapons[w])
+        env.selectedweapon = w;
 }

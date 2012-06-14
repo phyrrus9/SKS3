@@ -25,6 +25,10 @@ namespace targetnoms
 {
     enum target { SMALLBUG = 25, LARGEBUG = 50, WORM = 75, PITBULL = 100};
 }
+namespace weapons
+{
+    
+}
 char getch_(void);
 void enginecmd(string, string);
 void showhelp(void);
@@ -42,15 +46,18 @@ void light(int);
 void colorify(void);
 void colorify(color);
 void terminate(int);
-void throw_star(void);
+void attack(void);
 void increment_attack(void);
+void showweapons(void);
+void setselectedweapon(int);
 struct _environment
 {
     char map[900] = "\0", grid[900] = "/0";
     char * view;
     bool showmap = true, single = false;
+    bool weapons[5] = { true, false, false, false, false }; //star, sword
     int health = 100, lives = 3, score = 30, position = 0, moves = 1, kills = 0, kills_needed = 0,
-    levels_completed = 0, attack = 0, totalscore = 0;
+    levels_completed = 0, attack = 0, totalscore = 0, selectedweapon = 0;
     string savefile = "save.dat";
     color bgcolor = NORMAL, playercolor = RED;
     character::player player = character::N;

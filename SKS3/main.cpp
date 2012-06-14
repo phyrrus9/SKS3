@@ -39,6 +39,16 @@ int main(int argc, const char * argv[])
             populate();
             continue;
         }
+        
+        if (env.levels_completed > 0) //level 2
+            env.weapons[1] = true; //enable the throwing star
+        if (env.levels_completed > 4) //level 5
+            env.weapons[2] = true; //enable the sword
+        if (env.levels_completed > 9) //level 10
+            env.weapons[3] = true; //enable the gun
+        if (env.levels_completed > 24) //level 25
+            env.weapons[4] = true; //enable the canon
+        
         display();
         if (env.health <= 0)
         {
@@ -59,6 +69,16 @@ int main(int argc, const char * argv[])
             char a = getch_();
             bool turning = false, moving = false;
             direction t;
+            if (a == '1')
+                setselectedweapon(0);
+            if (a == '2')
+                setselectedweapon(1);
+            if (a == '3')
+                setselectedweapon(2);
+            if (a == '4')
+                setselectedweapon(3);
+            if (a == '5')
+                setselectedweapon(4);
             if (a == 'w')
             {
                 t = N;
@@ -100,7 +120,7 @@ int main(int argc, const char * argv[])
                 t = W;
             }
             if (a == 'e')
-                throw_star();
+                attack();
             if (a == 'E')
                 increment_attack();
             if (a == 'S')
