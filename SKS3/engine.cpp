@@ -66,7 +66,9 @@ void enginecmd(string c, string d)
     if (c == "gam->savefile")
         env.savefile = d;
     if (c == "env->foggy")
-        env.showmap = atoi(d.c_str());;
+        env.showmap = atoi(d.c_str());
+    if (c == "env->attack")
+        env.attack = atoi(d.c_str());
 
     if (c == "colorify")
     {
@@ -120,6 +122,8 @@ void enginecmd(string c, string d)
             cout << env.savefile << endl;
         if (d == "env->size")
             cout << sizeof(_environment) << endl;
+        if (d == "env->attack")
+            cout << env.attack << endl;
         cout << "Press any key to continue..." << endl;
         getch_(); //char c = ...
     }
