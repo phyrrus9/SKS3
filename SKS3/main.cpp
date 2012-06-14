@@ -6,6 +6,7 @@
 #ifndef SKS3_engine_h
 #include "engine.h"
 #endif
+#define _move moving = true
 extern _environment env; //fixes issues with xcode compilations
 int main(int argc, const char * argv[])
 {
@@ -56,16 +57,28 @@ int main(int argc, const char * argv[])
         {
             showmap();
             char a = getch_();
-            bool turning = false;
+            bool turning = false, moving = false;
             direction t;
             if (a == 'w')
+            {
                 t = N;
+                moving = true;
+            }
             if (a == 'a')
+            {
                 t = E;
+                moving = true;
+            }
             if (a == 's')
+            {
                 t = S;
+                moving = true;
+            }
             if (a == 'd')
+            {
                 t = W;
+                moving = true;
+            }
             if (a == 'i')
             {
                 turning = true;
@@ -86,14 +99,30 @@ int main(int argc, const char * argv[])
                 turning = true;
                 t = W;
             }
+            if (a == 'e')
+                throw_star();
+            if (a == 'E')
+                increment_attack();
             if (a == 'S')
+            {
                 t = SAV;
+                _move;
+            }
             if (a == 'R')
+            {
                 t = RES;
+                _move;
+            }
             if (a == 'Q')
+            {
                 t = QUI;
+                _move;
+            }
             if (a == 'H')
+            {
                 t = HLP;
+                _move;
+            }
             if (a == 'N')
                 execl(argv[0], argv[0]);
             if (a == '/')
@@ -104,7 +133,13 @@ int main(int argc, const char * argv[])
                 enginecmd(command1, command2);
                 t = NIL;
             }
-            turning ? turn(t) : move(t);
+            if (turning)
+                turn(t);
+            else
+                if (moving)
+                    move(t);
+                else
+                    continue;
         }
     }
     return 0;

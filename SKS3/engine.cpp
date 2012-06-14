@@ -131,6 +131,11 @@ void showhelp(void)
          << "This game is copyright to Ethan laur(phyrrus9) under modtech LLC" << endl
          << "To use:" << endl
          << "Run the game from the terminal or SSH." << endl
+         << "Your player will show up as the following characters, and it is an arrow:" << endl
+         << "^ - You are looking up" << endl
+         << "> - You are looking to the right" << endl
+         << "v - You are looking down" << endl
+         << "< - You are looking to the left" << endl
          << "Your player will be the red character on the screen, you may move by pressing:" << endl
          << "w - Up" << endl
          << "a - Left" << endl
@@ -143,6 +148,9 @@ void showhelp(void)
          << "k - Down" << endl
          << "l - Right" << endl
          << "No need to press enter, character icon will update automatically" << endl
+         << "You do not need to run into a target to attack it, you may use the following:" << endl
+         << "e - Attack target facing arrow" << endl
+         << "E - Increment your attack points" << endl
          << "Other commands used in the game are:" << endl
          << "S - Save game" << endl
          << "R - Restore game" << endl
@@ -180,44 +188,52 @@ void restore(void)
 void display(void)
 {
     colorify(NORMAL);
-    cout << left << setw(12) << "SKS3 (PR1)" << setw(7) << "Health:" << setw(5) << env.health << setw(7) << "Lives:" << setw(4) << env.lives <<  setw(7) << "Kills:" << setw(3) << env.kills << setw(14) << "Kills needed:" << setw(5) << env.kills_needed << setw(20) << "Levels completed:" << setw(5) << env.levels_completed << setw(7) << "Score:" << setw(9) << (((((env.score * (env.levels_completed * 2)) + (env.health / 3)) + env.kills) + env.lives) - (env.moves / 3)) << endl;
+    env.totalscore = (((((env.score * (env.levels_completed * 2)) + (env.health / 3)) + env.kills) + env.lives) - (env.moves / 3));
+    cout << left << setw(12) << "SKS3 (PR1)" << setw(7) << "Health:" << setw(5) << env.health << setw(7) << "Lives:" << setw(4) << env.lives <<  setw(7) << "Kills:" << setw(3) << env.kills << setw(14) << "Kills needed:" << setw(5) << env.kills_needed << setw(20) << "Levels completed:" << setw(5) << env.levels_completed << setw(7) << "Attack:" << setw(3) << env.attack << setw(7) << setprecision(6) << fixed << "Score:" << setw(9) << env.totalscore << endl;
     colorify();
+}
+void kill(int p)
+{
+    env.map[p] = env.grid[p] = echar;
 }
 void eat(int p)
 {
+    bool ate = false;
     if (env.map[p] == '%')
     {
         env.kills++;
         env.health -= 5;
-        env.score += 50;
-        env.map[p] = echar;
+        env.score += targetnoms::SMALLBUG;
+        ate = true;
     }
     if (env.map[p] == '&')
     {
         env.kills++;
         env.health -= 4;
-        env.score += 25;
-        env.map[p] = echar;
+        env.score += targetnoms::LARGEBUG;
+        ate = true;
     }
     if (env.map[p] == '$')
     {
         env.kills++;
         env.health -= 3;
-        env.score += 20;
-        env.map[p] = echar;
+        env.score += targetnoms::WORM;
+        ate = true;
     }
     if (env.map[p] == '!')
     {
         env.kills++;
         env.health -= 25;
-        env.score += 55;
-        env.map[p] = echar;
+        env.score += targetnoms::PITBULL;
+        ate = true;
     }
     if (env.map[p] == '+')
     {
         env.lives++;
-        env.map[p] = echar;
+        ate = true;
     }
+    if (ate)
+        kill(p);
 }
 void populate(void)
 {
@@ -393,4 +409,59 @@ void light(int p)
         env.grid[p + 30] = env.map[p + 30];
     if ((p + 31) < 900)
         env.grid[p + 31] = env.map[p + 31];
+}
+void throw_star(void)
+{
+    int location = -1, gain = 0, pos = env.position;
+    character::target t;
+    if (env.player == character::N)
+        if (pos - 30 > 0)
+            location = pos - 30;
+    if (env.player == character::S)
+        if (pos + 30 < 400)
+            location = pos + 30;
+    if (env.player == character::E)
+        if (pos - 1 > 0)
+            location = pos - 1;
+    if (env.player == character::W)
+        if (pos + 1 < 400)
+            location = pos + 1;
+    if (location < 0)
+        return;
+    if (env.view[location] == '%')
+    {
+        t = character::SMALLBUG;
+        gain = targetnoms::SMALLBUG;
+    }
+    if (env.view[location] == '&')
+    {
+        t = character::LARGEBUG;
+        gain = targetnoms::LARGEBUG;
+    }
+    if (env.view[location] == '$')
+    {
+        t = character::WORM;
+        gain = targetnoms::WORM;
+    }
+    if (env.view[location] == '!')
+    {
+        t = character::PITBULL;
+        gain = targetnoms::PITBULL;
+    }
+    int strength = env.levels_completed * t;
+    //cout << strength << endl; //debug
+    if (env.attack >= strength)
+    {
+        kill(location);
+        env.score += gain;
+    }
+}
+void increment_attack(void)
+{
+    int divisor = 1 + env.attack, increment = 1, total = env.health * env.lives;
+    if (total / divisor > 1) //kgood
+    {
+        env.attack += increment;
+        env.health -= env.score / divisor;
+    }
 }
