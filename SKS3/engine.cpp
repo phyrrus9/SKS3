@@ -155,6 +155,15 @@ void showhelp(void)
          << "You do not need to run into a target to attack it, you may use the following:" << endl
          << "e - Attack target facing arrow" << endl
          << "E - Increment your attack points" << endl
+         << "Weapons are available in the game and will be added to your view when earned" << endl
+         << "The current selection will show up in red in the weapons selector." << endl
+         << "Here is a list of weapons:" << endl
+         << "D - Your fist (default)" << endl
+         << "x - Throwing star (level 2)" << endl
+         << "| - Sword (level 5)" << endl
+         << "© - Gun (level 10)" << endl
+         << "{}- Canon (level 25)" << endl
+         << "To select a weapon, just use the keypad number of your choice" << endl
          << "Other commands used in the game are:" << endl
          << "S - Save game" << endl
          << "R - Restore game" << endl
