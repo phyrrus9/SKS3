@@ -419,13 +419,13 @@ void throw_star(void)
         if (pos - 30 > 0)
             location = pos - 30;
     if (env.player == character::S)
-        if (pos + 30 < 400)
+        if (pos + 30 < 900)
             location = pos + 30;
     if (env.player == character::E)
         if (pos - 1 > 0)
             location = pos - 1;
     if (env.player == character::W)
-        if (pos + 1 < 400)
+        if (pos + 1 < 900)
             location = pos + 1;
     if (location < 0)
         return;
