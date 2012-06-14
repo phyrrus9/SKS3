@@ -131,12 +131,18 @@ void showhelp(void)
          << "This game is copyright to Ethan laur(phyrrus9) under modtech LLC" << endl
          << "To use:" << endl
          << "Run the game from the terminal or SSH." << endl
-         << "Your player will be the @ character on the screen, you may move by pressing:" << endl
+         << "Your player will be the red character on the screen, you may move by pressing:" << endl
          << "w - Up" << endl
          << "a - Left" << endl
          << "s - Down" << endl
          << "d - Right" << endl
          << "Movement is automatic, no need to press enter." << endl
+         << "You may also turn your character with the following keys:" << endl
+         << "i - Up" << endl
+         << "j - Left" << endl
+         << "k - Down" << endl
+         << "l - Right" << endl
+         << "No need to press enter, character icon will update automatically" << endl
          << "Other commands used in the game are:" << endl
          << "S - Save game" << endl
          << "R - Restore game" << endl
@@ -261,6 +267,10 @@ void populate(void)
     }
     env.kills_needed /= 3;
 }
+void turn(direction d)
+{
+    env.player = (character::player)(d);
+}
 void move(direction d)
 {
     void (*prev_fn)(int);
@@ -308,6 +318,7 @@ void move(direction d)
         showhelp();
     if (moved)
     {
+        env.player = (character::player)(d);
         env.map[prev] = env.grid[prev] = echar;
         env.view[env.position] = '@';
         light(env.position);
@@ -336,7 +347,8 @@ void showmap(void)
         else
         {
             colorify(env.playercolor);
-            cout <<  "@";
+            //cout <<  "@";
+            showplayer();
             colorify();
             cout << "  ";
         }
@@ -351,6 +363,17 @@ void showmap(void)
         cout << "# ";
     cout << endl;
     colorify();
+}
+void showplayer(void)
+{
+    if (env.player == character::N)
+        cout << '^';
+    if (env.player == character::S)
+        cout << 'v';
+    if (env.player == character::E)
+        cout << '<';
+    if (env.player == character::W)
+        cout << '>';
 }
 void light(int p)
 {

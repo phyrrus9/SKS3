@@ -56,6 +56,7 @@ int main(int argc, const char * argv[])
         {
             showmap();
             char a = getch_();
+            bool turning = false;
             direction t;
             if (a == 'w')
                 t = N;
@@ -65,6 +66,26 @@ int main(int argc, const char * argv[])
                 t = S;
             if (a == 'd')
                 t = W;
+            if (a == 'i')
+            {
+                turning = true;
+                t = N;
+            }
+            if (a == 'j')
+            {
+                turning = true;
+                t = E;
+            }
+            if (a == 'k')
+            {
+                turning = true;
+                t = S;
+            }
+            if (a == 'l')
+            {
+                turning = true;
+                t = W;
+            }
             if (a == 'S')
                 t = SAV;
             if (a == 'R')
@@ -83,7 +104,7 @@ int main(int argc, const char * argv[])
                 enginecmd(command1, command2);
                 t = NIL;
             }
-            move(t);
+            turning ? turn(t) : move(t);
         }
     }
     return 0;

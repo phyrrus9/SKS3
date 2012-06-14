@@ -16,6 +16,10 @@ const char echar = '~';
 using namespace std;
 enum direction { N, S, E, W, SAV, RES, QUI, HLP, NIL };
 enum color { RED, GREEN, BLUE, NORMAL };
+namespace character
+{
+    enum player { N, S, E, W};
+}
 char getch_(void);
 void enginecmd(string, string);
 void showhelp(void);
@@ -25,7 +29,9 @@ void display(void);
 void eat(int p);
 void populate(void);
 void move(direction);
+void turn(direction);
 void showmap(void);
+void showplayer(void);
 void light(int);
 void colorify(void);
 void colorify(color);
@@ -39,5 +45,6 @@ struct _environment
     levels_completed = 0;
     string savefile = "save.dat";
     color bgcolor = NORMAL, playercolor = RED;
+    character::player player = character::N;
 };
 #endif
