@@ -27,7 +27,11 @@ namespace targetnoms
 }
 namespace weapons
 {
-    
+    struct weaponlist
+    {
+        int strength[6] = { 2, 4, 8, 16, 32, 64 }; //some standards
+    };
+    //D(fist) x(throwing star) |(sword) ©(gun) {}(cannon) ~(laser)
 }
 char getch_(void);
 void enginecmd(string, string);
@@ -55,7 +59,7 @@ struct _environment
     char map[900] = "\0", grid[900] = "/0";
     char * view;
     bool showmap = true, single = false;
-    bool weapons[5] = { true, false, false, false, false }; //star, sword
+    bool weapons[6] = { true, false, false, false, false, false };
     int health = 100, lives = 3, score = 30, position = 0, moves = 1, kills = 0, kills_needed = 0,
     levels_completed = 0, attack = 0, totalscore = 0, selectedweapon = 0;
     string savefile = "save.dat";

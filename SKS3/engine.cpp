@@ -163,6 +163,7 @@ void showhelp(void)
          << "| - Sword (level 5)" << endl
          << "© - Gun (level 10)" << endl
          << "{}- Canon (level 25)" << endl
+         << "~ - Laser (level 50)" << endl
          << "To select a weapon, just use the keypad number of your choice" << endl
          << "Other commands used in the game are:" << endl
          << "S - Save game" << endl
@@ -200,9 +201,10 @@ void restore(void)
 }
 void display(void)
 {
+    weapons::weaponlist t;
     colorify(NORMAL);
     env.totalscore = (((((env.score * (env.levels_completed * 2)) + (env.health / 3)) + env.kills) + env.lives) - (env.moves / 3));
-    cout << left << setw(12) << "SKS3 (PR1)" << setw(7) << "Health:" << setw(5) << env.health << setw(7) << "Lives:" << setw(4) << env.lives <<  setw(7) << "Kills:" << setw(3) << env.kills << setw(14) << "Kills needed:" << setw(5) << env.kills_needed << setw(20) << "Levels completed:" << setw(5) << env.levels_completed << setw(7) << "Attack:" << setw(3) << env.attack << setw(8) << "Weapon:" << setw(3) << (env.attack * (env.selectedweapon + 1)) << setw(7) << setprecision(6) << fixed << "Score:" << setw(9) << env.totalscore;
+    cout << left << setw(12) << "SKS3 (PR2)" << setw(7) << "Health:" << setw(5) << env.health << setw(7) << "Lives:" << setw(4) << env.lives <<  setw(7) << "Kills:" << setw(3) << env.kills << setw(14) << "Kills needed:" << setw(5) << env.kills_needed << setw(20) << "Levels completed:" << setw(5) << env.levels_completed << setw(7) << "Attack:" << setw(3) << env.attack << setw(8) << "Weapon:" << setw(5) << (env.attack * (t.strength[env.selectedweapon])) << setw(7) << setprecision(6) << fixed << "Score:" << setw(9) << env.totalscore;
     showweapons();
     cout << endl;
     colorify();
@@ -463,7 +465,8 @@ void attack(void)
     int strength = env.levels_completed * t;
     //cout << strength << endl; //debug
     int attack = env.attack;
-    attack *= env.selectedweapon + 1; //add a little boost
+    weapons::weaponlist weapon;
+    attack *= weapon.strength[env.selectedweapon]; //add a little boost
     if (attack >= strength)
     {
         kill(location);
@@ -481,7 +484,7 @@ void increment_attack(void)
 }
 void showweapons(void)
 {
-    //D(fist) x(throwing star) |(sword) ©(gun) {}(cannon)
+    //D(fist) x(throwing star) |(sword) ©(gun) {}(cannon) ~(laser)
     if (env.weapons[0])
     {
         if (env.selectedweapon == 0)
@@ -515,6 +518,13 @@ void showweapons(void)
         if (env.selectedweapon == 4)
             colorify(RED);
         cout << "{} ";
+        colorify();
+    }
+    if (env.weapons[5])
+    {
+        if (env.selectedweapon == 5)
+            colorify(RED);
+        cout << "~ ";
         colorify();
     }
 }

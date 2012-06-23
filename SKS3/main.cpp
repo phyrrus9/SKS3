@@ -48,6 +48,8 @@ int main(int argc, const char * argv[])
             env.weapons[3] = true; //enable the gun
         if (env.levels_completed > 24) //level 25
             env.weapons[4] = true; //enable the canon
+        if (env.levels_completed > 49) //level 50
+            env.weapons[5] = true; //enable the laser
         
         display();
         if (env.health <= 0)
@@ -79,6 +81,8 @@ int main(int argc, const char * argv[])
                 setselectedweapon(3);
             if (a == '5')
                 setselectedweapon(4);
+            if (a == '6')
+                setselectedweapon(5);
             if (a == 'w')
             {
                 t = N;
