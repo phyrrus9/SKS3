@@ -97,8 +97,8 @@ void attack(void)
 }
 void increment_attack(void)
 {
-    int divisor = 1 + env.attack, increment = 1, total = env.health * env.lives;
     const int multiplier = 5;
+    int divisor = (1 + env.attack) * multiplier, increment = 1, total = env.health * env.lives;
     if (total / divisor > 1) //kgood
     {
         env.attack += increment;
