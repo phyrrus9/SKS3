@@ -4,6 +4,14 @@
  * This software is free, it may be customized, redistributed, blah blah blah...
  */
 #include "main.h"
+/*int main(int argc, const char * argv[])
+{
+    if (argc > 1)
+        client("localhost", 1501);
+    else
+        server(1501);
+    
+}*/ //for testing server/client socket connections
 int main(int argc, const char * argv[])
 {
     bool single = false;

@@ -10,6 +10,7 @@
 #include <curses.h>
 #include <iomanip>
 #include <signal.h>
+#include "socket.h"
 #include "enumerations.h"
 #include "environment.h"
 #define clear() system("clear")
