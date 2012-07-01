@@ -4,6 +4,12 @@
  * This software is free, it may be customized, redistributed, blah blah blah...
  */
 #include "main.h"
+bool server_mode = false;
+bool client_mode = false;
+bool multiplayer = false;
+bool game_initialized = false;
+extern int client_port;
+extern int server_port;
 /*int main(int argc, const char * argv[])
 {
     if (argc > 1)
@@ -14,19 +20,127 @@
 }*/ //for testing server/client socket connections
 int main(int argc, const char * argv[])
 {
+    clear();
+    cout << "#######################################################" << endl
+         << "#Welcome  to  Super  Key  Seeker  3  ©  2012  phyrrus9#" << endl
+         << "#Please select an option from the list below to start #" << endl
+         << "#1. Single player (local) game                        #" << endl
+         << "#2. Miltiplayer (local) game                          #" << endl
+         << "#3. Multiplayer (online) game                         #" << endl
+         << "#4. Enable fastboot                                   #" << endl
+         << "#5. Disable fastboot                                  #" << endl
+         << "#6. Exit                                              #" << endl
+         << "#######################################################" << endl
+         << ">";
+    int selection;
+    cin >> selection;
+    extern int playernum;
+    extern char * hostname;
+    if (selection == 1)
+    {
+        //numargs = 1;
+        //strcpy(array[0], argv[0]);
+    }
+    if (selection == 2)
+    {
+        multiplayer = true;
+        cout << "Which player are you? (1/2) ";
+        int player;
+        cin >> player;
+        playernum = player;
+        strcpy(hostname, "localhost");
+    }
+    if (selection == 3)
+    {
+        cout << "This game uses TCP ports 5101-5103. Please make sure to patch them through"
+             << " your firewall if you wish for this to actually work." << endl
+             << "This game uses networking before the screen refreshes, so playing over "
+             << "an internet connection may be slow." << endl;
+        multiplayer = true;
+        cout << "Which player are you? (1/2) ";
+        int player;
+        cin >> player;
+        playernum = player;
+        cout << "Please enter the server host: ";
+        char * host = new char[255];
+        cin >> host;
+        strcpy(hostname, host);
+        delete host;
+    }
+    if (selection == 4)
+    {
+        ofstream sksfastboot(".sksfastboot", ios::out | ios::trunc);
+        sksfastboot << "Hello World!";
+        sksfastboot.close();
+        exit(EXIT_SUCCESS);
+    }
+    if (selection == 5)
+    {
+        system("rm .sksfastboot");
+        exit(EXIT_SUCCESS);
+    }
+    if (selection >= 6 || selection <= 0)
+        exit(EXIT_SUCCESS);
+    showhelp();
+    game(argc, argv);
+}
+void game(int argc, const char * argv[])
+{
+    game_initialized = true;
     bool single = false;
-    if (argc > 1)
-        single = true;
+    //if (argc > 1)
+      //  single = true; // i have no freaking clue
+    //if (argc > 1)
+   // {
+        //if (atoi(argv[1]) == 0)
+            //server_mode = true;
+        //if (argc > 2)
+            //if (/*atoi(argv[1]) == 1*/)
+    //            multiplayer /*client_mode*/ = true;
+   // }
     srand(time(0));
-    if (!single)
+    //if (!single)
         populate();
-    else
+    /*else
     {
         ifstream f("1.map");
         //i have no idea what i'm doing with this
         //so i will just stop here....continue it 
         //if you feel like it....
+    }*/
+    /*if (server_mode)
+        server(portnum); //start it
+    if (client_mode)
+        client((char *)argv[2], portnum);*/
+    extern int playernum;
+    if (multiplayer)
+    {
+        extern char* hostname;
+        //if (argc > 2)
+          //  strcpy(hostname, argv[2]);
+        //playernum = atoi(argv[1]);
+        if (playernum == 1) //player 1
+        {
+            server_port = portnum;
+            server(server_port);
+            cout << "When ready press any key" << endl;
+            //getch_();
+            client_port = portnum + 1;
+            //client("localhost", portnum + 1);
+        }
+        if (playernum == 2) //player 2
+        {
+            server_port = portnum + 1;
+            server(server_port);
+            cout << "When ready press any key" << endl;
+            //getch_();
+            client_port = portnum;
+            //client("localhost", portnum);
+        }
     }
+    //sleep(5);
+    cout << "dun" << endl;
+    //cin >> ws;
     bool run = true;
     while (run)
     {
@@ -87,6 +201,11 @@ int main(int argc, const char * argv[])
                 setselectedweapon(4);
             if (a == '6')
                 setselectedweapon(5);
+            /*if (a == 'g')
+            {
+                server(5100);
+                cout << env.socket_message << endl;
+            }*/ //old debug command... DO NOT ENABLE THIS IF YOU DONT KNOW WHAT YOUR DOING!
             if (a == 'w')
             {
                 t = N;

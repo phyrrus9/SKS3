@@ -16,5 +16,5 @@ struct _environment
     std::string savefile = "save.dat";
     color bgcolor = NORMAL, playercolor = RED;
     character::player player = character::N;
-    char socket_message[256] = "\0";
+    char socket_message[256] = "\251";
 };

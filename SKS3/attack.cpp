@@ -98,11 +98,11 @@ void attack(void)
 void increment_attack(void)
 {
     const int multiplier = 5;
-    int divisor = (1 + env.attack) * multiplier, increment = 1, total = env.health * env.lives;
+    int divisor = ((1 + env.attack) * multiplier) + env.lives + env.health, increment = 1, total = env.health * env.lives;
     if (total / divisor > 1) //kgood
     {
         env.attack += increment;
-        env.health -= env.score / divisor;
+        env.health -= total / divisor;
     }
 }
 void showweapons(void)

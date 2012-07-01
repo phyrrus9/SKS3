@@ -4,6 +4,7 @@
  * This software is free, it may be customized, redistributed, blah blah blah...
  */
 #include "engine.h"
-#define VERSION_BUILD "SKS3 (PR2.1)"
+#define VERSION_BUILD "SKS3 (PR3)"
 void showhelp(void); //shows the help screen
 void display(void); //shows the bar at top of screen
+void multidisplay(void); //for multiplayer

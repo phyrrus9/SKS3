@@ -5,6 +5,7 @@
  */
 #include "movement.h"
 #include "attack.h"
+#include "user.h"
 extern _environment env; //global variable
 void populate(void)
 {
@@ -98,6 +99,7 @@ void move(direction d)
         restore();
     if (d == QUI)
     {
+        server_end(); //disconnect and unbind the socket
         colorify(NORMAL); //un-colorify
         exit(EXIT_SUCCESS);
     }
@@ -110,6 +112,23 @@ void move(direction d)
         env.view[env.position] = '@';
         light(env.position);
         env.moves += 1;
+        extern bool multiplayer;
+        extern int client_port;
+        extern int server_port;
+        if (multiplayer)
+        {
+            extern int playernum;
+            if (playernum == 2)
+            {
+                server(server_port);
+                client("localhost", client_port);
+            }
+            else
+            {
+                client("localhost", client_port);
+                server(server_port);
+            }
+        }
     }
 }
 void showmap(void)

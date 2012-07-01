@@ -14,6 +14,7 @@
 #include "enumerations.h"
 #include "environment.h"
 #define clear() system("clear")
+const int portnum = 5102;
 const char echar = '~';
 using namespace std;
 char getch_(void);
