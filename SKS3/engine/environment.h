@@ -7,14 +7,14 @@
 #include <string.h>
 struct _environment
 {
-    char map[900] = "\0", grid[900] = "/0";
+    char map[900], grid[900];
     char * view;
-    bool showmap = true, single = false;
-    bool weapons[6] = { true, false, false, false, false, false };
-    int health = 100, lives = 3, score = 30, position = 0, moves = 1, kills = 0, kills_needed = 0,
-    levels_completed = 0, attack = 0, totalscore = 0, selectedweapon = 0;
-    std::string savefile = "save.dat";
-    color bgcolor = NORMAL, playercolor = RED;
-    character::player player = character::N;
-    char socket_message[256] = "\251";
+    bool showmap, single;
+    bool weapons[6];
+    int health, lives, score, position, moves, kills, kills_needed, levels_completed, attack,
+    totalscore, selectedweapon;
+    std::string savefile;
+    color bgcolor, playercolor;
+    character::player player;
+    char socket_message[256];
 };

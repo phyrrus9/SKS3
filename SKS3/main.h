@@ -4,7 +4,7 @@
  * This software is free, it may be customized, redistributed, blah blah blah...
  */
 #ifndef SKS3_engine_h
-#include "engine.h"
+#include "engine/engine.h"
 #endif
 #define _move moving = true
 extern _environment env; //fixes issues with xcode compilations

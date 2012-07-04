@@ -13,6 +13,7 @@
 #include "socket.h"
 #include "enumerations.h"
 #include "environment.h"
+#include "environment_functions.h"
 #define clear() system("clear")
 const int portnum = 5102;
 const char echar = '~';

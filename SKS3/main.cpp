@@ -20,6 +20,7 @@ extern int server_port;
 }*/ //for testing server/client socket connections
 int main(int argc, const char * argv[])
 {
+    environment_init();
     clear();
     displaylauncher();
     cout << ">";
@@ -285,7 +286,7 @@ void game(int argc, const char * argv[])
                     continue;
         }
     }
-    return 0;
+    return;
 }
 void displaylauncher(void)
 {
