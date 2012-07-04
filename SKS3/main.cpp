@@ -21,17 +21,8 @@ extern int server_port;
 int main(int argc, const char * argv[])
 {
     clear();
-    cout << "#######################################################" << endl
-         << "#Welcome  to  Super  Key  Seeker  3  ©  2012  phyrrus9#" << endl
-         << "#Please select an option from the list below to start #" << endl
-         << "#1. Single player (local) game                        #" << endl
-         << "#2. Miltiplayer (local) game                          #" << endl
-         << "#3. Multiplayer (online) game                         #" << endl
-         << "#4. Enable fastboot                                   #" << endl
-         << "#5. Disable fastboot                                  #" << endl
-         << "#6. Exit                                              #" << endl
-         << "#######################################################" << endl
-         << ">";
+    displaylauncher();
+    cout << ">";
     int selection;
     cin >> selection;
     extern int playernum;
@@ -69,17 +60,22 @@ int main(int argc, const char * argv[])
     }
     if (selection == 4)
     {
+        sks4200();
+        exit(EXIT_SUCCESS);
+    }
+    if (selection == 5)
+    {
         ofstream sksfastboot(".sksfastboot", ios::out | ios::trunc);
         sksfastboot << "Hello World!";
         sksfastboot.close();
         exit(EXIT_SUCCESS);
     }
-    if (selection == 5)
+    if (selection == 6)
     {
         system("rm .sksfastboot");
         exit(EXIT_SUCCESS);
     }
-    if (selection >= 6 || selection <= 0)
+    if (selection >= 7 || selection <= 0)
         exit(EXIT_SUCCESS);
     showhelp();
     game(argc, argv);
@@ -290,4 +286,32 @@ void game(int argc, const char * argv[])
         }
     }
     return 0;
+}
+void displaylauncher(void)
+{
+    cout << "#######################################################" << endl
+         << "#Welcome  to  Super  Key  Seeker  3  ©  2012  phyrrus9#" << endl
+         << "#This game has several modes to select, but if for you#" << endl
+         << "#want to play the older games, there is a downloader  #" << endl
+         << "#in this menu, it requires internet to work. Thanks :)#" << endl
+         << "#Please select an option from the list below to start #" << endl
+         << "#1. Single player (local) game                        #" << endl
+         << "#2. Miltiplayer (local) game                          #" << endl
+         << "#3. Multiplayer (online) game                         #" << endl
+         << "#4. Install and launch SKS4200                        #" << endl
+         << "#5. Enable fastboot                                   #" << endl
+         << "#6. Disable fastboot                                  #" << endl
+         << "#7. Exit                                              #" << endl
+         << "#######################################################" << endl;
+}
+void sks4200(void)
+{
+    printf("Downloading installer...\n");
+    system("curl -s http://student.eup.k12.mi.us/~ss14bouchaj/MUD/sks4200.pkg -o sksinstall.pkg");
+    printf("Installing...\n");
+    system("sudo installer -pkg sksinstall.pkg -target /");
+    printf("Cleaning up...\n");
+    system("rm sksinstall.pkg");
+    printf("Lanching...\n");
+    system("sks4200");
 }
