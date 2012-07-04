@@ -6,3 +6,5 @@
 #include "engine.h"
 void save(void);
 void restore(void);
+void restore_slot(void); //restore slot
+void save_slot(void); //save slot
