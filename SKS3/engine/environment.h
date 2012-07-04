@@ -9,7 +9,7 @@ struct _environment
 {
     char map[900], grid[900];
     char * view;
-    bool showmap, single;
+    bool showmap, single, cheats;
     bool weapons[6];
     int health, lives, score, position, moves, kills, kills_needed, levels_completed, attack,
     totalscore, selectedweapon;

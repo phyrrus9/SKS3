@@ -245,6 +245,16 @@ void game(int argc, const char * argv[])
                 attack();
             if (a == 'E')
                 increment_attack();
+            if (a == -97) //alt/option + s
+            {
+                t = SAVS;
+                _move;
+            }
+            if (a == -82) //alt/option + r
+            {
+                t = RESS;
+                _move;
+            }
             if (a == 'S')
             {
                 t = SAV;
@@ -275,6 +285,7 @@ void game(int argc, const char * argv[])
                 enginecmd(command1, command2);
                 t = NIL;
             }
+
             if (turning)
                 turn(t);
             else

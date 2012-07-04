@@ -25,6 +25,7 @@ void environment_init(void)
     strcpy(env.grid, "\0");
     env.showmap = true;
     env.single = false;
+    env.cheats = false;
     //weapons
     env.weapons[0] = true;
     for (int i = 1; i < 6; i++)

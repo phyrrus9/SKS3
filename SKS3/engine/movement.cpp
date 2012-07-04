@@ -95,6 +95,10 @@ void move(direction d)
         }
     if (d == SAV)
         save();
+    if (d == SAVS)
+        save_slot();
+    if (d == RESS)
+        restore_slot();
     if (d == RES)
         restore();
     if (d == QUI)

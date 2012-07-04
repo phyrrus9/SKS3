@@ -48,29 +48,39 @@ void colorify(color c)
 }
 void enginecmd(string c, string d)
 {
-    if (c == "env->health")
-        env.health = atoi(d.c_str());
-    if (c == "env->lives")
-        env.lives = atoi(d.c_str());
-    if (c == "env->score")
-        env.score = atoi(d.c_str());
-    if (c == "env->position")
-        env.position = atoi(d.c_str());
-    if (c == "env->moves")
-        env.moves = atoi(d.c_str());
-    if (c == "env->kills")
-        env.kills = atoi(d.c_str());
-    if (c == "env->kills_needed")
-        env.kills_needed = atoi(d.c_str());
-    if (c == "env->lc")
-        env.levels_completed = atoi(d.c_str());
-    if (c == "gam->savefile")
-        env.savefile = d;
-    if (c == "env->foggy")
-        env.showmap = atoi(d.c_str());
-    if (c == "env->attack")
-        env.attack = atoi(d.c_str());
-
+    if (c == "env->cheats")
+    {
+        extern bool multiplayer; //in main.cpp
+        if (!multiplayer)
+        {
+            env.cheats = atoi(d.c_str());
+        }
+    }
+    if (env.cheats)
+    {
+        if (c == "env->health")
+            env.health = atoi(d.c_str());
+        if (c == "env->lives")
+            env.lives = atoi(d.c_str());
+        if (c == "env->score")
+            env.score = atoi(d.c_str());
+        if (c == "env->position")
+            env.position = atoi(d.c_str());
+        if (c == "env->moves")
+            env.moves = atoi(d.c_str());
+        if (c == "env->kills")
+            env.kills = atoi(d.c_str());
+        if (c == "env->kills_needed")
+            env.kills_needed = atoi(d.c_str());
+        if (c == "env->lc")
+            env.levels_completed = atoi(d.c_str());
+        if (c == "gam->savefile")
+            env.savefile = d;
+        if (c == "env->foggy")
+            env.showmap = atoi(d.c_str());
+        if (c == "env->attack")
+            env.attack = atoi(d.c_str());
+    }
     if (c == "colorify")
     {
         if (d == "red")
@@ -125,6 +135,8 @@ void enginecmd(string c, string d)
             cout << sizeof(_environment) << endl;
         if (d == "env->attack")
             cout << env.attack << endl;
+        if (d == "env->cheats")
+            cout << env.cheats << endl;
         cout << "Press any key to continue..." << endl;
         getch_(); //char c = ...
     }

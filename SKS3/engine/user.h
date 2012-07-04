@@ -4,7 +4,8 @@
  * This software is free, it may be customized, redistributed, blah blah blah...
  */
 #include "engine.h"
-#define VERSION_BUILD "SKS3 (1.0)"
+#define VERSION_BUILD "SKS3 (1.1)"
 void showhelp(void); //shows the help screen
 void display(void); //shows the bar at top of screen
 void multidisplay(void); //for multiplayer
+void enginecmd_display();

@@ -17,6 +17,36 @@ void restore(void)
     f.read((char *)(&env), sizeof(_environment));
     f.close();
 }
+string select_slot(int slot)
+{
+    string saveslot = ".save-slot";
+    switch (slot) 
+    {
+        case 0:
+            saveslot += "0";
+            break;
+        case 1:
+            saveslot += "1";
+            break;
+        case 2:
+            saveslot += "2";
+            break;
+        case 3:
+            saveslot += "3";
+            break;
+        case 4:
+            saveslot += "4";
+            break;
+        case 5:
+            saveslot += "5";
+            break;
+        default:
+            saveslot += "-null";
+            break;
+    }
+    saveslot += ".dat";
+    return saveslot;
+}
 void restore_slot(void)
 {
     cout << "Please select a slot to restore," << endl
@@ -27,9 +57,7 @@ void restore_slot(void)
     cin >> slot;
     if (slot < 0 || slot > 5)
         return;
-    ostringstream t;
-    t << ".save-slot" << t << ".dat";
-    string savefile = t.str();
+    string savefile = select_slot(slot);
     ifstream f(savefile.c_str(),ios::binary);
     if (!f)
         return;
@@ -46,9 +74,7 @@ void save_slot(void)
     cin >> slot;
     if (slot < 0 || slot > 5)
         return;
-    ostringstream t;
-    t << ".save-slot" << t << ".dat";
-    string savefile = t.str();
+    string savefile = select_slot(slot);
     ofstream f(savefile.c_str(), ios::trunc | ios::binary);
     f.write((char *)(&env), sizeof(_environment));
     f.close();
