@@ -18,7 +18,7 @@ namespace weapons
 {
     struct weaponlist
     {
-        int strength[6] = { 2, 4, 8, 16, 32, 64 }; //some standards
+        int strength[6]; //some standards
     };
     //D(fist) x(throwing star) |(sword) ©(gun) {}(cannon) ~(laser)
 }

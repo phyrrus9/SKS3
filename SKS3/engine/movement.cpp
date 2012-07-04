@@ -117,15 +117,16 @@ void move(direction d)
         extern int server_port;
         if (multiplayer)
         {
+            char host[] = "localhost";
             extern int playernum;
             if (playernum == 2)
             {
                 server(server_port);
-                client("localhost", client_port);
+                client(host, client_port);
             }
             else
             {
-                client("localhost", client_port);
+                client(host, client_port);
                 server(server_port);
             }
         }

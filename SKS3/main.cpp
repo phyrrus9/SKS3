@@ -84,7 +84,6 @@ int main(int argc, const char * argv[])
 void game(int argc, const char * argv[])
 {
     game_initialized = true;
-    bool single = false;
     //if (argc > 1)
       //  single = true; // i have no freaking clue
     //if (argc > 1)
@@ -112,7 +111,6 @@ void game(int argc, const char * argv[])
     extern int playernum;
     if (multiplayer)
     {
-        extern char* hostname;
         //if (argc > 2)
           //  strcpy(hostname, argv[2]);
         //playernum = atoi(argv[1]);

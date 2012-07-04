@@ -88,6 +88,7 @@ void attack(void)
     //cout << strength << endl; //debug
     int attack = env.attack;
     weapons::weaponlist weapon;
+    weapons_init(weapon);
     attack *= weapon.strength[env.selectedweapon]; //add a little boost
     if (attack >= strength)
     {

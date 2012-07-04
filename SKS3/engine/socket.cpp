@@ -49,7 +49,7 @@ void server(int port)
         int newsockfd;
         socklen_t clilen;
         char buffer[256];
-        struct sockaddr_in serv_addr, cli_addr;
+        struct sockaddr_in cli_addr;
         int n;
         listen(serv_sockfd,5);
         dlog("listening\n");

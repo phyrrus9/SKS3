@@ -45,3 +45,14 @@ void environment_init(void)
     //socket init
     strcpy(env.socket_message, "\251");
 }
+
+void weapons_init(weapons::weaponlist t)
+{
+    //{ 2, 4, 8, 16, 32, 64 }
+    t.strength[0] = 2;
+    t.strength[1] = 4;
+    t.strength[2] = 8;
+    t.strength[3] = 16;
+    t.strength[4] = 32;
+    t.strength[5] = 64;
+}

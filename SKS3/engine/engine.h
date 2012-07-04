@@ -7,7 +7,7 @@
 #define SKS3_engine_h
 #include <iostream>
 #include <fstream>
-#include <curses.h>
+#include <ncurses.h>
 #include <iomanip>
 #include <signal.h>
 #include "socket.h"
