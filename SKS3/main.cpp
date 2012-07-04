@@ -266,7 +266,7 @@ void game(int argc, const char * argv[])
                 _move;
             }
             if (a == 'N')
-                execl(argv[0], argv[0]);
+                execl(argv[0], argv[0], (char *)NULL);
             if (a == '/')
             {
                 cout << ">";
