@@ -20,7 +20,7 @@ extern int server_port;
 }*/ //for testing server/client socket connections
 int main(int argc, const char * argv[])
 {
-    environment_init();
+    environment_init(env);
     clear();
     displaylauncher();
     cout << ">";

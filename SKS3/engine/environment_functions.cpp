@@ -19,40 +19,40 @@
  char socket_message[256] = "\251";
  };
 */
-void environment_init(void)
+void environment_init(_environment &t)
 {
-    strcpy(env.map, "\0");
-    strcpy(env.grid, "\0");
-    env.showmap = true;
-    env.single = false;
-    env.cheats = false;
+    strcpy(t.map, "\0");
+    strcpy(t.grid, "\0");
+    t.showmap = true;
+    t.single = false;
+    t.cheats = false;
     //weapons
-    env.weapons[0] = true;
+    t.weapons[0] = true;
     for (int i = 1; i < 6; i++)
-        env.weapons[i] = false;
+        t.weapons[i] = false;
     //integers
-    env.health = 100;
-    env.lives = 3;
-    env.score = 0;
-    env.position = 0;
-    env.moves = 1;
-    env.kills = 0;
-    env.kills_needed = 0;
-    env.levels_completed = 0;
-    env.attack = 1;
-    env.totalscore = 0;
-    env.selectedweapon = 0;
+    t.health = 100;
+    t.lives = 3;
+    t.score = 0;
+    t.position = 0;
+    t.moves = 1;
+    t.kills = 0;
+    t.kills_needed = 0;
+    t.levels_completed = 0;
+    t.attack = 1;
+    t.totalscore = 0;
+    t.selectedweapon = 0;
     //savedata
-    env.savefile = "save.dat";
+    t.savefile = "save.dat";
     //character stuff
-    env.bgcolor = NORMAL;
-    env.playercolor = RED;
-    env.player = character::N;
+    t.bgcolor = NORMAL;
+    t.playercolor = RED;
+    t.player = character::N;
     //socket init
-    strcpy(env.socket_message, "\251");
+    strcpy(t.socket_message, "\251");
 }
 
-void weapons_init(weapons::weaponlist t)
+void weapons_init(weapons::weaponlist &t)
 {
     //{ 2, 4, 8, 16, 32, 64 }
     t.strength[0] = 2;
