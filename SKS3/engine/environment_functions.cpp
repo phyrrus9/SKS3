@@ -4,21 +4,6 @@
  * This software is free, it may be customized, redistributed, blah blah blah...
  */
 #include "environment_functions.h"
-/*
- struct _environment
- {
- char map[900] = "\0", grid[900] = "/0";
- char * view;
- bool showmap = true, single = false;
- bool weapons[6] = { true, false, false, false, false, false };
- int health = 100, lives = 3, score = 30, position = 0, moves = 1, kills = 0, kills_needed = 0,
- levels_completed = 0, attack = 0, totalscore = 0, selectedweapon = 0;
- std::string savefile = "save.dat";
- color bgcolor = NORMAL, playercolor = RED;
- character::player player = character::N;
- char socket_message[256] = "\251";
- };
-*/
 void environment_init(_environment &t)
 {
     strcpy(t.map, "\0");
@@ -55,10 +40,6 @@ void environment_init(_environment &t)
 void weapons_init(weapons::weaponlist &t)
 {
     //{ 2, 4, 8, 16, 32, 64 }
-    t.strength[0] = 2;
-    t.strength[1] = 4;
-    t.strength[2] = 8;
-    t.strength[3] = 16;
-    t.strength[4] = 32;
-    t.strength[5] = 64;
+    for (int i = 0, j = 2; i < 6; i++, j *= 2) //all powers of two
+        t.strength[i] = j; //its all easier this way for adding say 128 weapons :P
 }

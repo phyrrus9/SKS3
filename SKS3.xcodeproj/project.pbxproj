@@ -10,6 +10,8 @@
 		4A0BFB5215A4A11C007AD137 /* environment_functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BFB5015A4A11C007AD137 /* environment_functions.cpp */; };
 		4A35A0AF157E5F03006EB744 /* libncurses.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A35A0AE157E5F03006EB744 /* libncurses.dylib */; };
 		4A748946158277F80048CFF8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A748945158277F80048CFF8 /* main.cpp */; };
+		4ABF2DBE15A7936C008E7535 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ABF2DBD15A7936C008E7535 /* main.cpp */; };
+		4ABF2DE115A79EE3008E7535 /* sks4200.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ABF2DDF15A79EE3008E7535 /* sks4200.cpp */; };
 		4AE9022B15A4888A0079BAAF /* attack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9021D15A4888A0079BAAF /* attack.cpp */; };
 		4AE9022C15A4888A0079BAAF /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9021F15A4888A0079BAAF /* engine.cpp */; };
 		4AE9022D15A4888A0079BAAF /* filesystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9022315A4888A0079BAAF /* filesystem.cpp */; };
@@ -37,6 +39,9 @@
 		4A35A0AE157E5F03006EB744 /* libncurses.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libncurses.dylib; path = usr/lib/libncurses.dylib; sourceTree = SDKROOT; };
 		4A748945158277F80048CFF8 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4A86878C159686E4001FF5E0 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		4ABF2DBD15A7936C008E7535 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		4ABF2DDF15A79EE3008E7535 /* sks4200.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sks4200.cpp; path = sks4200/sks4200.cpp; sourceTree = "<group>"; };
+		4ABF2DE015A79EE3008E7535 /* sks4200.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sks4200.h; path = sks4200/sks4200.h; sourceTree = "<group>"; };
 		4AE9021D15A4888A0079BAAF /* attack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = attack.cpp; sourceTree = "<group>"; };
 		4AE9021E15A4888A0079BAAF /* attack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = attack.h; sourceTree = "<group>"; };
 		4AE9021F15A4888A0079BAAF /* engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = engine.cpp; sourceTree = "<group>"; };
@@ -85,11 +90,30 @@
 		4A14DE9C157D3321007F17EB /* SKS3 */ = {
 			isa = PBXGroup;
 			children = (
+				4ABF2DDD15A79E95008E7535 /* sks4200 */,
+				4ABF2DBC15A7936C008E7535 /* ks4200 */,
 				4AE9021C15A4888A0079BAAF /* engine */,
 				4A748945158277F80048CFF8 /* main.cpp */,
 				4A86878C159686E4001FF5E0 /* main.h */,
 			);
 			path = SKS3;
+			sourceTree = "<group>";
+		};
+		4ABF2DBC15A7936C008E7535 /* ks4200 */ = {
+			isa = PBXGroup;
+			children = (
+				4ABF2DBD15A7936C008E7535 /* main.cpp */,
+			);
+			path = ks4200;
+			sourceTree = "<group>";
+		};
+		4ABF2DDD15A79E95008E7535 /* sks4200 */ = {
+			isa = PBXGroup;
+			children = (
+				4ABF2DDF15A79EE3008E7535 /* sks4200.cpp */,
+				4ABF2DE015A79EE3008E7535 /* sks4200.h */,
+			);
+			name = sks4200;
 			sourceTree = "<group>";
 		};
 		4AE9021C15A4888A0079BAAF /* engine */ = {
@@ -173,6 +197,8 @@
 				4AE9022F15A4888A0079BAAF /* socket.cpp in Sources */,
 				4AE9023015A4888A0079BAAF /* user.cpp in Sources */,
 				4A0BFB5215A4A11C007AD137 /* environment_functions.cpp in Sources */,
+				4ABF2DBE15A7936C008E7535 /* main.cpp in Sources */,
+				4ABF2DE115A79EE3008E7535 /* sks4200.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

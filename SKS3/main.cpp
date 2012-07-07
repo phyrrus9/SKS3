@@ -4,20 +4,13 @@
  * This software is free, it may be customized, redistributed, blah blah blah...
  */
 #include "main.h"
+//#include "sks4200_mainfunc.h"
 bool server_mode = false;
 bool client_mode = false;
 bool multiplayer = false;
 bool game_initialized = false;
 extern int client_port;
 extern int server_port;
-/*int main(int argc, const char * argv[])
-{
-    if (argc > 1)
-        client("localhost", 1501);
-    else
-        server(1501);
-    
-}*/ //for testing server/client socket connections
 int main(int argc, const char * argv[])
 {
     environment_init(env);
@@ -28,11 +21,6 @@ int main(int argc, const char * argv[])
     cin >> selection;
     extern int playernum;
     extern char * hostname;
-    if (selection == 1)
-    {
-        //numargs = 1;
-        //strcpy(array[0], argv[0]);
-    }
     if (selection == 2)
     {
         multiplayer = true;
@@ -61,22 +49,31 @@ int main(int argc, const char * argv[])
     }
     if (selection == 4)
     {
-        sks4200();
+        extern int ks4200(const char *);
+        ks4200("help");
+        getch_();
+        ks4200("not_debug");
         exit(EXIT_SUCCESS);
     }
     if (selection == 5)
+    {
+        cout << "Comming soon" << endl;
+        //launch_sks4200();
+        exit(EXIT_SUCCESS);
+    }
+    if (selection == 6)
     {
         ofstream sksfastboot(".sksfastboot", ios::out | ios::trunc);
         sksfastboot << "Hello World!";
         sksfastboot.close();
         exit(EXIT_SUCCESS);
     }
-    if (selection == 6)
+    if (selection == 7)
     {
         system("rm .sksfastboot");
         exit(EXIT_SUCCESS);
     }
-    if (selection >= 7 || selection <= 0)
+    if (selection >= 9 || selection <= 0)
         exit(EXIT_SUCCESS);
     showhelp();
     game(argc, argv);
@@ -84,58 +81,24 @@ int main(int argc, const char * argv[])
 void game(int argc, const char * argv[])
 {
     game_initialized = true;
-    //if (argc > 1)
-      //  single = true; // i have no freaking clue
-    //if (argc > 1)
-   // {
-        //if (atoi(argv[1]) == 0)
-            //server_mode = true;
-        //if (argc > 2)
-            //if (/*atoi(argv[1]) == 1*/)
-    //            multiplayer /*client_mode*/ = true;
-   // }
     srand(time(0));
-    //if (!single)
-        populate();
-    /*else
-    {
-        ifstream f("1.map");
-        //i have no idea what i'm doing with this
-        //so i will just stop here....continue it 
-        //if you feel like it....
-    }*/
-    /*if (server_mode)
-        server(portnum); //start it
-    if (client_mode)
-        client((char *)argv[2], portnum);*/
+    populate();
     extern int playernum;
     if (multiplayer)
     {
-        //if (argc > 2)
-          //  strcpy(hostname, argv[2]);
-        //playernum = atoi(argv[1]);
         if (playernum == 1) //player 1
         {
             server_port = portnum;
             server(server_port);
-            cout << "When ready press any key" << endl;
-            //getch_();
             client_port = portnum + 1;
-            //client("localhost", portnum + 1);
         }
         if (playernum == 2) //player 2
         {
             server_port = portnum + 1;
             server(server_port);
-            cout << "When ready press any key" << endl;
-            //getch_();
             client_port = portnum;
-            //client("localhost", portnum);
         }
     }
-    //sleep(5);
-    cout << "dun" << endl;
-    //cin >> ws;
     bool run = true;
     while (run)
     {
@@ -196,11 +159,6 @@ void game(int argc, const char * argv[])
                 setselectedweapon(4);
             if (a == '6')
                 setselectedweapon(5);
-            /*if (a == 'g')
-            {
-                server(5100);
-                cout << env.socket_message << endl;
-            }*/ //old debug command... DO NOT ENABLE THIS IF YOU DONT KNOW WHAT YOUR DOING!
             if (a == 'w')
             {
                 t = N;
@@ -308,20 +266,10 @@ void displaylauncher(void)
          << "#1. Single player (local) game                        #" << endl
          << "#2. Miltiplayer (local) game                          #" << endl
          << "#3. Multiplayer (online) game                         #" << endl
-         << "#4. Install and launch SKS4200                        #" << endl
-         << "#5. Enable fastboot                                   #" << endl
-         << "#6. Disable fastboot                                  #" << endl
-         << "#7. Exit                                              #" << endl
+         << "#4. Play                KS4200                        #" << endl
+         << "#5. Play               SKS4200                        #" << endl
+         << "#6. Enable fastboot                                   #" << endl
+         << "#7. Disable fastboot                                  #" << endl
+         << "#8. Exit                                              #" << endl
          << "#######################################################" << endl;
-}
-void sks4200(void)
-{
-    printf("Downloading installer...\n");
-    system("curl -s http://student.eup.k12.mi.us/~ss14bouchaj/MUD/sks4200.pkg -o sksinstall.pkg");
-    printf("Installing...\n");
-    system("sudo installer -pkg sksinstall.pkg -target /");
-    printf("Cleaning up...\n");
-    system("rm sksinstall.pkg");
-    printf("Lanching...\n");
-    system("sks4200");
 }

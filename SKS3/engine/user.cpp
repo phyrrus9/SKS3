@@ -93,25 +93,6 @@ void enginecmd_display(void)
     colorify(RED);
     cout << "Useful commands:" << endl;
     colorify();
-    /*
-     if (d == "env->score")
-     cout << env.score << endl;
-     if (d == "env->position")
-     cout << env.position << endl;
-     if (d == "env->moves")
-     cout << env.moves << endl;
-     if (d == "env->kills")
-     cout << env.kills << endl;
-     if (d == "env->kills_needed")
-     cout << env.kills_needed << endl;
-     if (d == "env->lc")
-     cout << env.levels_completed << endl;
-     if (d == "gam->savefile")
-     cout << env.savefile << endl;
-     if (d == "env->size")
-     cout << sizeof(_environment) << endl;
-     if (d == "env->attack")
-     */
     cout << "/colorify      <color>              Changes the foreground color  " << endl
          << "/env->pcolor   <color>              Changes your player icon color" << endl
          << "/gam           [option]                                           " << endl
@@ -132,30 +113,6 @@ void enginecmd_display(void)
     colorify(RED);
     cout << "Cheat commands:" << endl;
     colorify();
-    /*
-     if (c == "env->health")
-     env.health = atoi(d.c_str());
-     if (c == "env->lives")
-     env.lives = atoi(d.c_str());
-     if (c == "env->score")
-     env.score = atoi(d.c_str());
-     if (c == "env->position")
-     env.position = atoi(d.c_str());
-     if (c == "env->moves")
-     env.moves = atoi(d.c_str());
-     if (c == "env->kills")
-     env.kills = atoi(d.c_str());
-     if (c == "env->kills_needed")
-     env.kills_needed = atoi(d.c_str());
-     if (c == "env->lc")
-     env.levels_completed = atoi(d.c_str());
-     if (c == "gam->savefile")
-     env.savefile = d;
-     if (c == "env->foggy")
-     env.showmap = atoi(d.c_str());
-     if (c == "env->attack")
-     env.attack = atoi(d.c_str());
-     */
     cout << "/env->cheats   <bool>               Enable or disable cheating    " << endl
          << "/env->health   <int>                Change the health value       " << endl
          << "/env->lives    <int>                Change the number of lives    " << endl
