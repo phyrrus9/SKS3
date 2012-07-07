@@ -72,7 +72,7 @@ int main(int argc, const char * argv[])
         system("rm .sksfastboot");
         exit(EXIT_SUCCESS);
     }
-    if (selection >= 9 || selection <= 0)
+    if (selection >= 8 || selection <= 0)
         exit(EXIT_SUCCESS);
     showhelp();
     game(argc, argv);
@@ -265,8 +265,8 @@ void displaylauncher(void)
          << "#1. Single player (local) game                        #" << endl
          << "#2. Miltiplayer (local) game                          #" << endl
          << "#3. Multiplayer (online) game                         #" << endl
-         << "#4. Play                KS4200                        #" << endl
-         << "#5. Play               SKS4200                        #" << endl
+         << "#4. Play KS4200                                       #" << endl
+         << "#5. Play SKS4200                                      #" << endl
          << "#6. Enable fastboot                                   #" << endl
          << "#7. Disable fastboot                                  #" << endl
          << "#8. Exit                                              #" << endl
