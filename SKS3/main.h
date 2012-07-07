@@ -7,6 +7,7 @@
 #include "engine/engine.h"
 #endif
 #include "sks4200/sks4200.h"
+#include "ks4200/ks4200.h"
 #define _move moving = true
 extern _environment env; //fixes issues with xcode compilations
 int main(int argc, const char * argv[]); //main function

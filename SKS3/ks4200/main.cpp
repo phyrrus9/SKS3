@@ -3,15 +3,7 @@
  * Copyright Ethan Laur 2011
  *
  */
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <stdexcept>
-#include <fstream>
-#include <time.h>
+#include "ks4200.h"
 
 #define WALL (0)
 #define OPEN (1)

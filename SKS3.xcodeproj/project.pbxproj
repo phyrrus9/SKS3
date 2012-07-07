@@ -42,6 +42,7 @@
 		4ABF2DBD15A7936C008E7535 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4ABF2DDF15A79EE3008E7535 /* sks4200.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sks4200.cpp; path = sks4200/sks4200.cpp; sourceTree = "<group>"; };
 		4ABF2DE015A79EE3008E7535 /* sks4200.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sks4200.h; path = sks4200/sks4200.h; sourceTree = "<group>"; };
+		4ABF2DE215A87B4F008E7535 /* ks4200.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ks4200.h; sourceTree = "<group>"; };
 		4AE9021D15A4888A0079BAAF /* attack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = attack.cpp; sourceTree = "<group>"; };
 		4AE9021E15A4888A0079BAAF /* attack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = attack.h; sourceTree = "<group>"; };
 		4AE9021F15A4888A0079BAAF /* engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = engine.cpp; sourceTree = "<group>"; };
@@ -102,6 +103,7 @@
 		4ABF2DBC15A7936C008E7535 /* ks4200 */ = {
 			isa = PBXGroup;
 			children = (
+				4ABF2DE215A87B4F008E7535 /* ks4200.h */,
 				4ABF2DBD15A7936C008E7535 /* main.cpp */,
 			);
 			path = ks4200;

@@ -49,7 +49,6 @@ int main(int argc, const char * argv[])
     }
     if (selection == 4)
     {
-        extern int ks4200(const char *);
         ks4200("help");
         getch_();
         ks4200("not_debug");
