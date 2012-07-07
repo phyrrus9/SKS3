@@ -10,3 +10,5 @@ osx: sks4200
 	rm -rf Build
 linux: sks4200
 	g++ ./SKS3/main.cpp ./SKS3/engine/*.cpp -lncurses -o ./Binaries/sks3
+install:
+	sudo cp ./Binaries/* /usr/bin
