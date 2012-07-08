@@ -56,8 +56,7 @@ int main(int argc, const char * argv[])
     }
     if (selection == 5)
     {
-        cout << "Comming soon" << endl;
-        //launch_sks4200();
+        launch_sks4200(); //if your going to use this, you MUST 'make install' first
         exit(EXIT_SUCCESS);
     }
     if (selection == 6)

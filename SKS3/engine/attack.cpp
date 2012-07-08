@@ -8,8 +8,11 @@
 extern _environment env; //global var
 void kill(int p)
 {
-    env.map[p] = env.grid[p] = echar;
-    env.kills++;
+    if (env.map[p] != echar || env.map[p] != '#')
+    {
+        env.map[p] = env.grid[p] = echar;
+        env.kills++;
+    }
 }
 void eat(int p)
 {
@@ -84,6 +87,13 @@ void attack(void)
         t = character::PITBULL;
         gain = targetnoms::PITBULL;
     }
+    if (env.view[location] == 'z')
+    {
+        t = character::ZOMBIE;
+        gain = 0;
+    }
+    if (env.view[location] == echar || env.view[location] == '#')
+        return;
     int strength = env.levels_completed * t;
     //cout << strength << endl; //debug
     int attack = env.attack;

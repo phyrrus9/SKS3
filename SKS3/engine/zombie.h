@@ -4,7 +4,5 @@
  * This software is free, it may be customized, redistributed, blah blah blah...
  */
 #include "engine.h"
-void showhelp(void); //shows the help screen
-void display(void); //shows the bar at top of screen
-void multidisplay(void); //for multiplayer
-void enginecmd_display();
+bool zombiecheck(int);
+void do_zombie_damage(void);

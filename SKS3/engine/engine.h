@@ -15,7 +15,11 @@
 #include "environment.h"
 #include "environment_functions.h"
 #include "filesystem.h"
+#include "movement.h"
+#include "attack.h"
+#include "zombie.h"
 #define clear() system("clear")
+#define VERSION_BUILD "SKS3 (1.2)"
 const int portnum = 5102;
 const char echar = '~';
 using namespace std;
@@ -28,6 +32,4 @@ void display(void);
 void colorify(void);
 void colorify(color);
 void terminate(int);
-#include "movement.h"
-#include "attack.h"
 #endif

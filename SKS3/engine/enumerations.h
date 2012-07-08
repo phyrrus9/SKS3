@@ -8,7 +8,7 @@ enum color { RED, GREEN, BLUE, NORMAL };
 namespace character
 {
     enum player { N, S, E, W};
-    enum target { SMALLBUG, LARGEBUG, WORM, PITBULL};
+    enum target { SMALLBUG, LARGEBUG, WORM, PITBULL, ZOMBIE = 15};
 }
 namespace targetnoms
 {

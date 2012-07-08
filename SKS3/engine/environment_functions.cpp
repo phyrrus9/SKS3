@@ -35,6 +35,9 @@ void environment_init(_environment &t)
     t.player = character::N;
     //socket init
     strcpy(t.socket_message, "\251");
+    //zombie globals
+    t.min_zombie_does_damage_level = 5;
+    t.zombies_do_damage = true;
 }
 
 void weapons_init(weapons::weaponlist &t)

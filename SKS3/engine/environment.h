@@ -9,10 +9,10 @@ struct _environment
 {
     char map[900], grid[900];
     char * view;
-    bool showmap, single, cheats;
+    bool showmap, single, cheats, zombies_do_damage;
     bool weapons[6];
     int health, lives, score, position, moves, kills, kills_needed, levels_completed, attack,
-    totalscore, selectedweapon;
+    totalscore, selectedweapon, min_zombie_does_damage_level;
     std::string savefile;
     color bgcolor, playercolor;
     character::player player;

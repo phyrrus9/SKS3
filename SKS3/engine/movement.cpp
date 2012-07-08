@@ -45,7 +45,11 @@ void populate(void)
                 env.kills_needed++;
                 env.map[i] = '!';
             }
-            if (r >= 6 && r <= 11)
+            if (r == 6)
+            {
+                env.map[i] = 'z';
+            }
+            if (r >= 7 && r <= 11)
                 env.map[i] = '#';
         }
     }
@@ -65,6 +69,14 @@ void move(direction d)
     prev_fn = signal (SIGSEGV,terminate); //bugfix
     int prev = env.position;
     bool moved = false;
+    if (zombiecheck(env.position + 1))
+        do_zombie_damage();
+    if (zombiecheck(env.position - 1))
+        do_zombie_damage();
+    if (zombiecheck(env.position + 30))
+        do_zombie_damage();
+    if (zombiecheck(env.position - 30))
+        do_zombie_damage();
     if (d == N)
         if (env.map[env.position - 30] != '#' && (env.position - 30 > 0))
         {

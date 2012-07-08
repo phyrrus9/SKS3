@@ -80,6 +80,10 @@ void enginecmd(string c, string d)
             env.showmap = atoi(d.c_str());
         if (c == "env->attack")
             env.attack = atoi(d.c_str());
+        if (c == "zom->min_damagelevel")
+            env.min_zombie_does_damage_level = atoi(d.c_str());
+        if (c == "zom->damage")
+            env.zombies_do_damage = atoi(d.c_str());
     }
     if (c == "colorify")
     {
@@ -137,6 +141,10 @@ void enginecmd(string c, string d)
             cout << env.attack << endl;
         if (d == "env->cheats")
             cout << env.cheats << endl;
+        if (d == "zom->min_damagelevel")
+            cout << env.min_zombie_does_damage_level << endl;
+        if (d == "zom->damage")
+            cout << env.zombies_do_damage << endl;
         cout << "Press any key to continue..." << endl;
         getch_(); //char c = ...
     }

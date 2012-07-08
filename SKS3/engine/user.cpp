@@ -40,7 +40,7 @@ void showhelp(void)
     << "Characters in the game are:" << endl
     << "~ - Neutral (empty)                 % - Large bug" << endl
     << "& - Small bug                       $ - Worm" << endl
-    << "! - Vicious pitbull" << endl
+    << "! - Vicious pitbull                 z - Zombie" << endl
     << "You can change the color of the text (if your terminal does not support it)" << endl
     << "To do so, type /colorify (or /env->pcolor) and then one of the following colors:" << endl
     << "red, blue, green, yellow, normal" << endl
@@ -93,36 +93,40 @@ void enginecmd_display(void)
     colorify(RED);
     cout << "Useful commands:" << endl;
     colorify();
-    cout << "/colorify      <color>              Changes the foreground color  " << endl
-         << "/env->pcolor   <color>              Changes your player icon color" << endl
-         << "/gam           [option]                                           " << endl
-         << "   save                             Saves the game (not slotsave) " << endl
-         << "   restore                          Restores the game (not slot)  " << endl
-         << "/get           [option]                                           " << endl
-         << "   env->health                      Displays the current health   " << endl
-         << "   env->lives                       Displays the current lives    " << endl
-         << "   env->score                       Displays the current score    " << endl
-         << "   env->position                    Displays the current position " << endl
-         << "   env->moves                       Displays the current move #   " << endl
-         << "   env->kills                       Displays the current kills    " << endl
-         << "   env->kills_needed                Displays the kills needed     " << endl
-         << "   env->lc                          Displays the levels completed " << endl
-         << "   env->size                        Displays the savefile size    " << endl
-         << "   env->cheats                      Displays cheats on or off     " << endl
+    cout << "/colorify              <color>              Changes the foreground color  " << endl
+         << "/env->pcolor           <color>              Changes your player icon color" << endl
+         << "/gam                   [option]                                           " << endl
+         << "   save                                     Saves the game (not slotsave) " << endl
+         << "   restore                                  Restores the game (not slot)  " << endl
+         << "/get                   [option]                                           " << endl
+         << "   env->health                              Displays the current health   " << endl
+         << "   env->lives                               Displays the current lives    " << endl
+         << "   env->score                               Displays the current score    " << endl
+         << "   env->position                            Displays the current position " << endl
+         << "   env->moves                               Displays the current move #   " << endl
+         << "   env->kills                               Displays the current kills    " << endl
+         << "   env->kills_needed                        Displays the kills needed     " << endl
+         << "   env->lc                                  Displays the levels completed " << endl
+         << "   env->size                                Displays the savefile size    " << endl
+         << "   env->cheats                              Displays cheats on or off     " << endl
+         << "   zom->min_damagelevel                     Displays when zombies attack  " << endl
+         << "   zom->damage                              Weather they attack or not    " << endl
          << "<color> is filled by a color (red, green, blue, normal)           " << endl;
     colorify(RED);
     cout << "Cheat commands:" << endl;
     colorify();
-    cout << "/env->cheats   <bool>               Enable or disable cheating    " << endl
-         << "/env->health   <int>                Change the health value       " << endl
-         << "/env->lives    <int>                Change the number of lives    " << endl
-         << "/env->score    <int>                Change your base score        " << endl
-         << "/env->position <int>                Change your position          " << endl
-         << "/env->moves    <int>                Change the number of moves    " << endl
-         << "/env->kills    <int>                Change the number of kills    " << endl
-         << "/env->lc       <int>                Change the levels completed   " << endl
-         << "/env->foggy    <bool>               Enable or disable fog         " << endl
-         << "/env->attack   <int>                Change your attack value      " << endl
+    cout << "/env->cheats           <bool>               Enable or disable cheating    " << endl
+         << "/env->health           <int>                Change the health value       " << endl
+         << "/env->lives            <int>                Change the number of lives    " << endl
+         << "/env->score            <int>                Change your base score        " << endl
+         << "/env->position         <int>                Change your position          " << endl
+         << "/env->moves            <int>                Change the number of moves    " << endl
+         << "/env->kills            <int>                Change the number of kills    " << endl
+         << "/env->lc               <int>                Change the levels completed   " << endl
+         << "/env->foggy            <bool>               Enable or disable fog         " << endl
+         << "/env->attack           <int>                Change your attack value      " << endl
+         << "/zom->min_damagelevel  <int>                When zombies attack (level)   " << endl
+         << "/zom->damage           <bool>               If the zombies will attack you" << endl
          << "Data type <int> is any real whole number, <bool> is a 0 or a 1    " << endl
          << "NOTE: cheats are NOT available in multiplayer mode (sorry)        " << endl;
     cout << "Press any key to exit..." << endl;
