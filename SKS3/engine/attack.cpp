@@ -3,13 +3,32 @@
  * Copyright © 2012 phyrrus9 <phyrrus9@gmail.com>
  * This software is free, it may be customized, redistributed, blah blah blah...
  */
-#include "engine.h"
 #include "attack.h"
 extern _environment env; //global var
+class clrthread_atk : public tpool::Thread
+{
+    virtual void Entry(void)
+    {
+        env.statuscolor = RED; //make the whole bar red
+        sleep(1); //wait a few moves
+        env.statuscolor = NORMAL; //put it back
+    }
+};
+class clrthread_lif : public tpool::Thread
+{
+    virtual void Entry(void)
+    {
+        env.statuscolor = BLUE; //make the whole bar blue
+        sleep(1); //wait a few moves
+        env.statuscolor = NORMAL; //put it back
+    }
+};
 void kill(int p)
 {
     if (env.map[p] != echar || env.map[p] != '#')
     {
+        clrthread_atk *clrchg = new clrthread_atk;
+        clrchg->Run();
         env.map[p] = env.grid[p] = echar;
         env.kills++;
     }
@@ -45,6 +64,8 @@ void eat(int p)
     {
         env.lives++;
         ate = true;
+        clrthread_lif *clrchg = new clrthread_lif;
+        clrchg->Run();
     }
     if (ate)
         kill(p);

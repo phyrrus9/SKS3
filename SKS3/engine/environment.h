@@ -14,7 +14,7 @@ struct _environment
     int health, lives, score, position, moves, kills, kills_needed, levels_completed, attack,
     totalscore, selectedweapon, min_zombie_does_damage_level;
     std::string savefile;
-    color bgcolor, playercolor;
+    color bgcolor, playercolor, statuscolor;
     character::player player;
     char socket_message[256];
 };

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4A0BFB5215A4A11C007AD137 /* environment_functions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A0BFB5015A4A11C007AD137 /* environment_functions.cpp */; };
+		4A0C061D15BC50D300C125E6 /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A0C061B15BC50D300C125E6 /* Thread.cpp */; };
 		4A1F20F315A8FB7900982D5F /* zombie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A1F20F115A8FB7900982D5F /* zombie.cpp */; };
 		4A35A0AF157E5F03006EB744 /* libncurses.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A35A0AE157E5F03006EB744 /* libncurses.dylib */; };
 		4A748946158277F80048CFF8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A748945158277F80048CFF8 /* main.cpp */; };
@@ -36,6 +37,8 @@
 /* Begin PBXFileReference section */
 		4A0BFB5015A4A11C007AD137 /* environment_functions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = environment_functions.cpp; sourceTree = "<group>"; };
 		4A0BFB5115A4A11C007AD137 /* environment_functions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = environment_functions.h; sourceTree = "<group>"; };
+		4A0C061B15BC50D300C125E6 /* Thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Thread.cpp; sourceTree = "<group>"; };
+		4A0C061C15BC50D300C125E6 /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thread.h; sourceTree = "<group>"; };
 		4A14DE99157D3321007F17EB /* SKS3 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SKS3; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A1F20F115A8FB7900982D5F /* zombie.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = zombie.cpp; sourceTree = "<group>"; };
 		4A1F20F215A8FB7900982D5F /* zombie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zombie.h; sourceTree = "<group>"; };
@@ -124,6 +127,8 @@
 		4AE9021C15A4888A0079BAAF /* engine */ = {
 			isa = PBXGroup;
 			children = (
+				4A0C061B15BC50D300C125E6 /* Thread.cpp */,
+				4A0C061C15BC50D300C125E6 /* Thread.h */,
 				4A1F20F115A8FB7900982D5F /* zombie.cpp */,
 				4A1F20F215A8FB7900982D5F /* zombie.h */,
 				4A0BFB5015A4A11C007AD137 /* environment_functions.cpp */,
@@ -207,6 +212,7 @@
 				4ABF2DBE15A7936C008E7535 /* main.cpp in Sources */,
 				4ABF2DE115A79EE3008E7535 /* sks4200.cpp in Sources */,
 				4A1F20F315A8FB7900982D5F /* zombie.cpp in Sources */,
+				4A0C061D15BC50D300C125E6 /* Thread.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

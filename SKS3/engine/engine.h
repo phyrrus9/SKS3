@@ -18,6 +18,7 @@
 #include "movement.h"
 #include "attack.h"
 #include "zombie.h"
+#include "Thread.h"
 #define clear() system("clear")
 #define VERSION_BUILD "SKS3 (1.2)"
 const int portnum = 5102;

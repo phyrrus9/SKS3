@@ -32,6 +32,7 @@ void environment_init(_environment &t)
     //character stuff
     t.bgcolor = NORMAL;
     t.playercolor = RED;
+    t.statuscolor = NORMAL;
     t.player = character::N;
     //socket init
     strcpy(t.socket_message, "\251");
