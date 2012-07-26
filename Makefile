@@ -11,6 +11,6 @@ osx:
 	rm -rf Build
 linux:
 	mkdir -p ./Binaries
-	g++ ./SKS3/main.cpp ./SKS3/engine/*.cpp ./SKS3/ks4200/*.cpp ./SKS3/sks4200/sks4200.cpp -lncurses -o ./Binaries/sks3
+	g++ ./SKS3/main.cpp ./SKS3/engine/*.cpp ./SKS3/ks4200/*.cpp ./SKS3/sks4200/sks4200.cpp -lncurses -pthread -o ./Binaries/sks3
 install:
 	sudo cp ./Binaries/* /usr/bin
