@@ -11,6 +11,7 @@ void environment_init(_environment &t)
     t.showmap = true;
     t.single = false;
     t.cheats = false;
+    t.refresh_screen = true;
     //weapons
     t.weapons[0] = true;
     for (int i = 1; i < 6; i++)
@@ -39,6 +40,8 @@ void environment_init(_environment &t)
     //zombie globals
     t.min_zombie_does_damage_level = 5;
     t.zombies_do_damage = true;
+    //game timer stuffs
+    game_timer_init(t.timer);
 }
 
 void weapons_init(weapons::weaponlist &t)
@@ -46,4 +49,48 @@ void weapons_init(weapons::weaponlist &t)
     //{ 2, 4, 8, 16, 32, 64 }
     for (int i = 0, j = 2; i < 6; i++, j *= 2) //all powers of two
         t.strength[i] = j; //its all easier this way for adding say 128 weapons :P
+}
+
+class timer_thread : public tpool::Thread
+{
+    virtual void Entry(void)
+    {
+        while (true)
+        {
+            sleep(1);
+            if (env.moves > 1)
+            {
+                //env.score -= env.timer.clock;
+                game_timer_increment(env.timer);
+                env.refresh_screen = true;
+            }
+            else 
+            {
+                env.timer.second = env.timer.minute = 0;
+                //env.timer.clock /= 5;
+            }
+            env.totalscore = (((((env.score * (env.levels_completed * 2)) + (env.health / 3)) + env.kills) + env.lives) - (env.moves / 3) - ((env.timer.clock / 10) * env.levels_completed));
+            //figured i would do this here
+            if (env.totalscore < 0)
+                env.totalscore = 0;
+        }
+    }
+};
+
+void game_timer_init(game_timer &t)
+{
+    t.second = t.minute = t.clock = 0;
+    timer_thread *env_timer_thread = new timer_thread;
+    env_timer_thread->Run();
+}
+
+void game_timer_increment(game_timer & t)
+{
+    t.second++;
+    t.clock++;
+    if (t.second >= 60)
+    {
+        t.minute++;
+        t.second = t.second - 60;
+    }
 }

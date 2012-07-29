@@ -6,6 +6,22 @@
 #include "user.h"
 extern _environment env; //global variable
 extern bool game_initialized;
+class display_thread : public tpool::Thread
+{
+    virtual void Entry(void)
+    {
+        while (true)
+        {
+            if (env.refresh_screen) //right now i have a display issue but this will be used someday
+            {
+                clear();
+                display();
+                showmap();
+                env.refresh_screen = false;
+            }
+        }
+    }
+};
 void showhelp(void)
 {
     clear();
@@ -64,6 +80,8 @@ void showhelp(void)
         if (!sksfastboot)
             sleep(15);
         colorify();
+        display_thread *backgroundrefresh = new display_thread;
+        backgroundrefresh->Run();
     }
     //delete &c; //gets rid of unused var warning //nevermind: SKS3(19240) malloc: *** error for object 0x7fff655e69f7: pointer being freed was not allocated
 }
@@ -72,8 +90,7 @@ void display(void)
     weapons::weaponlist t;
     weapons_init(t);
     colorify(env.statuscolor);
-    env.totalscore = (((((env.score * (env.levels_completed * 2)) + (env.health / 3)) + env.kills) + env.lives) - (env.moves / 3));
-    cout << left << setw(13) << VERSION_BUILD << setw(7) << "Health:" << setw(5) << env.health << setw(7) << "Lives:" << setw(4) << env.lives <<  setw(7) << "Kills:" << setw(3) << env.kills << setw(14) << "Kills needed:" << setw(5) << env.kills_needed << setw(20) << "Levels completed:" << setw(5) << env.levels_completed << setw(7) << "Attack:" << setw(3) << env.attack << setw(8) << "Weapon:" << setw(5) << (env.attack * (t.strength[env.selectedweapon])) << setw(7) << setprecision(6) << fixed << "Score:" << setw(9) << env.totalscore;
+    cout << setfill(' ') << left << setw(13) << VERSION_BUILD << setw(7) << "Health:" << setw(5) << env.health << setw(7) << "Lives:" << setw(4) << env.lives <<  setw(7) << "Kills:" << setw(3) << env.kills << setw(14) << "Kills needed:" << setw(5) << env.kills_needed << setw(20) << "Levels completed:" << setw(5) << env.levels_completed << endl << setw(13) << " " << setw(7) << "Attack:" << setw(3) << env.attack << setw(8) << "Weapon:" << setw(5) << (env.attack * (t.strength[env.selectedweapon])) << setw(7) << setprecision(6) << fixed << "Score:" << setw(7) << env.totalscore << setw(6) << "Time:" << right << setw(2) << setprecision(2) << setfill('0') << env.timer.minute << ":" << right << setw(2) << env.timer.second << setfill(' ') << left << setw(5) << " " << setw(9) << "Weapons:";
     showweapons();
     cout << endl;
     multidisplay();

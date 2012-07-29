@@ -145,42 +145,42 @@ void showweapons(void)
         if (env.selectedweapon == 0)
             colorify(RED);
         cout << "D ";
-        colorify();
+        colorify(NORMAL);
     }
     if (env.weapons[1])
     {
         if (env.selectedweapon == 1)
             colorify(RED);
         cout << "x ";
-        colorify();
+        colorify(NORMAL);
     }
     if (env.weapons[2])
     {
         if (env.selectedweapon == 2)
             colorify(RED);
         cout << "| ";
-        colorify();
+        colorify(NORMAL);
     }
     if (env.weapons[3])
     {
         if (env.selectedweapon == 3)
             colorify(RED);
         cout << "© ";
-        colorify();
+        colorify(NORMAL);
     }
     if (env.weapons[4])
     {
         if (env.selectedweapon == 4)
             colorify(RED);
         cout << "{} ";
-        colorify();
+        colorify(NORMAL);
     }
     if (env.weapons[5])
     {
         if (env.selectedweapon == 5)
             colorify(RED);
         cout << "~ ";
-        colorify();
+        colorify(NORMAL);
     }
 }
 void setselectedweapon(int w)

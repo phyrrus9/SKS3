@@ -5,11 +5,16 @@
  */
 //#include "enumerations.h" //apparently this is all good if I leave it out...bad if not
 #include <string.h>
+struct game_timer
+{
+    int second, minute, clock;
+};
+
 struct _environment
 {
     char map[900], grid[900];
     char * view;
-    bool showmap, single, cheats, zombies_do_damage;
+    bool showmap, single, cheats, zombies_do_damage, refresh_screen;
     bool weapons[6];
     int health, lives, score, position, moves, kills, kills_needed, levels_completed, attack,
     totalscore, selectedweapon, min_zombie_does_damage_level;
@@ -17,4 +22,5 @@ struct _environment
     color bgcolor, playercolor, statuscolor;
     character::player player;
     char socket_message[256];
+    game_timer timer;
 };

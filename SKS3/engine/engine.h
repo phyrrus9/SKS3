@@ -20,7 +20,7 @@
 #include "zombie.h"
 #include "Thread.h"
 #define clear() system("clear")
-#define VERSION_BUILD "SKS3 (1.2)"
+#define VERSION_BUILD "SKS3 (1.3)"
 const int portnum = 5102;
 const char echar = '~';
 using namespace std;
