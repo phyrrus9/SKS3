@@ -6,6 +6,8 @@
 #include "environment_functions.h"
 void environment_init(_environment &t)
 {
+    t.paused = false;
+    t.music = true;
     strcpy(t.map, "\0");
     strcpy(t.grid, "\0");
     t.showmap = true;
@@ -60,9 +62,12 @@ class timer_thread : public tpool::Thread
             sleep(1);
             if (env.moves > 1)
             {
-                //env.score -= env.timer.clock;
-                game_timer_increment(env.timer);
-                env.refresh_screen = true;
+                if (!env.paused)
+                {
+                    //env.score -= env.timer.clock;
+                    game_timer_increment(env.timer);
+                    env.refresh_screen = true;
+                }
             }
             else 
             {

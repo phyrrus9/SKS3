@@ -132,6 +132,8 @@ void game(int argc, const char * argv[])
             {
                 cout << "You are dead..." << endl;
                 run = false;
+                music_stop();
+                colorify(NORMAL);
             }
             else
             {
@@ -230,6 +232,27 @@ void game(int argc, const char * argv[])
             {
                 t = HLP;
                 _move;
+            }
+            if (a == 'p')
+            {
+                if (env.paused)
+                    t = UNPAU;
+                else
+                    t = PAU;
+                _move;
+            }
+            if (a == 'm')
+            {
+                if (env.music)
+                {
+                    env.music = false;
+                    music_stop();
+                }
+                else
+                {
+                    env.music = true;
+                    music_start();
+                }
             }
             if (a == 'N')
                 execl(argv[0], argv[0], (char *)NULL);

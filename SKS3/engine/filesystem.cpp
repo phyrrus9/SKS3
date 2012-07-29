@@ -7,15 +7,37 @@
 extern _environment env; //global variable
 void save(void)
 {
+    pause();
     ofstream f(env.savefile.c_str(), ios::trunc | ios::binary);
+    if (!f)
+    {
+        clear();
+        colorify(RED);
+        cout << "ERROR! Savefile could not be written" << endl
+             << "Press any key to continue your game" << endl;
+        colorify(NORMAL);
+        getch_();
+    }
     f.write((char *)(&env), sizeof(_environment));
     f.close();
+    unpause();
 }
 void restore(void)
 {
+    pause();
     ifstream f(env.savefile.c_str(),ios::binary);
+    if (!f)
+    {
+        clear();
+        colorify(RED);
+        cout << "ERROR! Savefile could not be read" << endl
+             << "Press any key to continue your game" << endl;
+        colorify(NORMAL);
+        getch_();
+    }
     f.read((char *)(&env), sizeof(_environment));
     f.close();
+    unpause();
 }
 string select_slot(int slot)
 {
@@ -49,6 +71,7 @@ string select_slot(int slot)
 }
 void restore_slot(void)
 {
+    pause();
     cout << "Please select a slot to restore," << endl
          << "note: all slots may not have data." << endl
          << "Slots range from 0 to 5" << endl
@@ -63,9 +86,11 @@ void restore_slot(void)
         return;
     f.read((char *)(&env), sizeof(_environment));
     f.close();
+    unpause();
 }
 void save_slot(void)
 {
+    pause();
     cout << "Please select a slot to save to," << endl
     << "note: all slots may not have data." << endl
     << "Slots range from 0 to 5" << endl
@@ -78,4 +103,5 @@ void save_slot(void)
     ofstream f(savefile.c_str(), ios::trunc | ios::binary);
     f.write((char *)(&env), sizeof(_environment));
     f.close();
+    unpause();
 }

@@ -3,7 +3,7 @@
  * Copyright © 2012 phyrrus9 <phyrrus9@gmail.com>
  * This software is free, it may be customized, redistributed, blah blah blah...
  */
-enum direction { N, S, E, W, SAV, SAVS, RES, RESS, QUI, HLP, NIL };
+enum direction { N, S, E, W, SAV, SAVS, RES, RESS, QUI, HLP, PAU, UNPAU, NIL };
 enum color { RED, GREEN, BLUE, NORMAL };
 namespace character
 {

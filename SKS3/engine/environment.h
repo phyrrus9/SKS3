@@ -12,6 +12,7 @@ struct game_timer
 
 struct _environment
 {
+    bool paused, music;
     char map[900], grid[900];
     char * view;
     bool showmap, single, cheats, zombies_do_damage, refresh_screen;

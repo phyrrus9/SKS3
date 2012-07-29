@@ -65,6 +65,8 @@ void turn(direction d)
 }
 void move(direction d)
 {
+    if (env.paused && d != UNPAU)
+        return; //you arnt allowed to move while paused... thats cheating...
     void (*prev_fn)(int);
     prev_fn = signal (SIGSEGV,terminate); //bugfix
     int prev = env.position;
@@ -117,10 +119,19 @@ void move(direction d)
     {
         server_end(); //disconnect and unbind the socket
         colorify(NORMAL); //un-colorify
+        kill_music("killall afplay"); //kill the music
         exit(EXIT_SUCCESS);
     }
     if (d == HLP)
         showhelp();
+    if (d == PAU)
+    {
+        env.paused = true;
+    }
+    if (d == UNPAU)
+    {
+        env.paused = false;
+    }
     if (moved)
     {
         env.player = (character::player)(d);

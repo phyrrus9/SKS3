@@ -21,7 +21,6 @@
 
 #include <pthread.h>
 #include <cstdlib>
-
 namespace tpool {
     
     class Thread {

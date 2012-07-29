@@ -22,11 +22,46 @@ class display_thread : public tpool::Thread
         }
     }
 };
+class music_thread : public tpool::Thread
+{
+    virtual void Entry(void)
+    {
+        while (true)
+        {
+            if (!env.music)
+            {
+                //system("killall afplay"); //stop the music, please (pun)
+            }
+            while (!env.music)
+            {
+                //no music is played
+            }
+            while (env.music)
+            {
+                if (env.music)
+                    play_music("afplay /usr/share/sks3/1.mp3 &");
+                if (env.music)
+                    sleep(289); //betrayal of fear
+                if (env.music)
+                    play_music("afplay /usr/share/sks3/2.mp3 &");
+                if (env.music)
+                    sleep(173); //betrayal of fate
+                if (env.music)
+                    play_music("afplay /usr/share/sks3/3.mp3 &");
+                if (env.music)
+                    sleep(256); //guitar vs piano v1.2
+            }
+        }
+    }
+};
+music_thread *backgroundmusic; //file global
 void showhelp(void)
 {
     clear();
+    //env.music = true; //ensure it actually starts //nevermind....
     cout << "Super Key Seeker 3 - Copyright © 2012 phyrrus9 <phyrrus9@gmail.com>" << endl
     << "This game is copyright to Ethan laur(phyrrus9) under modtech LLC" << endl
+    << "Music (mac os x only) copyright 2006-2012, 2008-2012 Goukisan" << endl
     << "To use:" << endl
     << "Run the game from the terminal or SSH." << endl
     << "Your player will show up as the following characters, and it is an arrow:" << endl
@@ -52,6 +87,7 @@ void showhelp(void)
     << "S - Save game                       R - Restore game" << endl
     << "&S- Save to slot                    &R- Restore from slot      -- & denotes pressing alt(PC/linux) or option(osx)" << endl
     << "Q - Quit game                       N - New game" << endl
+    << "p - Pause or unpause game           m - Start or stop music" << endl
     << "H - Show help" << endl
     << "Characters in the game are:" << endl
     << "~ - Neutral (empty)                 % - Large bug" << endl
@@ -73,15 +109,20 @@ void showhelp(void)
     }
     else
     {
+        play_music("say Welcome to Super Key Seeker 3!");
         colorify(RED);
-        cout << "This dialog will close in 15 seconds." << endl
+        cout << "This dialog will close in about 15 seconds." << endl
         << "To disable this, just add a file named .sksfastboot to this directory" << endl;
         ifstream sksfastboot(".sksfastboot");
         if (!sksfastboot)
+        {
             sleep(15);
+        }
         colorify();
         display_thread *backgroundrefresh = new display_thread;
         backgroundrefresh->Run();
+        backgroundmusic = new music_thread;
+        music_start();
     }
     //delete &c; //gets rid of unused var warning //nevermind: SKS3(19240) malloc: *** error for object 0x7fff655e69f7: pointer being freed was not allocated
 }
@@ -95,6 +136,8 @@ void display(void)
     cout << endl;
     multidisplay();
     colorify();
+    if (env.paused)
+        cout << "Paused..." << endl;
 }
 void multidisplay(void)
 {
@@ -148,4 +191,15 @@ void enginecmd_display(void)
          << "NOTE: cheats are NOT available in multiplayer mode (sorry)        " << endl;
     cout << "Press any key to exit..." << endl;
     getch_();
+}
+void music_stop(void)
+{
+    backgroundmusic->Stop();
+    kill_music("killall sleep; killall afplay"); //this will cause a jump in one second
+    //env.timer.second--;
+    env.timer.clock--;
+}
+void music_start(void)
+{
+    backgroundmusic->Run();
 }

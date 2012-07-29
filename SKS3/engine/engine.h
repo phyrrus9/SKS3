@@ -10,6 +10,8 @@
 #include <ncurses.h>
 #include <iomanip>
 #include <signal.h>
+#include <string.h>
+#include <sstream>
 #include "socket.h"
 #include "enumerations.h"
 #include "environment.h"
@@ -19,8 +21,18 @@
 #include "attack.h"
 #include "zombie.h"
 #include "Thread.h"
+#ifdef __APPLE__
+#define play_music(a) system(a)
+#define kill_music(b) system(b)
+#endif
+#ifndef __APPLE__
+#define play_music(a) //hello world
+#define kill_music(b) //hello world
+#endif
 #define clear() system("clear")
-#define VERSION_BUILD "SKS3 (1.3)"
+#define pause() env.paused = true
+#define unpause() env.paused = false
+#define VERSION_BUILD "SKS3 (1.4)"
 const int portnum = 5102;
 const char echar = '~';
 using namespace std;
