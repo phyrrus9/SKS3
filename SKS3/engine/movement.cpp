@@ -4,9 +4,51 @@
  * This software is free, it may be customized, redistributed, blah blah blah...
  */
 #include "movement.h"
-#include "attack.h"
-#include "user.h"
 extern _environment env; //global variable
+bool thread_started = false;
+class socket_thread : public tpool::Thread
+{
+    /*
+     * This thread (multiplayer only) just gets rid of the way I used to do
+     * multiplayer (by making it a turn-by-turn game where one player moved
+     * and then had to wait for the other to move in order to move again
+     * while there was only a relatively small ammount of data [like 25 bytes]
+     * being send between clients). Now, the multiplayer works by sending and
+     * recieving data every second (which really means every 5-25 sepending on
+     * the speed of the internet connection) and no longer interrupts the game
+     * while it waits for another set of data, instead it just displayes the
+     * current env.socket_message until it gets a new one, then it sends its
+     * socket message and displays the one recieved. All of this is done in
+     * the background, so dont expect to see any status of it. When player 1
+     * or 2 disconnect the game will still exit as usual.
+     */
+    virtual void Entry(void)
+    {
+        extern bool multiplayer;
+        extern int client_port;
+        extern int server_port;
+        while (true)
+        {
+            if (multiplayer)
+            {
+                char host[] = "localhost";
+                extern int playernum;
+                if (playernum == 2)
+                {
+                    server(server_port);
+                    client(host, client_port);
+                }
+                else
+                {
+                    client(host, client_port);
+                    server(server_port);
+                }
+            }
+            sleep(1); //update once a second instead of 1 million times a second
+        }
+    }
+};
+socket_thread *_socket_thread = new socket_thread;
 void populate(void)
 {
     int health_i = 0;
@@ -139,23 +181,10 @@ void move(direction d)
         env.view[env.position] = '@';
         light(env.position);
         env.moves += 1;
-        extern bool multiplayer;
-        extern int client_port;
-        extern int server_port;
-        if (multiplayer)
+        if (!thread_started)
         {
-            char host[] = "localhost";
-            extern int playernum;
-            if (playernum == 2)
-            {
-                server(server_port);
-                client(host, client_port);
-            }
-            else
-            {
-                client(host, client_port);
-                server(server_port);
-            }
+            _socket_thread->Run();
+            thread_started = true;
         }
     }
 }
