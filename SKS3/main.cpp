@@ -15,7 +15,7 @@ class newlevel_thread : public tpool::Thread
 {
     virtual void Entry(void)
     {
-        while (true)
+        //while (true) //play it once, not forever....
         {
             {
                 if (env.music)

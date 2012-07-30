@@ -71,8 +71,9 @@ string select_slot(int slot)
 }
 void restore_slot(void)
 {
-    pause();
     env.allow_refresh = false;
+    pause();
+    small_delay();
     cout << "Please select a slot to restore," << endl
          << "note: all slots may not have data." << endl
          << "Slots range from 0 to 5" << endl
@@ -92,8 +93,10 @@ void restore_slot(void)
 }
 void save_slot(void)
 {
-    pause();
     env.allow_refresh = false;
+    pause();
+    small_delay();
+    clear();
     cout << "Please select a slot to save to," << endl
     << "note: all slots may not have data." << endl
     << "Slots range from 0 to 5" << endl
@@ -108,4 +111,9 @@ void save_slot(void)
     f.close();
     env.allow_refresh = true;
     unpause();
+}
+void small_delay(void)
+{
+    for (int i = 0 ; i < 1000; i++)
+    { }
 }
