@@ -11,6 +11,7 @@ bool debug = false;
 void error(const char *msg)
 {
     printf("Error! %s\n", msg);
+    endwin();
     exit(-1);
 }
 void dlog(const char *msg)
@@ -102,12 +103,17 @@ void client(char *host, int port)
     t << "  "; //pad it so it lines up with the health display on p1||p2
     t << "Score: ";
     t << env.totalscore;
+    t << " Health: ";
+    t << env.health;
     t << " Lives: ";
     t << env.lives;
     t << " Kills: ";
     t << env.kills;
     t << " Levels Completed: ";
     t << env.levels_completed;
+    t << " Time: " << right << setw(2) << setprecision(2) << setfill('0') << env.timer.minute << ":" << right << setw(2) << env.timer.second << setfill(' ') << left;
+    if (env.paused)
+        t << "\33[31m Player has paused game\33[0m";
     strcpy(buffer, t.str().c_str());
     n = write(sockfd,buffer,strlen(buffer));
     if (n < 0) 

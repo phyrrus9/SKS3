@@ -2,6 +2,7 @@ all:
 	@echo "You must make either osx, linux, sks4200, or clean"
 clean:
 	rm -rf ./Binaries
+	rm -rf ./build
 sks4200:
 	make -C ./SKS3/sks4200
 osx:
