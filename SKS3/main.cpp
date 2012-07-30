@@ -11,6 +11,19 @@ bool multiplayer = false;
 bool game_initialized = false;
 extern int client_port;
 extern int server_port;
+class newlevel_thread : public tpool::Thread
+{
+    virtual void Entry(void)
+    {
+        while (true)
+        {
+            {
+                if (env.music)
+                    play_music("afplay /usr/share/sks3/next_level.mp3 -v 3 &");
+            }
+        }
+    }
+};
 int main(int argc, const char * argv[])
 {
     environment_init(env);
@@ -79,7 +92,7 @@ int main(int argc, const char * argv[])
 void game(int argc, const char * argv[])
 {
     game_initialized = true;
-    srand(time(0));
+    srand((unsigned)time((long)0));
     populate();
     extern int playernum;
     if (multiplayer)
@@ -104,9 +117,10 @@ void game(int argc, const char * argv[])
             env.view = (char *)&env.map;
         else
             env.view = (char *)&env.grid;
-        clear();
         if (env.kills >= env.kills_needed)
         {
+            newlevel_thread *newlvl_sound = new newlevel_thread;
+            newlvl_sound->Run();
             env.levels_completed++;
             env.position = 0;
             env.score += env.kills;
@@ -125,12 +139,12 @@ void game(int argc, const char * argv[])
         if (env.levels_completed > 49) //level 50
             env.weapons[5] = true; //enable the laser
         
-        display();
         if (env.health <= 0)
         {
             if (env.lives <= 0)
             {
-                cout << "You are dead..." << endl;
+                cout << "You are dead..." << endl
+		     << "Your score was " << env.totalscore << endl;
                 run = false;
                 music_stop();
                 colorify(NORMAL);
@@ -143,7 +157,7 @@ void game(int argc, const char * argv[])
         }
         if (run)
         {
-            showmap();
+            env.refresh_screen = true;
             char a = getch_();
             bool turning = false, moving = false;
             direction t;
@@ -259,9 +273,11 @@ void game(int argc, const char * argv[])
             if (a == '/')
             {
                 cout << ">";
+                env.allow_refresh = false;
                 string command1, command2;
                 cin >> command1 >> command2;
                 enginecmd(command1, command2);
+                env.allow_refresh = true;
                 t = NIL;
             }
 
@@ -285,6 +301,7 @@ void displaylauncher(void)
          << "#in this menu, it requires internet to work. Thanks :)#" << endl
          << "#Please select an option from the list below to start #" << endl
          << "#1. Single player (local) game                        #" << endl
+         << "#2. Single player (local) game no sound (OSX only)    #" << endl
          << "#2. Miltiplayer (local) game                          #" << endl
          << "#3. Multiplayer (online) game                         #" << endl
          << "#4. Play KS4200                                       #" << endl

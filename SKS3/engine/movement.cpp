@@ -194,7 +194,7 @@ void showmap(void)
     cout << "#  ";
     for (int i = 0; i < 46; i++)
         cout << "# ";
-    cout << endl;
+    cout << "\n\r";
     for (int i = 0, j = 1; i < 900; i++, j++)
     {
         if (i % 30 == 0)
@@ -217,7 +217,7 @@ void showmap(void)
         }
         if (j == 30)
         {
-            cout << '#' << endl;
+            cout << '#' << "\n\r";
             j = 0;
         }
     }

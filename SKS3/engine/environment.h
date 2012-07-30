@@ -15,7 +15,7 @@ struct _environment
     bool paused, music;
     char map[900], grid[900];
     char * view;
-    bool showmap, single, cheats, zombies_do_damage, refresh_screen;
+    bool showmap, single, cheats, zombies_do_damage, refresh_screen, allow_refresh;
     bool weapons[6];
     int health, lives, score, position, moves, kills, kills_needed, levels_completed, attack,
     totalscore, selectedweapon, min_zombie_does_damage_level;

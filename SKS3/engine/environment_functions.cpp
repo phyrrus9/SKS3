@@ -14,6 +14,7 @@ void environment_init(_environment &t)
     t.single = false;
     t.cheats = false;
     t.refresh_screen = true;
+    t.allow_refresh = true;
     //weapons
     t.weapons[0] = true;
     for (int i = 1; i < 6; i++)
@@ -57,6 +58,7 @@ class timer_thread : public tpool::Thread
 {
     virtual void Entry(void)
     {
+        int count = 0;
         while (true)
         {
             sleep(1);
@@ -78,6 +80,12 @@ class timer_thread : public tpool::Thread
             //figured i would do this here
             if (env.totalscore < 0)
                 env.totalscore = 0;
+            count++;
+            if (count == 2)
+            {
+                env.refresh_screen = true;
+                count = 0;
+            }
         }
     }
 };

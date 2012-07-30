@@ -61,11 +61,11 @@ void server(int port)
         if (newsockfd < 0) 
             error("ERROR on accept");
         bzero(buffer,256);
-        n = read(newsockfd,buffer,255);
+        n = (int)read(newsockfd,buffer,255);
         if (n < 0) error("ERROR reading from socket");
         strcpy(env.socket_message, buffer);
         //fprintf(stdout, "%s\n", env.socket_message);
-        n = write(newsockfd,"OK",3);
+        n = (int)write(newsockfd,"OK",3);
         if (n < 0) error("ERROR writing to socket");
         close(newsockfd);
     }
@@ -115,11 +115,11 @@ void client(char *host, int port)
     if (env.paused)
         t << "\33[31m Player has paused game\33[0m";
     strcpy(buffer, t.str().c_str());
-    n = write(sockfd,buffer,strlen(buffer));
+    n = (int)write(sockfd,buffer,strlen(buffer));
     if (n < 0) 
         error("ERROR writing to socket");
     bzero(buffer,256);
-    n = read(sockfd,buffer,255);
+    n = (int)read(sockfd,buffer,255);
     if (n < 0) 
         error("Shutting down, (player probably quit)");
     //printf("%s\n",buffer);

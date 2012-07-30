@@ -12,12 +12,18 @@ class display_thread : public tpool::Thread
     {
         while (true)
         {
-            if (env.refresh_screen) //right now i have a display issue but this will be used someday
+            if (env.refresh_screen)
             {
-                clear();
-                display();
-                showmap();
-                env.refresh_screen = false;
+                if (env.allow_refresh)
+                {
+                    clear();
+                    cout << "\r";
+                    display();
+                    cout << "\r";
+                    showmap();
+                    cout << "\r";
+                    env.refresh_screen = false;
+                }
             }
         }
     }
@@ -39,15 +45,15 @@ class music_thread : public tpool::Thread
             while (env.music)
             {
                 if (env.music)
-                    play_music("afplay /usr/share/sks3/1.mp3 &");
+                    play_music("afplay /usr/share/sks3/1.mp3 -v 0.5 &");
                 if (env.music)
                     sleep(289); //betrayal of fear
                 if (env.music)
-                    play_music("afplay /usr/share/sks3/2.mp3 &");
+                    play_music("afplay /usr/share/sks3/2.mp3 -v 0.5 &");
                 if (env.music)
                     sleep(173); //betrayal of fate
                 if (env.music)
-                    play_music("afplay /usr/share/sks3/3.mp3 &");
+                    play_music("afplay /usr/share/sks3/3.mp3 -v 0.f &");
                 if (env.music)
                     sleep(256); //guitar vs piano v1.2
             }
@@ -61,7 +67,8 @@ void showhelp(void)
     //env.music = true; //ensure it actually starts //nevermind....
     cout << "Super Key Seeker 3 - Copyright © 2012 phyrrus9 <phyrrus9@gmail.com>" << endl
     << "This game is copyright to Ethan laur(phyrrus9) under modtech LLC" << endl
-    << "Music (mac os x only) copyright 2006-2012, 2008-2012 Goukisan" << endl
+    << "Background Music (mac os x only) copyright 2006-2012, 2008-2012 Goukisan" << endl
+    << "Sound effects are music found in the public domain and are mac os only" << endl
     << "To use:" << endl
     << "Run the game from the terminal or SSH." << endl
     << "Your player will show up as the following characters, and it is an arrow:" << endl
@@ -131,7 +138,7 @@ void display(void)
     weapons::weaponlist t;
     weapons_init(t);
     colorify(env.statuscolor);
-    cout << setfill(' ') << left << setw(13) << VERSION_BUILD << setw(7) << "Health:" << setw(5) << env.health << setw(7) << "Lives:" << setw(4) << env.lives <<  setw(7) << "Kills:" << setw(3) << env.kills << setw(14) << "Kills needed:" << setw(5) << env.kills_needed << setw(20) << "Levels completed:" << setw(5) << env.levels_completed << endl << setw(13) << " " << setw(7) << "Attack:" << setw(3) << env.attack << setw(8) << "Weapon:" << setw(5) << (env.attack * (t.strength[env.selectedweapon])) << setw(7) << setprecision(6) << fixed << "Score:" << setw(7) << env.totalscore << setw(6) << "Time:" << right << setw(2) << setprecision(2) << setfill('0') << env.timer.minute << ":" << right << setw(2) << env.timer.second << setfill(' ') << left << setw(5) << " " << setw(9) << "Weapons:";
+    cout << setfill(' ') << left << setw(13) << VERSION_BUILD << setw(7) << "Health:" << setw(5) << env.health << setw(7) << "Lives:" << setw(4) << env.lives <<  setw(7) << "Kills:" << setw(3) << env.kills << setw(14) << "Kills needed:" << setw(5) << env.kills_needed << setw(20) << "Levels completed:" << setw(5) << env.levels_completed << "\n\r" << setw(13) << " " << setw(7) << "Attack:" << setw(3) << env.attack << setw(8) << "Weapon:" << setw(5) << (env.attack * (t.strength[env.selectedweapon])) << setw(7) << setprecision(6) << fixed << "Score:" << setw(7) << env.totalscore << setw(6) << "Time:" << right << setw(2) << setprecision(2) << setfill('0') << env.timer.minute << ":" << right << setw(2) << env.timer.second << setfill(' ') << left << setw(5) << " " << setw(9) << "Weapons:";
     showweapons();
     cout << endl;
     multidisplay();
@@ -142,7 +149,7 @@ void display(void)
 void multidisplay(void)
 {
     if (strcmp(env.socket_message, "\251") != 0)
-        cout << "[player 2] " << env.socket_message << endl;
+        cout << "[player 2] " << env.socket_message << "\n\r";
 }
 void enginecmd_display(void)
 {
