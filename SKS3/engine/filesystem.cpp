@@ -72,6 +72,7 @@ string select_slot(int slot)
 void restore_slot(void)
 {
     pause();
+    env.allow_refresh = false;
     cout << "Please select a slot to restore," << endl
          << "note: all slots may not have data." << endl
          << "Slots range from 0 to 5" << endl
@@ -86,11 +87,13 @@ void restore_slot(void)
         return;
     f.read((char *)(&env), sizeof(_environment));
     f.close();
+    env.allow_refresh = true;
     unpause();
 }
 void save_slot(void)
 {
     pause();
+    env.allow_refresh = false;
     cout << "Please select a slot to save to," << endl
     << "note: all slots may not have data." << endl
     << "Slots range from 0 to 5" << endl
@@ -103,5 +106,6 @@ void save_slot(void)
     ofstream f(savefile.c_str(), ios::trunc | ios::binary);
     f.write((char *)(&env), sizeof(_environment));
     f.close();
+    env.allow_refresh = true;
     unpause();
 }

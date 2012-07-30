@@ -64,6 +64,7 @@ music_thread *backgroundmusic; //file global
 void showhelp(void)
 {
     clear();
+    env.allow_refresh = false;
     //env.music = true; //ensure it actually starts //nevermind....
     cout << "Super Key Seeker 3 - Copyright © 2012 phyrrus9 <phyrrus9@gmail.com>" << endl
     << "This game is copyright to Ethan laur(phyrrus9) under modtech LLC" << endl
@@ -132,6 +133,7 @@ void showhelp(void)
         music_start();
     }
     //delete &c; //gets rid of unused var warning //nevermind: SKS3(19240) malloc: *** error for object 0x7fff655e69f7: pointer being freed was not allocated
+    env.allow_refresh = true;
 }
 void display(void)
 {
@@ -154,6 +156,7 @@ void multidisplay(void)
 void enginecmd_display(void)
 {
     clear();
+    env.allow_refresh = false;
     cout << "Engine commands are accessed by pressing the '/' key which will display a >"
          << " at the bottom of the screen" << endl
     << "Commands are as shown below." << endl;
@@ -198,6 +201,7 @@ void enginecmd_display(void)
          << "NOTE: cheats are NOT available in multiplayer mode (sorry)        " << endl;
     cout << "Press any key to exit..." << endl;
     getch_();
+    env.allow_refresh = true;
 }
 void music_stop(void)
 {

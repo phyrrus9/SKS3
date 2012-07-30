@@ -29,7 +29,7 @@
 #define play_music(a) //hello world
 #define kill_music(b) //hello world
 #endif
-//#define endl "\n\r"
+//#define endl "\n\r"x
 #define clear() system("clear")
 #define pause() env.paused = true
 #define unpause() env.paused = false
