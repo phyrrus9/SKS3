@@ -74,6 +74,7 @@ void restore_slot(void)
     env.allow_refresh = false;
     pause();
     small_delay();
+    clear();
     cout << "Please select a slot to restore," << endl
          << "note: all slots may not have data." << endl
          << "Slots range from 0 to 5" << endl

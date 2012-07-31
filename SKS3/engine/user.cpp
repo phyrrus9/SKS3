@@ -206,7 +206,7 @@ void enginecmd_display(void)
 void music_stop(void)
 {
     backgroundmusic->Stop();
-    kill_music("killall sleep; killall afplay"); //this will cause a jump in one second
+    kill_music("killall sleep>/tmp/null-log; killall afplay>/tmp/null-log"); //this will cause a jump in one second
     //env.timer.second--;
     env.timer.clock--;
 }
