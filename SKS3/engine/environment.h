@@ -22,6 +22,7 @@ struct _environment
     std::string savefile;
     color bgcolor, playercolor, statuscolor;
     character::player player;
+    character::difficulty difficulty;
     char socket_message[256];
     game_timer timer;
 };

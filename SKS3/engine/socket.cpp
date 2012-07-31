@@ -65,7 +65,7 @@ void server(int port)
         if (n < 0) error("ERROR reading from socket");
         strcpy(env.socket_message, buffer);
         //fprintf(stdout, "%s\n", env.socket_message);
-        n = (int)write(newsockfd,"OK",3);
+        n =(int) write(newsockfd,"OK",3);
         if (n < 0) error("ERROR writing to socket");
         close(newsockfd);
     }

@@ -115,7 +115,7 @@ void attack(void)
     }
     if (env.view[location] == echar || env.view[location] == '#')
         return;
-    int strength = env.levels_completed * t;
+    int strength = (env.levels_completed * t) * env.difficulty;
     //cout << strength << endl; //debug
     int attack = env.attack;
     weapons::weaponlist weapon;

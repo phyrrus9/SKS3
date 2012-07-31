@@ -45,6 +45,8 @@ void colorify(color c)
             cout << "\33[32m";
         if (c == NORMAL)
             cout << "\33[0m";
+        if (c == BORDER)
+            cout << "\33[32m";
 }
 void enginecmd(string c, string d)
 {

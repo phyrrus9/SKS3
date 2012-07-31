@@ -4,11 +4,12 @@
  * This software is free, it may be customized, redistributed, blah blah blah...
  */
 enum direction { N, S, E, W, SAV, SAVS, RES, RESS, QUI, HLP, PAU, UNPAU, NIL };
-enum color { RED, GREEN, BLUE, NORMAL };
+enum color { RED, GREEN, BLUE, NORMAL, BORDER };
 namespace character
 {
     enum player { N, S, E, W};
     enum target { SMALLBUG, LARGEBUG, WORM, PITBULL, ZOMBIE = 15};
+    enum difficulty { NORMAL, PRO };
 }
 namespace targetnoms
 {

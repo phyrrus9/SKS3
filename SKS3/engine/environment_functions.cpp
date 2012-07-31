@@ -38,6 +38,7 @@ void environment_init(_environment &t)
     t.playercolor = RED;
     t.statuscolor = NORMAL;
     t.player = character::N;
+    t.difficulty = character::NORMAL; //set it this for now
     //socket init
     strcpy(t.socket_message, "\251");
     //zombie globals

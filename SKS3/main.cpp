@@ -27,6 +27,7 @@ class newlevel_thread : public tpool::Thread
 int main(int argc, const char * argv[])
 {
     environment_init(env);
+    long seed = time(0);
     clear();
     displaylauncher();
     cout << ">";
@@ -34,7 +35,29 @@ int main(int argc, const char * argv[])
     cin >> selection;
     extern int playernum;
     extern char * hostname;
+    //env.allow_refresh = false;
+    if (selection == 1)
+    {
+        //nothing here... idk why i added this
+    }
     if (selection == 2)
+    {
+        env.music = false;
+    }
+    if (selection == 1 || selection == 2)
+    {
+        int difficulty_selection = 0;
+        while (difficulty_selection < 1 || difficulty_selection > 2)
+        {
+            cout << "Please select a difficulty:" << endl
+                << "1. Normal (1x damage and strength)" << endl
+                << "2. Hard   (2x damage and strength)" << endl
+                << "--> Hard also has around 2.5x more enemies" << endl;
+            cin >> difficulty_selection;
+        }
+        env.difficulty = (character::difficulty)(difficulty_selection - 1);
+    }
+    if (selection == 3)
     {
         multiplayer = true;
         cout << "Which player are you? (1/2) ";
@@ -43,7 +66,7 @@ int main(int argc, const char * argv[])
         playernum = player;
         strcpy(hostname, "localhost");
     }
-    if (selection == 3)
+    if (selection == 4)
     {
         cout << "This game uses TCP ports 5101-5103. Please make sure to patch them through"
              << " your firewall if you wish for this to actually work." << endl
@@ -60,39 +83,47 @@ int main(int argc, const char * argv[])
         strcpy(hostname, host);
         delete host;
     }
-    if (selection == 4)
+    if (selection == 3 || selection == 4)
+    {
+        do
+        {
+            cout << "Please enter a seed number (between 1 and " << INT_MAX << ") ";
+            cin >> seed;
+        } while (seed < 0 || seed > INT_MAX);
+    }
+    if (selection == 5)
     {
         ks4200("help");
         getch_();
         ks4200("not_debug");
         exit(EXIT_SUCCESS);
     }
-    if (selection == 5)
+    if (selection == 6)
     {
         launch_sks4200(); //if your going to use this, you MUST 'make install' first
         exit(EXIT_SUCCESS);
     }
-    if (selection == 6)
+    if (selection == 7)
     {
         ofstream sksfastboot(".sksfastboot", ios::out | ios::trunc);
         sksfastboot << "Hello World!";
         sksfastboot.close();
         exit(EXIT_SUCCESS);
     }
-    if (selection == 7)
+    if (selection == 8)
     {
         system("rm .sksfastboot");
         exit(EXIT_SUCCESS);
     }
-    if (selection >= 8 || selection <= 0)
+    if (selection >= 9 || selection <= 0)
         exit(EXIT_SUCCESS);
+    srand((int)seed);
     showhelp();
     game(argc, argv);
 }
 void game(int argc, const char * argv[])
 {
     game_initialized = true;
-    srand((unsigned)time((long)0));
     populate();
     extern int playernum;
     if (multiplayer)
@@ -302,12 +333,14 @@ void displaylauncher(void)
          << "#Please select an option from the list below to start #" << endl
          << "#1. Single player (local) game                        #" << endl
          << "#2. Single player (local) game no sound (OSX only)    #" << endl
-         << "#2. Miltiplayer (local) game                          #" << endl
-         << "#3. Multiplayer (online) game                         #" << endl
-         << "#4. Play KS4200                                       #" << endl
-         << "#5. Play SKS4200                                      #" << endl
-         << "#6. Enable fastboot                                   #" << endl
-         << "#7. Disable fastboot                                  #" << endl
-         << "#8. Exit                                              #" << endl
+         << "#3. Miltiplayer (local) game                          #" << endl
+         << "#4. Multiplayer (online) game                         #" << endl
+         << "#5. Play KS4200                                       #" << endl
+         << "#6. Play SKS4200                                      #" << endl
+         << "#7. Enable fastboot                                   #" << endl
+         << "#8. Disable fastboot                                  #" << endl
+         << "#9. Exit                                              #" << endl
+         << "*** Note: you can specify a seed by running \"sks3 #\"  #" << endl
+         << "*** ->seeds make the map the same across all games    #" << endl
          << "#######################################################" << endl;
 }

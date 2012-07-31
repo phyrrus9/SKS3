@@ -117,7 +117,8 @@ void showhelp(void)
     }
     else
     {
-        play_music("say Welcome to Super Key Seeker 3!");
+        if (env.music)
+            play_music("say Welcome to Super Key Seeker 3!");
         colorify(RED);
         cout << "This dialog will close in about 15 seconds." << endl
         << "To disable this, just add a file named .sksfastboot to this directory" << endl;
@@ -206,7 +207,8 @@ void enginecmd_display(void)
 void music_stop(void)
 {
     backgroundmusic->Stop();
-    kill_music("killall sleep>/tmp/null-log; killall afplay>/tmp/null-log"); //this will cause a jump in one second
+    if (env.music)
+        kill_music("killall sleep>/tmp/null-log; killall afplay>/tmp/null-log"); //this will cause a jump in one second
     //env.timer.second--;
     env.timer.clock--;
 }

@@ -93,13 +93,34 @@ void populate(void)
             }
             if (r >= 7 && r <= 11)
                 env.map[i] = '#';
+            if (env.difficulty >= character::PRO)
+            {
+                if (r > 15 && r < 20)
+                {
+                    env.map[i] = 'z';
+                    env.kills_needed++;
+                }
+                if (r > 20 && r < 25)
+                {
+                    env.map[i] = '!';
+                    env.kills_needed++;
+                }
+                if (r > 25 && r < 30)
+                {
+                    env.map[i] = '$';
+                    env.kills_needed++;
+                }
+            }
         }
     }
     else 
     {
         //??
     }
-    env.kills_needed /= 3;
+    if (env.difficulty == character::NORMAL)
+        env.kills_needed /= 3;
+    else if (env.difficulty == character::PRO)
+        env.kills_needed /= 2;
 }
 void turn(direction d)
 {
@@ -161,7 +182,8 @@ void move(direction d)
     {
         server_end(); //disconnect and unbind the socket
         colorify(NORMAL); //un-colorify
-        kill_music("killall afplay"); //kill the music
+        if (env.music)
+            kill_music("killall afplay"); //kill the music
         exit(EXIT_SUCCESS);
     }
     if (d == HLP)
@@ -191,19 +213,30 @@ void move(direction d)
 void showmap(void)
 {
     colorify();
+    colorify(BORDER);
     cout << "#  ";
     for (int i = 0; i < 46; i++)
         cout << "# ";
+    colorify();
     cout << "\n\r";
     for (int i = 0, j = 1; i < 900; i++, j++)
     {
         if (i % 30 == 0)
-            cout << "#  ";
+        {
+            colorify(BORDER);
+            cout << "#";
+            colorify();
+            cout << "  ";
+        }
         if (i != env.position)
         {
             if (env.view[i] != '~' && env.view[i] != '#' && env.view[i] != '?')
+            {
                 if (env.view[i] != '+')
                     colorify(GREEN);
+                if (env.view[i] == '+')
+                    colorify(BLUE);
+            }
             cout << env.view[i] << "  ";
             colorify();
         }
@@ -217,13 +250,22 @@ void showmap(void)
         }
         if (j == 30)
         {
+            colorify(BORDER);
             cout << '#' << "\n\r";
+            colorify();
             j = 0;
         }
     }
-    cout << "#  ";
+    colorify(BORDER);
+    cout << "#";
+    colorify();
+    cout << "  ";
     for (int i = 0; i < 46; i++)
+    {
+        colorify(BORDER);
         cout << "# ";
+        colorify();
+    }
     cout << endl;
     colorify();
 }
