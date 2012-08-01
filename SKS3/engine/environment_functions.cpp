@@ -34,6 +34,7 @@ void environment_init(_environment &t)
     t.moves = 1;
     t.kills = 0;
     t.kills_needed = 0;
+    t.total_enemies = 0;
     t.levels_completed = 0;
     t.attack = 1;
     t.totalscore = 0;
@@ -93,7 +94,7 @@ class timer_thread : public tpool::Thread
                 env.timer.second = env.timer.minute = 0;
                 //env.timer.clock /= 5;
             }
-            env.totalscore = (((((env.score * (env.levels_completed * 2)) + (env.health / 3)) + env.kills) + env.lives) - (env.moves / 3) - ((env.timer.clock / 10) * env.levels_completed));
+            env.totalscore = (((((env.score * (env.levels_completed * 2)) + (env.health / 3)) + env.kills) + env.lives) - (env.moves / 30) - ((env.timer.clock / 10) * env.levels_completed));
             //figured i would do this here
             if (env.totalscore < 0)
                 env.totalscore = 0;

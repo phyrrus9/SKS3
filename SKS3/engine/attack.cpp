@@ -32,6 +32,11 @@ class clrthread_lif : public tpool::Thread
         env.statuscolor = NORMAL; //put it back
     }
 };
+void attack_color_change(void)
+{
+    clrthread_atk *clrchg = new clrthread_atk;
+    clrchg->Run();
+}
 void kill(int p)
 {
     /*
@@ -40,8 +45,6 @@ void kill(int p)
      */
     if (env.map[p] != echar || env.map[p] != '#')
     {
-        clrthread_atk *clrchg = new clrthread_atk;
-        clrchg->Run();
         env.map[p] = env.grid[p] = echar;
         env.kills++;
     }
@@ -60,24 +63,28 @@ void eat(int p)
         env.health -= 5;
         env.score += targetnoms::SMALLBUG;
         ate = true;
+        attack_color_change();
     }
     if (env.map[p] == '&')
     {
         env.health -= 4;
         env.score += targetnoms::LARGEBUG;
         ate = true;
+        attack_color_change();
     }
     if (env.map[p] == '$')
     {
         env.health -= 3;
         env.score += targetnoms::WORM;
         ate = true;
+        attack_color_change();
     }
     if (env.map[p] == '!')
     {
         env.health -= 25;
         env.score += targetnoms::PITBULL;
         ate = true;
+        attack_color_change();
     }
     if (env.map[p] == '+')
     {
@@ -85,6 +92,11 @@ void eat(int p)
         ate = true;
         clrthread_lif *clrchg = new clrthread_lif;
         clrchg->Run();
+    }
+    if (env.map[p] == '@')
+    {
+        env.kills = env.kills_needed;
+        ate = true;
     }
     if (ate)
         kill(p);
@@ -139,6 +151,12 @@ void attack(void)
     {
         t = character::ZOMBIE;
         gain = 0;
+    }
+    if (env.view[location] == '@') //eat the teleport
+    {
+        t = character::TELEPORT; //they have a strength of 0
+        gain = targetnoms::TELEPORT;
+        //env.score += gain;
     }
     if (env.view[location] == echar || env.view[location] == '#')
         return;

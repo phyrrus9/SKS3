@@ -17,7 +17,7 @@ struct _environment
     char * view;
     bool showmap, single, cheats, zombies_do_damage, refresh_screen, allow_refresh;
     bool weapons[6];
-    int health, lives, score, position, moves, kills, kills_needed, levels_completed, attack,
+    int health, lives, score, position, moves, kills, kills_needed, total_enemies, levels_completed, attack,
     totalscore, selectedweapon, min_zombie_does_damage_level;
     std::string savefile;
     color bgcolor, playercolor, statuscolor;

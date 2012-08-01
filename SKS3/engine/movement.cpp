@@ -126,6 +126,7 @@ void populate(void)
     {
         //??
     }
+    env.total_enemies = env.kills_needed;
     if (env.difficulty == character::NORMAL)
         env.kills_needed /= 3;
     else if (env.difficulty == character::PRO)
@@ -133,6 +134,7 @@ void populate(void)
         env.kills_needed /= 3; //sorry... but 2 just made it really hard and annoying
         env.kills_needed -= 50;
     }
+    env.map[rand() % 400] = '@'; //randomly place a teleport
 }
 void turn(direction d)
 {
@@ -265,7 +267,12 @@ void showmap(void)
             if (env.view[i] != '~' && env.view[i] != '#' && env.view[i] != '?')
             {
                 if (env.view[i] != '+')
-                    colorify(GREEN);
+                {
+                    if (env.view[i] == '@') //teleport
+                        colorify(RED);
+                    else
+                        colorify(GREEN);
+                }
                 if (env.view[i] == '+')
                     colorify(BLUE);
             }

@@ -4,6 +4,7 @@
  * This software is free, it may be customized, redistributed, blah blah blah...
  */
 #include "engine.h"
+void attack_color_change(void);
 void kill(void);
 void eat(int p);
 void attack(void);

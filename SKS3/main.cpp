@@ -130,6 +130,10 @@ int main(int argc, const char * argv[])
     }
     if (selection >= 9 || selection <= 0)
         exit(EXIT_SUCCESS);
+    if (argc > 1)
+    {
+        seed = atoi(argv[1]);
+    }
     srand((int)seed);
     showhelp();
     game(argc, argv);
