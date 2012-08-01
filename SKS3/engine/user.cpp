@@ -8,6 +8,10 @@ extern _environment env; //global variable
 extern bool game_initialized;
 class display_thread : public tpool::Thread
 {
+    /*
+     * Display everything on screen whenever the
+     * program says that a refresh is necessary
+     */
     virtual void Entry(void)
     {
         while (true)
@@ -30,14 +34,16 @@ class display_thread : public tpool::Thread
 };
 class music_thread : public tpool::Thread
 {
+    /*
+     * Keep the background music going in a loop
+     * unless the user turns it off, in that case
+     * this thread will enter an infinite do nothing
+     * loop until it is tuned back on
+     */
     virtual void Entry(void)
     {
         while (true)
         {
-            if (!env.music)
-            {
-                //system("killall afplay"); //stop the music, please (pun)
-            }
             while (!env.music)
             {
                 //no music is played
@@ -63,6 +69,11 @@ class music_thread : public tpool::Thread
 music_thread *backgroundmusic; //file global
 void showhelp(void)
 {
+    /*
+     * Display the help dialog on the screen, this will be
+     * shown once at start (unless music is disabled), and
+     * every time the user presses the 'H' key.
+     */
     clear();
     env.allow_refresh = false;
     //env.music = true; //ensure it actually starts //nevermind....
@@ -138,6 +149,11 @@ void showhelp(void)
 }
 void display(void)
 {
+    /*
+     * The HUD. The most important part of the game is what
+     * the user can see and do. This tells him all that
+     * information (except the multiplayer stuff)
+     */
     weapons::weaponlist t;
     weapons_init(t);
     colorify(env.statuscolor);
@@ -151,11 +167,24 @@ void display(void)
 }
 void multidisplay(void)
 {
+    /*
+     * The "multiplayer stuff" from above is
+     * shown using this function on a new line right
+     * below the first HUD
+     */
     if (strcmp(env.socket_message, "\251") != 0)
         cout << "[player 2] " << env.socket_message << "\n\r";
 }
 void enginecmd_display(void)
 {
+    /*
+     * This is the second help screen that
+     * shows all of the cheats and engine
+     * commands that can be used with the '/'
+     * key. Some of them require cheats to be
+     * turned on. Parsed in the engine.cpp file
+     * inside the enginecmd function
+     */
     clear();
     env.allow_refresh = false;
     cout << "Engine commands are accessed by pressing the '/' key which will display a >"
@@ -206,6 +235,11 @@ void enginecmd_display(void)
 }
 void music_stop(void)
 {
+    /*
+     * This will stop the music thread from
+     * starting another song. Then it will kill
+     * all of the running processes playing music
+     */
     backgroundmusic->Stop();
     if (env.music)
         kill_music("killall sleep>/tmp/null-log; killall afplay>/tmp/null-log"); //this will cause a jump in one second
@@ -214,5 +248,8 @@ void music_stop(void)
 }
 void music_start(void)
 {
+    /*
+     * Re-start the music thread. Simple and fast
+     */
     backgroundmusic->Run();
 }

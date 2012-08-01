@@ -51,6 +51,15 @@ class socket_thread : public tpool::Thread
 socket_thread *_socket_thread = new socket_thread;
 void populate(void)
 {
+    /*
+     * Seed a new map. This happens in about a quarter of a second.
+     * It goes through 899 random numbers and parses what to put in
+     * each section of the map. Very useful, NEVER bypass this unless
+     * you want to use static maps like sks4200 did (but with the size
+     * of this engine I wouldnt reccommend it because sks4200 took a 
+     * good 5 minutes to compile on its 10 function engine. This one has
+     * at least 50.)
+     */
     int health_i = 0;
     env.map[0] = env.grid[0] = '@';
     if (!env.single)
@@ -120,14 +129,31 @@ void populate(void)
     if (env.difficulty == character::NORMAL)
         env.kills_needed /= 3;
     else if (env.difficulty == character::PRO)
-        env.kills_needed /= 2;
+    {
+        env.kills_needed /= 3; //sorry... but 2 just made it really hard and annoying
+        env.kills_needed -= 50;
+    }
 }
 void turn(direction d)
 {
+    /*
+     * When you use 'i/j/k/l' this just rotates your
+     * character in that direction so you can use the
+     * 'e' command to attack and such
+     */
     env.player = (character::player)(d);
 }
 void move(direction d)
 {
+    /*
+     * This parses most of your actions. This just figures out
+     * if there are any zombies nearby, if there are not then
+     * it will make your move and call the respective functions
+     * to do exactly what you want. This is the first link of the
+     * chain call that can go 30+ functions back in the engine
+     * before it must return here and update your monitor. All
+     * of this happens in less than an eighth of a second.
+     */
     if (env.paused && d != UNPAU)
         return; //you arnt allowed to move while paused... thats cheating...
     void (*prev_fn)(int);
@@ -212,6 +238,12 @@ void move(direction d)
 }
 void showmap(void)
 {
+    /*
+     * Called from the refresh thread,
+     * displays the 30x30 map on the screen
+     * so you can make your next move and
+     * eventually die, etc
+     */
     colorify();
     colorify(BORDER);
     cout << "#  ";
@@ -271,6 +303,9 @@ void showmap(void)
 }
 void showplayer(void)
 {
+    /*
+     * Displays your character on screen
+     */
     if (env.player == character::N)
         cout << '^';
     if (env.player == character::S)
@@ -282,6 +317,14 @@ void showplayer(void)
 }
 void light(int p)
 {
+    /*
+     * With the newer versions of the game (sks4200 release 2
+     * and newer), there has been a fog so you can't make an
+     * effecient path to the portal (removed in sks3 but I will
+     * more than likely add it again soon). This function shows
+     * you the entire block around your character so you can see
+     * nearby. Sorry it is hardcoded and not in an efficient loop.
+     */
     if ((p - 29) >= 0)
         env.grid[p - 29] = env.map[p - 29];
     if ((p - 30) >= 0)

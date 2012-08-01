@@ -10,6 +10,7 @@
 #include "ks4200/ks4200.h"
 #define _move moving = true
 extern _environment env; //fixes issues with xcode compilations
+//external functions to control the background music threads
 extern void music_start(void);
 extern void music_stop(void);
 int main(int argc, const char * argv[]); //main function

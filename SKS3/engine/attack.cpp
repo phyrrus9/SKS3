@@ -7,6 +7,10 @@
 extern _environment env; //global var
 class clrthread_atk : public tpool::Thread
 {
+    /*
+     * Pretty simple, when you attack, this will turn the
+     * statusbar red for one second
+     */
     virtual void Entry(void)
     {
         env.statuscolor = RED; //make the whole bar red
@@ -16,6 +20,11 @@ class clrthread_atk : public tpool::Thread
 };
 class clrthread_lif : public tpool::Thread
 {
+    /*
+     * This thread runs pretty much the same as the attack
+     * thread does, but instead of red, it turns the status
+     * bar blue when you obtain a life point.
+     */
     virtual void Entry(void)
     {
         env.statuscolor = BLUE; //make the whole bar blue
@@ -25,6 +34,10 @@ class clrthread_lif : public tpool::Thread
 };
 void kill(int p)
 {
+    /*
+     * This will increment your kills, start the attack thread,
+     * and then it will return so the engine can call the eat function
+     */
     if (env.map[p] != echar || env.map[p] != '#')
     {
         clrthread_atk *clrchg = new clrthread_atk;
@@ -35,6 +48,12 @@ void kill(int p)
 }
 void eat(int p)
 {
+    /*
+     * This function, will figure out how much health to take away,
+     * take that from you, and do the stuff to add to your score,
+     * then remove the object from the game. if the object is a life,
+     * it wills start the thread to turn blue
+     */
     bool ate = false;
     if (env.map[p] == '%')
     {
@@ -72,6 +91,14 @@ void eat(int p)
 }
 void attack(void)
 {
+    /*
+     * This will attack an object that you point it at.
+     * most of the work is done in the eat and kill functions
+     * but this will figure every piece of math and stuff out
+     * like where the object is, how much damage you do to it
+     * how much damage it does to you, and if it is a zombie
+     * it will call the respctive function (look in zombie.h)
+     */
     int location = -1, gain = 0, pos = env.position;
     character::target t;
     if (env.player == character::N)
@@ -129,6 +156,11 @@ void attack(void)
 }
 void increment_attack(void)
 {
+    /*
+     * Called when you press 'E', it will figure out if you are
+     * allowed to add to your attack, and if you are, it will take
+     * from your health and add to your attack.
+     */
     const int multiplier = 5;
     int divisor = ((1 + env.attack) * multiplier) + env.lives + env.health, increment = 1, total = env.health * env.lives;
     if (total / divisor > 1) //kgood
@@ -139,6 +171,11 @@ void increment_attack(void)
 }
 void showweapons(void)
 {
+    /*
+     * Weapons display function, weapons list is in the comment below this one
+     * What this does is show the list of available weapons and which one is
+     * selected will show up in red instead of your statusbar color.
+     */
     //D(fist) x(throwing star) |(sword) ©(gun) {}(cannon) ~(laser)
     if (env.weapons[0])
     {
@@ -185,6 +222,10 @@ void showweapons(void)
 }
 void setselectedweapon(int w)
 {
+    /*
+     * This will just select your weapon, but it is done in main.cpp
+     * in the function game.
+     */
     if (env.weapons[w])
         env.selectedweapon = w;
 }

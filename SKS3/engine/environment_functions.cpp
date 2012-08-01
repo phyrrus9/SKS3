@@ -6,6 +6,13 @@
 #include "environment_functions.h"
 void environment_init(_environment &t)
 {
+    /*
+     * This function just sets up the initial environment
+     * variables in their default values. It needed to be
+     * a function instead of static initializations because
+     * it would not compile for any system other than mac os x
+     * that way, and even then it threw a few hundred warnings.
+     */
     t.paused = false;
     t.music = true;
     strcpy(t.map, "\0");
@@ -50,6 +57,10 @@ void environment_init(_environment &t)
 
 void weapons_init(weapons::weaponlist &t)
 {
+    /*
+     * This just initializes the strength array for weapons
+     * its here because it cant be initialized in a header file
+     */
     //{ 2, 4, 8, 16, 32, 64 }
     for (int i = 0, j = 2; i < 6; i++, j *= 2) //all powers of two
         t.strength[i] = j; //its all easier this way for adding say 128 weapons :P
@@ -57,6 +68,11 @@ void weapons_init(weapons::weaponlist &t)
 
 class timer_thread : public tpool::Thread
 {
+    /*
+     * This thread runs CONSTANTLY in the background, NO exceptions
+     * all it does is count, literally. This is a timer, we use it to
+     * track how many points to take off a user's score every ten seconds
+     */
     virtual void Entry(void)
     {
         int count = 0;
@@ -93,6 +109,9 @@ class timer_thread : public tpool::Thread
 
 void game_timer_init(game_timer &t)
 {
+    /*
+     * Initialize the game timer to 00:00/0
+     */
     t.second = t.minute = t.clock = 0;
     timer_thread *env_timer_thread = new timer_thread;
     env_timer_thread->Run();
@@ -100,6 +119,10 @@ void game_timer_init(game_timer &t)
 
 void game_timer_increment(game_timer & t)
 {
+    /*
+     * Increment by 00:01/1
+     * if the seconds is more than xx:59/x, add 1 to the minutes
+     */
     t.second++;
     t.clock++;
     if (t.second >= 60)

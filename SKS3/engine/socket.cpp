@@ -10,17 +10,31 @@ int serv_sockfd, cli_sockfd;
 bool debug = false;
 void error(const char *msg)
 {
+    /*
+     * So I can print errors that the socket recieves
+     * this is only used in multiplayers and usually
+     * just a disconnect from the communication.
+     */
     printf("Error! %s\n", msg);
     endwin();
     exit(-1);
 }
 void dlog(const char *msg)
 {
+    /*
+     * Used for debugging, if you turn on debugging,
+     * this will print all the status messages onto
+     * the screen as the socket thread prints them.
+     */
     if (debug)
         printf("%s\n", msg);
 }
 void server_connect(int port)
 {
+    /*
+     * Initialize a multiplayer game by opening a socket
+     * that lets us pass a buffer between the two programs
+     */
     dlog("Server connect\n");
     int portno;
     struct sockaddr_in serv_addr;
@@ -39,6 +53,15 @@ void server_connect(int port)
 }
 void server(int port)
 {
+    /*
+     * Gather all the information into a string
+     * send it into a buffer, flush the network
+     * stream, write the buffer to it, and send
+     * the OK signal over to the client so it
+     * can be set as the socket message and
+     * displayed as the other player's score and
+     * stats to compete.
+     */
     if (!running)
     {
         server_connect(port);
@@ -61,11 +84,11 @@ void server(int port)
         if (newsockfd < 0) 
             error("ERROR on accept");
         bzero(buffer,256);
-        n = (int)read(newsockfd,buffer,255);
+        n = (int)read((int)newsockfd,buffer,255);
         if (n < 0) error("ERROR reading from socket");
         strcpy(env.socket_message, buffer);
         //fprintf(stdout, "%s\n", env.socket_message);
-        n =(int) write(newsockfd,"OK",3);
+        n =(int)write((int)newsockfd,"OK",3);
         if (n < 0) error("ERROR writing to socket");
         close(newsockfd);
     }
@@ -75,6 +98,11 @@ void server(int port)
 
 void client(char *host, int port)
 {
+    /*
+     * Recieve the socket message, and set it as
+     * the socket message in the environment
+     * so that the display thread will show it.
+     */
     int sockfd, portno, n;
     struct sockaddr_in serv_addr;
     struct hostent *server;
@@ -115,11 +143,11 @@ void client(char *host, int port)
     if (env.paused)
         t << "\33[31m Player has paused game\33[0m";
     strcpy(buffer, t.str().c_str());
-    n = (int)write(sockfd,buffer,strlen(buffer));
+    n = (int)write((int)sockfd,buffer,(int)strlen(buffer));
     if (n < 0) 
         error("ERROR writing to socket");
     bzero(buffer,256);
-    n = (int)read(sockfd,buffer,255);
+    n = (int)read((int)sockfd,buffer,255);
     if (n < 0) 
         error("Shutting down, (player probably quit)");
     //printf("%s\n",buffer);
@@ -127,6 +155,11 @@ void client(char *host, int port)
 }
 void server_end(void)
 {
+    /*
+     * Kill the socket so we can shut down the
+     * game. And the other player's game will die
+     * as well.
+     */
     close(serv_sockfd);
     dlog("socket closed");
 }

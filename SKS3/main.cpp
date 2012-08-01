@@ -13,6 +13,11 @@ extern int client_port;
 extern int server_port;
 class newlevel_thread : public tpool::Thread
 {
+    /*
+     * This thread just plays the new level beep sound effect
+     * on a separate thread once you clear a level. It is only
+     * called once a level at the beginning.
+     */
     virtual void Entry(void)
     {
         //while (true) //play it once, not forever....
@@ -26,6 +31,14 @@ class newlevel_thread : public tpool::Thread
 };
 int main(int argc, const char * argv[])
 {
+    /*
+     * Main function, this is what the OS calls when the
+     * program execution is requested (and on some systems
+     * after the signature is verified and a sandbox is set
+     * up). This sets everything up for the game to be playable.
+     * After everything is set up, it forwards its args to the 
+     * game function and all is good.
+     */
     environment_init(env);
     long seed = time(0);
     clear();
@@ -123,6 +136,12 @@ int main(int argc, const char * argv[])
 }
 void game(int argc, const char * argv[])
 {
+    /*
+     * This is the entire game, yes it is all inside one function,
+     * what ya gonna do about it. Anyways this uses all the engine
+     * commands to make it all wok. This does some minor thinking
+     * and the engine does the rest. See engine.h
+     */
     game_initialized = true;
     populate();
     extern int playernum;
@@ -325,6 +344,11 @@ void game(int argc, const char * argv[])
 }
 void displaylauncher(void)
 {
+    /*
+     * This is a pretty simple function, just displays a menu allowing
+     * the user to select what he/she wants to do with the game. Options
+     * parsed in main function.
+     */
     cout << "#######################################################" << endl
          << "#Welcome  to  Super  Key  Seeker  3  ©  2012  phyrrus9#" << endl
          << "#This game has several modes to select, but if for you#" << endl

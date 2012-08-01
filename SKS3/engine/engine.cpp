@@ -11,10 +11,22 @@ int client_port, server_port, playernum;
 char * hostname = new char[256];
 void terminate(int param) //segmentation fault on clean exit (unalloc from restore bug tempfix)
 {
+    /*
+     * Sometimes, after a save this will cause a sigsegv on closing the game
+     * this is just here to catch it, and sigterm it so it wont throw
+     * an error to the os and clutter your screen with crap
+     */
     kill(getpid(), SIGTERM);
 }
 char getch_()
 {
+    /*
+     * Get a single character using the ncurses functions
+     * so that you no longer need to press enter (like in
+     * the original version of sks4200). This function being
+     * here just makes it a lot easier to grab a character
+     * instead of pasting this code everywhere we needed it
+     */
     char c;
     initscr();
     cbreak();
@@ -24,6 +36,12 @@ char getch_()
 }
 void colorify(void)
 {
+    /*
+     * Not to be confused with colorify(color),
+     * this changes the screen color to whatever
+     * color is the bgcolor set with the /colorify
+     * engine command
+     */
     color c = env.bgcolor;
     if (c == RED)
         cout << "\33[31m";
@@ -36,20 +54,39 @@ void colorify(void)
 }
 void colorify(color c)
 {
-
-        if (c == RED)
-            cout << "\33[31m";
-        if (c == BLUE)
-            cout << "\33[34m";
-        if (c == GREEN)
-            cout << "\33[32m";
-        if (c == NORMAL)
-            cout << "\33[0m";
-        if (c == BORDER)
-            cout << "\33[32m";
+    /*
+     * This sets the screen to a specific color
+     * useful in threading or whenever you want
+     * to change the color of a piece of text.
+     * it used to be that in order to do this we
+     * would just add the code to the actual object.
+     * in SKS3 I decided to save memory and stop using
+     * a 3D string array for maps and use a 2D character
+     * array (a 1D string) instead. So each object takes
+     * 1 byte of RAM instead of 8.
+     */
+    if (c == RED)
+        cout << "\33[31m";
+    if (c == BLUE)
+        cout << "\33[34m";
+    if (c == GREEN)
+        cout << "\33[32m";
+    if (c == NORMAL)
+        cout << "\33[0m";
+    if (c == BORDER)
+        cout << "\33[32m";
 }
 void enginecmd(string c, string d)
 {
+    /*
+     * Called when the user presses '/', this just
+     * parses the input and performes the output
+     * which could be useful commands like save
+     * or not useful commands like cheating your
+     * score or something stupid like that. It is
+     * also useful for engineering savedata for
+     * testing functions at say level 51.
+     */
     if (c == "env->cheats")
     {
         extern bool multiplayer; //in main.cpp

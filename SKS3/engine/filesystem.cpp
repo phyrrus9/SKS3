@@ -7,6 +7,12 @@
 extern _environment env; //global variable
 void save(void)
 {
+    /*
+     * Saves the current env variable to disk,
+     * see environment.h to see what exactly it
+     * writes. This contains all RAM used in
+     * the program that is useful to the user
+     */
     pause();
     ofstream f(env.savefile.c_str(), ios::trunc | ios::binary);
     if (!f)
@@ -24,6 +30,11 @@ void save(void)
 }
 void restore(void)
 {
+    /*
+     * Read the environment from disk and insert
+     * it into the existing one, including all
+     * maps, user data, etc.
+     */
     pause();
     ifstream f(env.savefile.c_str(),ios::binary);
     if (!f)
@@ -41,6 +52,19 @@ void restore(void)
 }
 string select_slot(int slot)
 {
+    /*
+     * Games on older consoles used to have slots
+     * that you could save to, so you could have
+     * multiple (I think most used 5) games going
+     * at the same time without affecting each
+     * other.
+     * Well, in SKS3 I decided to add this ability
+     * to the game. You have 6 save slots and one
+     * catchall null slot. Allowing you to go back
+     * to the good 'ole days and be able to go back
+     * if you were to say die on one level and needed
+     * a new seed or something.
+     */
     string saveslot = ".save-slot";
     switch (slot) 
     {
@@ -71,6 +95,12 @@ string select_slot(int slot)
 }
 void restore_slot(void)
 {
+    /*
+     * I know, this comment block is very much
+     * shorter than the one above, but it is a 
+     * simple function... All it does is restore
+     * from a save slot :P
+     */
     env.allow_refresh = false;
     pause();
     small_delay();
@@ -94,6 +124,10 @@ void restore_slot(void)
 }
 void save_slot(void)
 {
+    /*
+     * Save to the selected slot...
+     * yes, i know these are getting shorter.
+     */
     env.allow_refresh = false;
     pause();
     small_delay();
@@ -115,6 +149,12 @@ void save_slot(void)
 }
 void small_delay(void)
 {
+    /*
+     * Sometimes the refresh thread picks up too fast
+     * and makes your allow_refresh = false; useless as
+     * it has already overwritten the screen buffer. Call
+     * this before writing to the screen to fix the problem
+     */
     for (int i = 0 ; i < 1000; i++)
     { }
 }
