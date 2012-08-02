@@ -166,26 +166,31 @@ void attack(void)
     {
         t = character::SMALLBUG;
         gain = targetnoms::SMALLBUG;
+        attack_color_change();
     }
     if (env.view[location] == '&')
     {
         t = character::LARGEBUG;
         gain = targetnoms::LARGEBUG;
+        attack_color_change();
     }
     if (env.view[location] == '$')
     {
         t = character::WORM;
         gain = targetnoms::WORM;
+        attack_color_change();
     }
     if (env.view[location] == '!')
     {
         t = character::PITBULL;
         gain = targetnoms::PITBULL;
+        attack_color_change();
     }
     if (env.view[location] == 'z')
     {
         t = character::ZOMBIE;
         gain = 0;
+        attack_color_change();
     }
     if (env.view[location] == '@') //eat the teleport
     {

@@ -129,6 +129,8 @@ int main(int argc, const char * argv[])
             cin >> seed;
         } while (seed < 0 || seed > INT_MAX);
     }
+    if (multiplayer)
+        env.multiplayer = true;
     if (selection == 5)
     {
         ks4200("help");

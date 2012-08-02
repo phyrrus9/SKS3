@@ -252,6 +252,8 @@ void multidisplay(void)
      * shown using this function on a new line right
      * below the first HUD
      */
+    if (!env.multiplayer)
+        return;
     cout << '\r'; //return to the beginning now.... please
     env.socket_message[0] = ' '; //so the P wont show up
     if (strcmp(env.socket_message, "\251") != 0)
