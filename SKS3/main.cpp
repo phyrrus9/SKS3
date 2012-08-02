@@ -313,7 +313,6 @@ void game(int argc, const char * argv[])
             {
                 if (env.music)
                 {
-                    env.music = false;
                     music_stop();
                 }
                 else

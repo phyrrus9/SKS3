@@ -150,6 +150,8 @@ void showhelp(void)
     << "~ - Neutral (empty)                 % - Large bug" << endl
     << "& - Small bug                       $ - Worm" << endl
     << "! - Vicious pitbull                 z - Zombie" << endl
+    << "@ - Teleport ****** The teleport will instantly push you to the next level" << endl
+    << "    If you were to eat this, you get a massive score boost." << endl
     << "You can change the color of the text (if your terminal does not support it)" << endl
     << "To do so, type /colorify (or /env->pcolor) and then one of the following colors:" << endl
     << "red, blue, green, yellow, normal" << endl
@@ -281,6 +283,7 @@ void music_stop(void)
     backgroundmusic->Stop();
     if (env.music)
         kill_music("killall sleep>/tmp/null-log; killall afplay>/tmp/null-log"); //this will cause a jump in one second
+    env.music = false;
     //env.timer.second--;
     env.timer.clock--;
 }

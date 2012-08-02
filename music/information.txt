@@ -1,0 +1,1 @@
+In order to make adding files more practical, I need to name this next folder sks3 so when installer extracts it, it will extract to /usr/share/sks3 not /usr/share/music

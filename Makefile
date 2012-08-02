@@ -16,4 +16,4 @@ linux:
 install:
 	sudo cp ./Binaries/* /usr/bin
 	sudo mkdir -p /usr/share/sks3
-	sudo cp ./music/* /usr/share/sks3
+	sudo cp ./music/sks3/* /usr/share/sks3
