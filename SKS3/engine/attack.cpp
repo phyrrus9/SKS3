@@ -86,6 +86,11 @@ void eat(int p)
         ate = true;
         attack_color_change();
     }
+    /*
+     * The following statements are used for special characters
+     * these do not have the standard effect as they do the
+     * rest of attacks and eats
+     */
     if (env.map[p] == '+')
     {
         env.lives++;
@@ -96,6 +101,11 @@ void eat(int p)
     if (env.map[p] == '@')
     {
         env.kills = env.kills_needed;
+        ate = true;
+    }
+    if (env.map[p] == 'k')
+    {
+        env.keys++;
         ate = true;
     }
     if (ate)
@@ -157,6 +167,12 @@ void attack(void)
         t = character::TELEPORT; //they have a strength of 0
         gain = targetnoms::TELEPORT;
         //env.score += gain;
+    }
+    if (env.view[location] == 'k') //eat a key
+    {
+        t = character::TELEPORT; //strength of 0
+        gain = 0;
+        env.keys++;
     }
     if (env.view[location] == echar || env.view[location] == '#')
         return;

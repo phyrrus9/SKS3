@@ -12,13 +12,13 @@ struct game_timer
 
 struct _environment
 {
-    bool paused, music;
+    bool paused, music, socket_paused;
     char map[900], grid[900];
     char * view;
     bool showmap, single, cheats, zombies_do_damage, refresh_screen, allow_refresh;
     bool weapons[6];
     int health, lives, score, position, moves, kills, kills_needed, total_enemies, levels_completed, attack,
-    totalscore, selectedweapon, min_zombie_does_damage_level;
+    totalscore, selectedweapon, min_zombie_does_damage_level, keys;
     std::string savefile;
     color bgcolor, playercolor, statuscolor;
     character::player player;

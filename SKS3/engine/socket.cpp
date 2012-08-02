@@ -87,6 +87,17 @@ void server(int port)
         n = (int)read((int)newsockfd,buffer,255);
         if (n < 0) error("ERROR reading from socket");
         strcpy(env.socket_message, buffer);
+        if (env.socket_message[0] == 'P')
+        {
+                pause();
+                env.socket_paused = true;
+        }
+        else
+            if (env.socket_paused)
+            {
+                env.socket_paused = false;
+                unpause();
+            }
         //fprintf(stdout, "%s\n", env.socket_message);
         n =(int)write((int)newsockfd,"OK",3);
         if (n < 0) error("ERROR writing to socket");
@@ -125,10 +136,13 @@ void client(char *host, int port)
     serv_addr.sin_port = htons(portno);
     if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) 
         error("ERROR connecting");
-    //printf("Please enter the message: ");
     bzero(buffer,256);
     ostringstream t;
-    t << "  "; //pad it so it lines up with the health display on p1||p2
+    if (env.paused)
+        t << "P";
+    else
+        t << " ";
+    t << " "; //pad it so it lines up with the health display on p1||p2
     t << "Score: ";
     t << env.totalscore;
     t << " Health: ";
@@ -137,11 +151,16 @@ void client(char *host, int port)
     t << env.lives;
     t << " Kills: ";
     t << env.kills;
+    t << " Keys: ";
+    t << env.keys;
     t << " Levels Completed: ";
     t << env.levels_completed;
     t << " Time: " << right << setw(2) << setprecision(2) << setfill('0') << env.timer.minute << ":" << right << setw(2) << env.timer.second << setfill(' ') << left;
     if (env.paused)
-        t << "\33[31m Player has paused game\33[0m";
+    {
+        t << "\n\r\t    \33[31m Player has paused game\33[0m";
+        //env.player_socket_paused = false;
+    }
     strcpy(buffer, t.str().c_str());
     n = (int)write((int)sockfd,buffer,(int)strlen(buffer));
     if (n < 0) 

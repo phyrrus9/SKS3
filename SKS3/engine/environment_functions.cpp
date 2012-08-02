@@ -15,6 +15,7 @@ void environment_init(_environment &t)
      */
     t.paused = false;
     t.music = true;
+    t.socket_paused = false;
     strcpy(t.map, "\0");
     strcpy(t.grid, "\0");
     t.showmap = true;
@@ -39,6 +40,7 @@ void environment_init(_environment &t)
     t.attack = 1;
     t.totalscore = 0;
     t.selectedweapon = 0;
+    t.keys = 0;
     //savedata
     t.savefile = "save.dat";
     //character stuff
@@ -94,7 +96,7 @@ class timer_thread : public tpool::Thread
                 env.timer.second = env.timer.minute = 0;
                 //env.timer.clock /= 5;
             }
-            env.totalscore = (((((env.score * (env.levels_completed * 2)) + (env.health / 3)) + env.kills) + env.lives) - (env.moves / 30) - ((env.timer.clock / 10) * env.levels_completed));
+            env.totalscore = (((((env.score * (env.levels_completed * 2)) + (env.health / 3)) + env.kills) + env.lives) - (env.moves / 30) - ((env.timer.clock / 10) * env.levels_completed)) + (env.keys * 2);
             //figured i would do this here
             if (env.totalscore < 0)
                 env.totalscore = 0;

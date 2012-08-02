@@ -33,7 +33,7 @@
 #define clear() system("clear")
 #define pause() env.paused = true
 #define unpause() env.paused = false
-#define VERSION_BUILD "SKS3 (1.6)"
+#define VERSION_BUILD "SKS3 (1.7PB)"
 const int portnum = 5102;
 const char echar = '~';
 using namespace std;

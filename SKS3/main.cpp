@@ -181,6 +181,11 @@ void game(int argc, const char * argv[])
             populate();
             continue;
         }
+        if (env.keys >= 500)
+        {
+            env.score += (env.keys /= 5);
+            env.keys -= 500;
+        }
         
         if (env.levels_completed > 0) //level 2
             env.weapons[1] = true; //enable the throwing star

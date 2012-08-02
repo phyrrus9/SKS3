@@ -100,7 +100,11 @@ void populate(void)
             {
                 env.map[i] = 'z';
             }
-            if (r >= 7 && r <= 11)
+            if (r == 7)
+            {
+                env.map[i] = 'k';
+            }
+            if (r >= 8 && r <= 11)
                 env.map[i] = '#';
             if (env.difficulty >= character::PRO)
             {

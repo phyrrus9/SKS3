@@ -113,6 +113,8 @@ void enginecmd(string c, string d)
             env.kills_needed = atoi(d.c_str());
         if (c == "env->lc")
             env.levels_completed = atoi(d.c_str());
+        if (c == "env->keys")
+            env.keys = atoi(d.c_str());
         if (c == "gam->savefile")
             env.savefile = d;
         if (c == "env->foggy")
@@ -153,6 +155,14 @@ void enginecmd(string c, string d)
             save();
         if (d == "restore")
             restore();
+    }
+    if (c == "ssav")
+    {
+        //more here later
+    }
+    if (c == "sres")
+    {
+        //more here later
     }
     if (c == "get")
     {

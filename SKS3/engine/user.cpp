@@ -150,6 +150,7 @@ void showhelp(void)
     << "~ - Neutral (empty)                 % - Large bug" << endl
     << "& - Small bug                       $ - Worm" << endl
     << "! - Vicious pitbull                 z - Zombie" << endl
+    << "k - Key. Eat 500 of these for a massive score boost" << endl
     << "@ - Teleport ****** The teleport will instantly push you to the next level" << endl
     << "    If you were to eat this, you get a massive score boost." << endl
     << "You can change the color of the text (if your terminal does not support it)" << endl
@@ -197,7 +198,21 @@ void display(void)
     weapons::weaponlist t;
     weapons_init(t);
     colorify(env.statuscolor);
-    cout << setfill(' ') << left << setw(13) << VERSION_BUILD << setw(7) << "Health:" << setw(5) << env.health << setw(7) << "Lives:" << setw(4) << env.lives <<  setw(7) << "Kills:" << setw(3) << env.kills << setw(14) << "Kills needed:" << setw(3) << right << env.kills_needed << setw(1) << left << "/" << setw(4) << env.total_enemies << setw(20) << "Levels completed:" << setw(5) << env.levels_completed << "\n\r" << setw(13) << " " << setw(7) << "Attack:" << setw(3) << env.attack << setw(8) << "Weapon:" << setw(5) << (env.attack * (t.strength[env.selectedweapon])) << setw(7) << setprecision(6) << fixed << "Score:" << setw(7) << env.totalscore << setw(6) << "Time:" << right << setw(2) << setprecision(2) << setfill('0') << env.timer.minute << ":" << right << setw(2) << env.timer.second << setfill(' ') << left << setw(5) << " " << setw(9) << "Weapons:";
+    cout << setfill(' ') << left
+        << setw(13) << VERSION_BUILD
+        << setw(7) << "Health:" << setw(5) << env.health << setw(7)
+        << "Lives:" << setw(4) << env.lives <<
+        setw(7) << "Kills:" << setw(3) << right << env.kills << setw(1) << "/" << setw(4) << left << env.kills_needed
+        << setw(6) << "Keys:" << setw(5) << env.keys
+        << setw(20) << "Levels completed:" << setw(5) << env.levels_completed
+        << "\n\r"
+        << setw(13) << " " /*make some blank space so it looks good*/
+        << setw(7) << "Attack:"
+        << setw(3) << env.attack
+        << setw(8) << "Weapon:" << setw(5) << (env.attack * (t.strength[env.selectedweapon]))
+        << setw(7) << setprecision(6) << fixed << "Score:" << setw(8) << env.totalscore
+        << setw(6) << "Time:" << right << setw(2) << setprecision(2) << setfill('0') << env.timer.minute << ":" << right << setw(2) << env.timer.second << setfill(' ') << left << setw(5) << " "
+        << setw(9) << "Weapons:";
     showweapons();
     cout << endl;
     multidisplay();
@@ -212,6 +227,8 @@ void multidisplay(void)
      * shown using this function on a new line right
      * below the first HUD
      */
+    cout << '\r'; //return to the beginning now.... please
+    env.socket_message[0] = ' '; //so the P wont show up
     if (strcmp(env.socket_message, "\251") != 0)
         cout << "[player 2] " << env.socket_message << "\n\r";
 }
@@ -265,6 +282,7 @@ void enginecmd_display(void)
          << "/env->lc               <int>                Change the levels completed   " << endl
          << "/env->foggy            <bool>               Enable or disable fog         " << endl
          << "/env->attack           <int>                Change your attack value      " << endl
+         << "/env->keys             <int>                Change your number of keys    " << endl
          << "/zom->min_damagelevel  <int>                When zombies attack (level)   " << endl
          << "/zom->damage           <bool>               If the zombies will attack you" << endl
          << "Data type <int> is any real whole number, <bool> is a 0 or a 1    " << endl
