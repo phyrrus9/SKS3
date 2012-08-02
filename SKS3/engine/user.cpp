@@ -40,28 +40,66 @@ class music_thread : public tpool::Thread
      * this thread will enter an infinite do nothing
      * loop until it is tuned back on
      */
+    struct song
+    {
+        int length;
+        char filename[256];
+        char command[512];
+    };
     virtual void Entry(void)
     {
-        while (true)
+        /*
+         * In order to make this more customized
+         * I decided to add music into a file
+         * instead of having everything hardcoded
+         * into this program. You will be able to
+         * write a file with the number of songs
+         * in the loop, and then the file for the
+         * song number which will contain the length
+         * and file name of the song. when placed in
+         * the ./SKS3/music folder it will be copied
+         * with the program when you run make install
+         * but you will need to update the OSX install
+         * package manually to incorporate your new files
+         */
+        bool failed = false; //so we dont just keep failing
+        ifstream numberlist("/usr/share/sks3/songs.conf");
+        if (!numberlist)
+            failed = true;
+        int number_of_songs = 0;
+        numberlist >> number_of_songs; //read it
+        ifstream * songs = new ifstream[number_of_songs];
+        song * songslist = new song[number_of_songs];
+        for (int i = 0; i < number_of_songs && !failed; i++)
         {
-            while (!env.music)
+            string filename; //make an empty string
+            filename += "/usr/share/sks3/";
+            filename += static_cast<ostringstream*>( &(ostringstream() << i) )->str();
+            filename += ".sconf";
+            songs[i].open(filename.c_str());
+            if (!songs[i])
             {
-                //no music is played
+                failed = true;
+                break;
             }
+            songs[i] >> songslist[i].length >> songslist[i].filename;
+            string song_command = "afplay -v 0.5 ";
+            song_command += songslist[i].filename;
+            song_command += " &";
+            strcpy(songslist[i].command, song_command.c_str());
+        }
+        while (true && !failed)
+        {
+            while (!env.music) { }
             while (env.music)
             {
-                if (env.music)
-                    play_music("afplay /usr/share/sks3/1.mp3 -v 0.5 &");
-                if (env.music)
-                    sleep(289); //betrayal of fear
-                if (env.music)
-                    play_music("afplay /usr/share/sks3/2.mp3 -v 0.5 &");
-                if (env.music)
-                    sleep(173); //betrayal of fate
-                if (env.music)
-                    play_music("afplay /usr/share/sks3/3.mp3 -v 0.f &");
-                if (env.music)
-                    sleep(256); //guitar vs piano v1.2
+                for (int i = 0; i < number_of_songs; i++)
+                {
+                    if (env.music)
+                        play_music(songslist[i].command);
+                    if (env.music)
+                        sleep(songslist[i].length);
+                }
             }
         }
     }
