@@ -91,40 +91,44 @@ class music_thread : public tpool::Thread
         ifstream numberlist("/usr/share/sks3/songs.conf");
         if (!numberlist)
             failed = true;
-        int number_of_songs = 0;
-        numberlist >> number_of_songs; //read it
-        ifstream * songs = new ifstream[number_of_songs];
-        song * songslist = new song[number_of_songs];
-        for (int i = 0; i < number_of_songs && !failed; i++)
+        numberlist >> env.number_of_songs; //read it
+        ifstream * songs = new ifstream[env.number_of_songs];
+        song * songslist = new song[env.number_of_songs];
+        //if (env.number_of_songs == 0)
         {
-            string filename; //make an empty string
-            filename += "/usr/share/sks3/";
-            filename += static_cast<ostringstream*>( &(ostringstream() << i) )->str();
-            filename += ".sconf";
-            songs[i].open(filename.c_str());
-            if (!songs[i])
+            for (int i = 0; i < env.number_of_songs && !failed; i++)
             {
-                failed = true;
-                break;
+                string filename; //make an empty string
+                filename += "/usr/share/sks3/";
+                filename += static_cast<ostringstream*>( &(ostringstream() << i) )->str();
+                filename += ".sconf";
+                songs[i].open(filename.c_str());
+                if (!songs[i])
+                {
+                    failed = true;
+                    break;
+                }
+                songs[i] >> songslist[i].length >> songslist[i].filename;
+                string song_command = "afplay -v 0.5 ";
+                song_command += songslist[i].filename;
+                song_command += " &";
+                strcpy(songslist[i].command, song_command.c_str());
             }
-            songs[i] >> songslist[i].length >> songslist[i].filename;
-            string song_command = "afplay -v 0.5 ";
-            song_command += songslist[i].filename;
-            song_command += " &";
-            strcpy(songslist[i].command, song_command.c_str());
         }
         while (true && !failed)
         {
             while (!env.music) { }
             while (env.music)
             {
-                for (int i = 0; i < number_of_songs; i++)
+                while (env.current_song < env.number_of_songs)
                 {
                     if (env.music)
-                        play_music(songslist[i].command);
+                        play_music(songslist[env.current_song].command);
                     if (env.music)
-                        sleep(songslist[i].length);
+                        sleep(songslist[env.current_song].length);
+                    env.current_song++;
                 }
+                env.current_song = 0; //restart the loop every time
             }
         }
     }
@@ -170,7 +174,7 @@ void showhelp(void)
     << "&S- Save to slot                    &R- Restore from slot      -- & denotes pressing alt(PC/linux) or option(osx)" << endl
     << "Q - Quit game                       N - New game" << endl
     << "p - Pause or unpause game           m - Start or stop music" << endl
-    << "H - Show help" << endl
+    << "H - Show help                       n - Next song if music is on" << endl
     << "Characters in the game are:" << endl
     << "~ - Neutral (empty)                 % - Large bug" << endl
     << "& - Small bug                       $ - Worm" << endl

@@ -353,6 +353,18 @@ void game(int argc, const char * argv[])
                     music_start();
                 }
             }
+            if (a == 'n')
+            {
+                if (env.music)
+                {
+                    music_stop();
+                    env.current_song++;
+                    if (env.current_song >= env.number_of_songs)
+                        env.current_song = 0;
+                    env.music = true;
+                    music_start();
+                }
+            }
             if (a == 'N')
                 execl(argv[0], argv[0], (char *)NULL);
             if (a == '/')

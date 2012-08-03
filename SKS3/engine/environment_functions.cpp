@@ -42,6 +42,7 @@ void environment_init(_environment &t)
     t.music = true;
     t.socket_paused = false;
     t.multiplayer = false;
+    t.number_of_songs = 0;
     strcpy(t.map, "\0");
     strcpy(t.grid, "\0");
     t.showmap = true;

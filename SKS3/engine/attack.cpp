@@ -196,7 +196,6 @@ void attack(void)
     {
         t = character::TELEPORT; //they have a strength of 0
         gain = targetnoms::TELEPORT;
-        //env.score += gain;
     }
     if (env.view[location] == 'k') //eat a key
     {
@@ -207,7 +206,6 @@ void attack(void)
     if (env.view[location] == echar || env.view[location] == '#')
         return;
     int strength = (env.levels_completed * t) * env.difficulty;
-    //cout << strength << endl; //debug
     int attack = env.attack;
     weapons::weaponlist weapon;
     weapons_init(weapon);
