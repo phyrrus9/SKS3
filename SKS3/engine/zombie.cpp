@@ -55,3 +55,71 @@ void do_zombie_damage(void)
         if (env.levels_completed >= env.min_zombie_does_damage_level)
             env.health = env.health - ((env.position / 3) - (env.levels_completed + env.attack));
 }
+
+void zombie_thread::Entry(void)
+{
+    /*
+     * This is a set of threads that will
+     * control the AI of the zombies which
+     * are actually not that intelligent
+     * but do their job just fine... if
+     * I was you I would stay out of this
+     * thread
+     */
+    sleep(2); //make sure the user moves out of the way first
+    while (true)
+    {
+        if (env.map[location] == echar)
+            return;
+        bool moved = false;
+        while (!moved)
+        {
+            if (env.paused)
+                break;
+            int seed = (env.timer.clock % 4) + 1;
+            int offset = 0;
+            switch (seed)
+            {
+                case 1:
+                    offset = -30;
+                    break;
+                case 2:
+                    offset = 30;
+                    break;
+                case 3:
+                    offset = -1;
+                    break;
+                case 4:
+                    offset = 1;
+                    break;
+            }
+            if (env.view[location + offset] == echar)
+            {
+                env.map[location] = env.grid[location] = echar;
+                location += offset;
+                env.map[location] = env.grid[location] = 'z';
+                //env.refresh_screen = true;
+                moved = true;
+            }
+            if (env.view[location + offset] == env.position)
+            {
+                do_zombie_damage();
+                moved = true;
+            }
+        }
+        sleep(2); //a small delay
+    }
+}
+zombie::zombie(int t)
+{
+    /*
+     * Constructor for a new active
+     * zombie, will set up a thread
+     * at that location and start it
+     * see the threadcode above for
+     * the whole code
+     */
+    zthread = new zombie_thread;
+    zthread->location = t;
+    zthread->Run();
+}

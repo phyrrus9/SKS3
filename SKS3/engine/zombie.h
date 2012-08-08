@@ -31,3 +31,18 @@
 #include "engine.h"
 bool zombiecheck(int);
 void do_zombie_damage(void);
+#ifndef zombie_classes
+#define zombie_classes
+class zombie_thread : public tpool::Thread
+{
+    virtual void Entry(void);
+public:
+    int location;
+};
+class zombie
+{
+public:
+    zombie(int); //constructor, int location
+    zombie_thread *zthread; //a definition of the thread
+};
+#endif

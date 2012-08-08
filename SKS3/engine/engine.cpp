@@ -151,6 +151,11 @@ void enginecmd(string c, string d)
         if (c == "zom->damage")
             env.zombies_do_damage = atoi(d.c_str());
     }
+    if (c == "zombie")
+    {
+        env.map[atoi(d.c_str())] = 'z';
+        zombie *z = new zombie(atoi(d.c_str()));
+    }
     if (c == "colorify")
     {
         if (d == "red")

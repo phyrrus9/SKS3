@@ -124,6 +124,8 @@ void populate(void)
             if (r == 6)
             {
                 env.map[i] = 'z';
+                if (i % 4 == 0)
+                    zombie *z = new zombie(i); //activate only 25% of zombies
             }
             if (r == 7)
             {

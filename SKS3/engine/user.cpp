@@ -189,12 +189,13 @@ void showhelp(void)
     if (game_initialized)
     {
         cout << "For a list of engine commands, press H again" << endl;
+        cout << "For information about zomnies press Z" << endl;
         cout << "Good luck! Press any other key to exit help.." << endl;
         char c = getch_(); //just got rid of char c = to fix the err below
         if (c == 'H')
-        {
             enginecmd_display();
-        }
+        if (c == 'Z')
+            about_zombie();
     }
     else
     {
@@ -319,6 +320,35 @@ void enginecmd_display(void)
          << "Data type <int> is any real whole number, <bool> is a 0 or a 1    " << endl
          << "NOTE: cheats are NOT available in multiplayer mode (sorry)        " << endl;
     cout << "Press any key to exit..." << endl;
+    getch_();
+    env.allow_refresh = true;
+}
+void about_zombie(void)
+{
+    /*
+     * Function to show all the juicy details about
+     * the zombie AI system and what it does.
+     */
+    env.allow_refresh = false;
+    clear();
+    cout << "From the dawn of man, zombies have been a threat to survival of all creatures" << endl
+         << "because since man is the most dominant creature on Earth, it would only make " << endl
+         << "sense that a creature created by an ill human that had characteristics much  " << endl
+         << "like savages without any mercy that they would be dominant over not only the " << endl
+         << "humans but also the other creatures on the planet. In Super Key Seeker 3, I  " << endl
+         << "decided it might be a good idea to add some of their vicious rampagingness to" << endl
+         << "enhance your gameplay experience. Zombies can deal a lot of damage and they  " << endl
+         << "should not be taken lightly. Not all zombies are like the rest on the other  " << endl
+         << "hand. Some zombies are mobile, and some are not which makes your job a lot   " << endl
+         << "more difficult as the player of this game.                                   " << endl
+         << "With the AI system, only twenty five percent of the total zombies on the map " << endl
+         << "will be active (able to move around) and therefore your experience wont be as" << endl
+         << "laggy as it would be if I had 250 threads running again instead of 20 at the " << endl
+         << "maximum. Zombies will move once every two seconds using the clock as an AI   " << endl
+         << "base and will only move in blank squares or on you (which will hurt).        " << endl
+         << "Thank you for reading my brief explanation of the zombies in this game       " << endl
+         << endl
+         << "Press any key to exit this dialog..." << endl;
     getch_();
     env.allow_refresh = true;
 }
