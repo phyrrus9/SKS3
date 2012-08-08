@@ -111,6 +111,13 @@ void eat(int p)
         ate = true;
         attack_color_change();
     }
+    if (env.map[p] == 'z')
+    {
+        env.score += 5; //yes, I know its cheap
+                        //but it has to be done
+        attack_color_change();
+        ate = true;
+    }
     /*
      * The following statements are used for special characters
      * these do not have the standard effect as they do the

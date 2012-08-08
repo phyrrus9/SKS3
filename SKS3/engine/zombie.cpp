@@ -69,15 +69,67 @@ void zombie_thread::Entry(void)
     sleep(2); //make sure the user moves out of the way first
     while (true)
     {
+        int prev = 0;
         if (env.map[location] == echar)
             return;
         bool moved = false;
+        bool allow_move = true;
         while (!moved)
         {
             if (env.paused)
                 break;
-            int seed = (rand() % 4) + 1;
+            int seed;
+            /* begin no-repeat AI seedcode */
+            do
+            {
+                seed = (rand() % 4) + 1;
+            }
+            while (seed == prev);
+            /* end no-repeat AI seedcode */
+            switch (env.position - location)
+            {
+                    /*
+                     * This switch helps us make it a
+                     * little bit more intelligent by
+                     * making it so if you come within
+                     * two spaces of a zombie, it will
+                     * simply move toward you instead
+                     * of whatever path it was taking
+                     */
+                case 60:
+                    seed = 2;
+                    break;
+                case -60:
+                    seed = 1;
+                    break;
+                case -2:
+                    seed = 3;
+                    break;
+                case 2:
+                    seed = 4;
+                    break;
+                    /*
+                     * Since the following all do the
+                     * same thing, there is no need to
+                     * repeat the same code so I will
+                     * use this switch to do the same
+                     * thing as repeating if's
+                     */
+                /*begin near code*/
+                case 30:
+                case -30:
+                case 1:
+                case -1:
+                    allow_move = false;
+                    moved = true;
+                    break;
+                /*end near code*/
+                default:
+                    seed = seed;
+                    break;
+            }
             int offset = 0;
+            prev = seed;
             switch (seed)
             {
                 case 1:
@@ -93,7 +145,7 @@ void zombie_thread::Entry(void)
                     offset = 1;
                     break;
             }
-            if (env.view[location + offset] == echar)
+            if (env.view[location + offset] == echar && allow_move)
             {
                 env.map[location] = env.grid[location] = echar;
                 location += offset;
@@ -101,12 +153,13 @@ void zombie_thread::Entry(void)
                 //env.refresh_screen = true;
                 moved = true;
             }
-            if (env.view[location + offset] == env.position)
+            if (env.view[location + offset] == env.position && allow_move)
             {
                 do_zombie_damage();
                 moved = true;
             }
         }
+        allow_move = true; //just in case they have left
         sleep(2); //a small delay
     }
 }
