@@ -76,7 +76,7 @@ void zombie_thread::Entry(void)
         {
             if (env.paused)
                 break;
-            int seed = (env.timer.clock % 4) + 1;
+            int seed = (rand() % 4) + 1;
             int offset = 0;
             switch (seed)
             {
