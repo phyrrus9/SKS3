@@ -71,7 +71,10 @@ void zombie_thread::Entry(void)
     {
         int prev = 0;
         if (env.map[location] == echar)
+        {
+            env.zombies--;
             return;
+        }
         bool moved = false;
         bool allow_move = true;
         while (!moved)
@@ -172,6 +175,7 @@ zombie::zombie(int t)
      * see the threadcode above for
      * the whole code
      */
+    env.zombies++;
     zthread = new zombie_thread;
     zthread->location = t;
     zthread->Run();

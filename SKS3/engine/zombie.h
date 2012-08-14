@@ -42,6 +42,7 @@ public:
 class zombie
 {
 public:
+    int count;
     zombie(int); //constructor, int location
     zombie_thread *zthread; //a definition of the thread
 };

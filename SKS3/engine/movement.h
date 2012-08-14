@@ -29,6 +29,7 @@
  find . -type f -print0 | xargs -0 cat | wc -l
  *****************************************************************/
 #include "engine.h"
+#define d(a) if (d == a) //make a nice little function
 void populate(void);
 void move(direction);
 void turn(direction);

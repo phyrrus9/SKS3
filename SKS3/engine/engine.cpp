@@ -129,7 +129,10 @@ void enginecmd(string c, string d)
         if (c == "env->score")
             env.score = atoi(d.c_str());
         if (c == "env->position")
+        {
+            env.map[env.position] = env.view[env.position] = echar;
             env.position = atoi(d.c_str());
+        }
         if (c == "env->moves")
             env.moves = atoi(d.c_str());
         if (c == "env->kills")
@@ -224,6 +227,8 @@ void enginecmd(string c, string d)
             cout << env.min_zombie_does_damage_level << endl;
         if (d == "zom->damage")
             cout << env.zombies_do_damage << endl;
+        if (d == "zom->active")
+            cout << env.zombies << endl;
         cout << "Press any key to continue..." << endl;
         getch_(); //char c = ...
     }

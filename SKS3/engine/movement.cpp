@@ -126,10 +126,20 @@ void populate(void)
                 env.map[i] = 'z';
                 if (i % 4 == 0)
                     zombie *z = new zombie(i); //activate only 25% of zombies
+                /************************************************
+                 In Xcode, this line will throw a warning,
+                 this is only because I never actually use
+                 the result of the creation of z, because if
+                 you look in zombie.cpp at the class constructor
+                 you will see that the run method of the base
+                 thread class is called from the private method
+                 inside the constructor, making it one line
+                 shorter and making my debug life a lot simpler
+                 ***********************************************/
             }
             if (r == 7)
             {
-                env.map[i] = 'k';
+                env.map[i] = 'k'; //don't place a whole lot of keys
             }
             if (r >= 8 && r <= 11)
                 env.map[i] = '#';
@@ -138,6 +148,8 @@ void populate(void)
                 if (r > 15 && r < 20)
                 {
                     env.map[i] = 'z';
+                    if (i % 4 == 0)
+                        zombie *z = new zombie(i); //activate more zombies as pro
                     env.kills_needed++;
                 }
                 if (r > 20 && r < 25)
@@ -157,15 +169,47 @@ void populate(void)
     {
         //??
     }
-    env.total_enemies = env.kills_needed;
+    env.total_enemies = env.kills_needed; //record what the full total is before subtraction
+    /* do the subtraction */
     if (env.difficulty == character::NORMAL)
         env.kills_needed /= 3;
     else if (env.difficulty == character::PRO)
     {
         env.kills_needed /= 3; //sorry... but 2 just made it really hard and annoying
         env.kills_needed -= 50;
+        /********************************************
+         You may ask why I subtract 50 kills after
+         i divide the kills by three just like I
+         do when you are in normal mode. I too
+         myself thought that was a bug becuase my
+         thinking went "hey wait wont that actually
+         make pro mode easier than normal mode??"
+         Well, fact is no it will not because if
+         you look above you will see that pro gets
+         about 3-5 times the characters on screen
+         therefore when divided by three, it is
+         only the same number or a little more
+         than the total number of creatures in a
+         normal gameplay mode. Still though trying
+         to get 200 kills is pretty annoying so we
+         make it a little easier by taking off
+         fifty, because 150 is easier than 200
+         ********************************************/
     }
     env.map[rand() % 400] = '@'; //randomly place a teleport
+    /*
+     * This part is where we will check to make
+     * sure that the map is playable, because
+     * for some reason there is always that
+     * one map that is at like level 50 that
+     * has blocks at the 1 and 30 positions,
+     * which means that you can't move out
+     * of this trap without having cheats
+     * enabled, so we will check for it and
+     * correct the problem if need be.
+     */
+    if (env.map[1] == '#' && env.map[30] == '#') //both are walls, anything else is good
+        populate(); //reseed the map so this won't happen again.
 }
 void turn(direction d)
 {
@@ -201,43 +245,43 @@ void move(direction d)
         do_zombie_damage();
     if (zombiecheck(env.position - 30))
         do_zombie_damage();
-    if (d == N)
+    d(N)
         if (env.map[env.position - 30] != '#' && (env.position - 30 > 0))
         {
             eat(env.position - 30);
             env.position -= 30;
             moved = true;
         }
-    if (d == S)
+    d(S)
         if (env.map[env.position + 30] != '#' && (env.position + 30 < 900))
         {
             eat(env.position + 30);
             env.position += 30;
             moved = true;
         }
-    if (d == E)
+    d(E)
         if (env.map[env.position - 1] != '#' && (env.position - 1 > 0))
         {
             eat(env.position - 1);
             env.position -= 1;
             moved = true;
         }
-    if (d == W)
+    d(W)
         if (env.map[env.position + 1] != '#' && (env.position + 1 < 900))
         {
             eat(env.position+ 1);
             env.position += 1;
             moved = true;
         }
-    if (d == SAV)
+    d(SAV)
         save();
-    if (d == SAVS)
+    d(SAVS)
         save_slot();
-    if (d == RESS)
+    d(RESS)
         restore_slot();
-    if (d == RES)
+    d(RES)
         restore();
-    if (d == QUI)
+    d(QUI)
     {
         server_end(); //disconnect and unbind the socket
         colorify(NORMAL); //un-colorify
@@ -245,13 +289,13 @@ void move(direction d)
             kill_music("killall afplay"); //kill the music
         exit(EXIT_SUCCESS);
     }
-    if (d == HLP)
+    d(HLP)
         showhelp();
-    if (d == PAU)
+    d(PAU)
     {
         env.paused = true;
     }
-    if (d == UNPAU)
+    d(UNPAU)
     {
         env.paused = false;
     }

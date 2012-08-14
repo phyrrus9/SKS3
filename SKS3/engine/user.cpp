@@ -188,14 +188,17 @@ void showhelp(void)
     << "You can disable the fog by typing /env->foggy 0 and turn it on by using 1" << endl;
     if (game_initialized)
     {
-        cout << "For a list of engine commands, press H again" << endl;
-        cout << "For information about zomnies press Z" << endl;
+        cout << "Press these keys to diaplay other help dialogs " << endl;
+        cout << "H - Engine commands                 Z - Zombies" << endl;
+        cout << "C - Credits                                    " << endl;
         cout << "Good luck! Press any other key to exit help.." << endl;
         char c = getch_(); //just got rid of char c = to fix the err below
         if (c == 'H')
             enginecmd_display();
         if (c == 'Z')
             about_zombie();
+        if (c == 'C')
+            copyright();
     }
     else
     {
@@ -300,7 +303,9 @@ void enginecmd_display(void)
          << "   env->cheats                              Displays cheats on or off     " << endl
          << "   zom->min_damagelevel                     Displays when zombies attack  " << endl
          << "   zom->damage                              Weather they attack or not    " << endl
-         << "<color> is filled by a color (red, green, blue, normal)           " << endl;
+         << "   zom->active                              Display # of active zombies   " << endl
+         << "/zombie                 <int>               Create a zombie at location   " << endl
+         << "<color> is filled by a color (red, green, blue, normal)                   " << endl;
     colorify(RED);
     cout << "Cheat commands:" << endl;
     colorify();
@@ -349,6 +354,58 @@ void about_zombie(void)
          << "Thank you for reading my brief explanation of the zombies in this game       " << endl
          << endl
          << "Press any key to exit this dialog..." << endl;
+    getch_();
+    env.allow_refresh = true;
+}
+void copyright(void)
+{
+    /*
+     * This just shows the credits,
+     * pretty self explanitory and if it
+     * isnt press 'H' then 'C' while in
+     * game and you will find out.
+     */
+    env.allow_refresh = false;
+    clear();
+    cout << "This game would not be possible without the help of a few great people and " << endl
+         << "organizations. The ammount of code it would take to completely write this  " << endl
+         << "game by myself would have taken me a lot longer than the year it took me to" << endl
+         << "write the first release version of this game. I would like to thank all of " << endl
+         << "the people for their hard work on the libraries and code this game uses.   " << endl
+         << "Firstly, the game author: I, Ethan Laur, wrote most of the code this game  " << endl
+         << "uses for free, and on my own time with almost no help and mainly my ideas. " << endl
+         << "I did it and then distributed the source code openly to the public so that " << endl
+         << "you might be able to see what it takes to write even a simple game like so " << endl
+         << "and that it might inspire you to learn new things and gain more experience " << endl
+         << "as you go along programming (if you are a programmer). So, without further " << endl
+         << "distraction, I would like to say that this code is mostly copyright © 2012 " << endl
+         << "Ethan Laur (phyrrus9) <phyrrus9@gmail.com> and is open source, meaning that" << endl
+         << "at any time you may visit http://github.com/phyrrus9/SKS3/ and browse the  " << endl
+         << "source code and do what you please, please note the lisence block at the   " << endl
+         << "top of every file as it will let you know what you can and cannot do with  " << endl
+         << "the source code I am providing you with.                                   " << endl
+         << "Next, I would like to thank the guy who gave me the original idea back in  " << endl
+         << "2011 with Key Seeker 4200: Dereck Wonnacott. He helped make this game into " << endl
+         << "what it is now and I want him to have some credit for it.                  " << endl
+         << "Here comes the big one, back when I wrote the first game, I was using some " << endl
+         << "simple cin or getch functions for movement and it got pretty painful after " << endl
+         << "the workout of pressing 'w' and then enter every time I wanted to move up  " << endl
+         << "so after a little bit of research I found that the GNU Project has a code  " << endl
+         << "library that I could use to getch() without the need of pressing enter like" << endl
+         << "in a regular video game. So for their hard work on that extensive library I" << endl
+         << "would like to say THANK YOU, because the little snippet of code getch_()   " << endl
+         << "in the engine is used more times than anything else and it wouldnt be the  " << endl
+         << "great game it is without their hard work and dedication, so I would like to" << endl
+         << "say that part of this code is copyright to the GNU Project for the ncurses " << endl
+         << "library that we all love.                                                  " << endl
+         << "Lastly, I must thank the company that helped me get it all put together and" << endl
+         << "release my code to the public, MOD Technologies LLC <http://modtech.co> has" << endl
+         << "made my work so much easier when it is time to release because they help me" << endl
+         << "cover server cost as well as feed me advice and developers. So I would like" << endl
+         << "to thank my company, MOD Technologies LLC for all the help Jerrick has been" << endl
+         << "providing me with. This game is also copyright © 2012 MOD Technologies LLC " << endl
+         << endl
+        << "Press any key to continue..." << endl;
     getch_();
     env.allow_refresh = true;
 }

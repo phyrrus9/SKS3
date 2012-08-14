@@ -38,6 +38,7 @@ void environment_init(_environment &t)
      * it would not compile for any system other than mac os x
      * that way, and even then it threw a few hundred warnings.
      */
+    t.zombies = 0;
     t.paused = false;
     t.music = true;
     t.socket_paused = false;
