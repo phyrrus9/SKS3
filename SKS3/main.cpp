@@ -230,10 +230,17 @@ void game(int argc, const char * argv[])
             if (env.lives <= 0)
             {
                 cout << "You are dead..." << endl
-		     << "Your score was " << env.totalscore << endl;
-                run = false;
+                     << "Your score was " << env.totalscore << endl;
+                bool high = false;
+                for (int i = 0; i < hiscore::num_scores; i++)
+                    if (env.totalscore > env.hiscorelist[i].score)
+                        high = true;
+                if (high)
+                    hiscore::user_save();
                 music_stop();
                 colorify(NORMAL);
+                run = false;
+                hiscore::display();
             }
             else
             {

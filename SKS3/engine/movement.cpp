@@ -301,29 +301,7 @@ void move(direction d)
     }
 //#define log(a) cout << a << endl;
     d(HSC_SAV)
-    {
-        env.allow_refresh = false;
-        small_delay();
-        endwin(); //because it wont read if we dont
-        clear();
-        cout << "Please enter your name: ";
-        char name[15];
-        cin >> name;
-        env.allow_refresh = true;
-        //cin.getline(name, 10, '\n'); //prevent an overflow
-        int location = -1;
-        for (int i = 0; i < hiscore::num_scores; i++)
-        {
-            if (env.totalscore > env.hiscorelist[i].score)
-                location = i;
-        }
-        if (location != -1)
-        {
-            strcpy(env.hiscorelist[location].name, name);
-            env.hiscorelist[location].score = env.totalscore;
-            hiscore::save();
-        }
-    }
+        hiscore::user_save();
     if (moved)
     {
         env.player = (character::player)(d);

@@ -172,6 +172,7 @@ void showhelp(void)
     << "Other commands used in the game are:" << endl
     << "S - Save game                       R - Restore game" << endl
     << "&S- Save to slot                    &R- Restore from slot      -- & denotes pressing alt(PC/linux) or option(osx)" << endl
+    << "o - View high scores                O - save your score" << endl
     << "Q - Quit game                       N - New game" << endl
     << "p - Pause or unpause game           m - Start or stop music" << endl
     << "H - Show help                       n - Next song if music is on" << endl

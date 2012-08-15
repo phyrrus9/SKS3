@@ -148,4 +148,34 @@ namespace hiscore
         getch_();
         env.allow_refresh = true;
     }
+    void user_save(void)
+    {
+        /*
+         * Ask the user for his name and
+         * add him to the list in the
+         * environment so we can save
+         */
+        
+        env.allow_refresh = false;
+        small_delay();
+        endwin(); //because it wont read if we dont
+        clear();
+        cout << "Please enter your name: ";
+        char name[15];
+        cin >> name;
+        env.allow_refresh = true;
+        //cin.getline(name, 10, '\n'); //prevent an overflow
+        int location = -1;
+        for (int i = 0; i < hiscore::num_scores; i++)
+        {
+            if (env.totalscore > env.hiscorelist[i].score)
+                location = i;
+        }
+        if (location != -1)
+        {
+            strcpy(env.hiscorelist[location].name, name);
+            env.hiscorelist[location].score = env.totalscore;
+            hiscore::save();
+        }
+    }
 }

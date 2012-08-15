@@ -62,4 +62,5 @@ namespace hiscore
     void display(void); //show the high scores
     void save(void); //save your scores (if need be)
     void bobble_sort(void); //sort them from first to last
+    void user_save(void); //get all the info
 }
