@@ -303,6 +303,13 @@ void game(int argc, const char * argv[])
                 attack();
             if (a == 'E')
                 increment_attack();
+            if (a == 'o')
+                hiscore::display();
+            if (a == 'O')
+            {
+                t = HSC_SAV;
+                _move;
+            }
             if (a == -97) //alt/option + s
             {
                 t = SAVS;

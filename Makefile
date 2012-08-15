@@ -1,5 +1,5 @@
 all:
-	@echo "You must make either osx, linux, sks4200, or clean"
+	@echo "You must make either osx, linux, sks4200, release, or clean"
 clean:
 	rm -rf ./Binaries
 	rm -rf ./build
@@ -17,3 +17,5 @@ install:
 	sudo cp ./Binaries/* /usr/bin
 	sudo mkdir -p /usr/share/sks3
 	sudo cp ./music/sks3/* /usr/share/sks3
+release: clean sks4200 linux
+	@echo "Ready to build"

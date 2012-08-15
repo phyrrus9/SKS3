@@ -84,6 +84,8 @@ void environment_init(_environment &t)
     t.zombies_do_damage = true;
     //game timer stuffs
     game_timer_init(t.timer);
+    //high score stuff
+    hiscore::get_scores();
 }
 
 void weapons_init(weapons::weaponlist &t)

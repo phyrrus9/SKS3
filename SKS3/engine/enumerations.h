@@ -28,7 +28,7 @@
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
  *****************************************************************/
-enum direction { N, S, E, W, SAV, SAVS, RES, RESS, QUI, HLP, PAU, UNPAU, NIL };
+enum direction { N, S, E, W, SAV, SAVS, RES, RESS, QUI, HLP, PAU, UNPAU, HSC_SAV, NIL };
 enum color { RED, GREEN, BLUE, NORMAL, BORDER };
 namespace character
 {

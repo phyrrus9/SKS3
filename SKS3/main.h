@@ -31,6 +31,7 @@
 #ifndef SKS3_engine_h
 #include "engine/engine.h"
 #endif
+#include "engine/hiscore.h"
 #include "sks4200/sks4200.h"
 #include "ks4200/ks4200.h"
 #define _move moving = true

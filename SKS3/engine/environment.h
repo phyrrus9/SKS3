@@ -29,6 +29,7 @@
  find . -type f -print0 | xargs -0 cat | wc -l
  *****************************************************************/
 #include <string.h>
+#include "hiscore.h"
 struct game_timer
 {
     int second, minute, clock;
@@ -49,4 +50,5 @@ struct _environment
     character::difficulty difficulty;
     char socket_message[256];
     game_timer timer;
+    hiscore::score hiscorelist[hiscore::num_scores]; //all x high scores
 };
