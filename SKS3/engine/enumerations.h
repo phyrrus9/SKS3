@@ -28,6 +28,8 @@
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
  *****************************************************************/
+#ifndef enumerations
+#define enumerations
 enum direction { N, S, E, W, SAV, SAVS, RES, RESS, QUI, HLP, PAU, UNPAU, HSC_SAV, NIL };
 enum color { RED, GREEN, BLUE, NORMAL, BORDER };
 namespace character
@@ -42,9 +44,11 @@ namespace targetnoms
 }
 namespace weapons
 {
+    const int num_of_weapons = 8;
     struct weaponlist
     {
-        int strength[6]; //some standards
+        int strength[num_of_weapons]; //some standards
     };
-    //D(fist) x(throwing star) |(sword) ©(gun) {}(cannon) ~(laser)
+    //D(fist) x(throwing star) |(sword) ©(gun) {}(cannon) ~(laser) √(stocking) ø(admin gun)
 }
+#endif

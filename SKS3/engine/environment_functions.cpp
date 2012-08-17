@@ -43,6 +43,7 @@ void environment_init(_environment &t)
     t.music = true;
     t.socket_paused = false;
     t.multiplayer = false;
+    t.time_up = false;
     t.number_of_songs = 0;
     strcpy(t.map, "\0");
     strcpy(t.grid, "\0");
@@ -95,7 +96,7 @@ void weapons_init(weapons::weaponlist &t)
      * its here because it cant be initialized in a header file
      */
     //{ 2, 4, 8, 16, 32, 64 }
-    for (int i = 0, j = 2; i < 6; i++, j *= 2) //all powers of two
+    for (int i = 0, j = 2; i < weapons::num_of_weapons; i++, j *= 2) //all powers of two
         t.strength[i] = j; //its all easier this way for adding say 128 weapons :P
 }
 
@@ -111,6 +112,8 @@ class timer_thread : public tpool::Thread
         int count = 0;
         while (true)
         {
+            if (env.timer.clock >= time_limit) //1 hour of game play
+                env.time_up = true;
             sleep(1);
             if (env.moves > 1)
             {

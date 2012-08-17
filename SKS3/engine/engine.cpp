@@ -233,3 +233,15 @@ void enginecmd(string c, string d)
         getch_(); //char c = ...
     }
 }
+int char_int(char c)
+{
+#define sw(a) if (c == a) //simplify
+    int ret = (int)c;
+    if (c < 48 || c > 57)
+        return -1;
+    else
+    {
+        ret = c - 48;
+    }
+    return ret;
+}

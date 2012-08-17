@@ -288,6 +288,20 @@ void showweapons(void)
         cout << "~ ";
         colorify(NORMAL);
     }
+    if (env.weapons[6])
+    {
+        if (env.selectedweapon == 6)
+            colorify(RED);
+        cout << "√ ";
+        colorify(NORMAL);
+    }
+    if (env.weapons[7])
+    {
+        if (env.selectedweapon == 7)
+            colorify(RED);
+        cout << "ø ";
+        colorify(NORMAL);
+    }
 }
 void setselectedweapon(int w)
 {

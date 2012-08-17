@@ -224,13 +224,22 @@ void game(int argc, const char * argv[])
             env.weapons[4] = true; //enable the canon
         if (env.levels_completed > 49) //level 50
             env.weapons[5] = true; //enable the laser
+        if (env.levels_completed > 74) //level 75
+            env.weapons[6] = true; //enable the stocking
+        if (env.levels_completed > 99) //level 100
+            env.weapons[7] = true; //enable the admin gun
         
-        if (env.health <= 0)
+        if (env.health <= 0 || env.time_up)
         {
-            if (env.lives <= 0)
+            if (env.lives <= 0 || env.time_up)
             {
-                cout << "You are dead..." << endl
-                     << "Your score was " << env.totalscore << endl;
+                env.allow_refresh = false;
+                //clear();
+                if (env.lives <= 0 && env.health <= 0)
+                    cout << "You are dead..." << endl;
+                else
+                    cout << "Time up!" << endl;
+                cout << "Your score was " << env.totalscore << endl;
                 bool high = false;
                 for (int i = 0; i < hiscore::num_scores; i++)
                     if (env.totalscore > env.hiscorelist[i].score)
@@ -254,18 +263,10 @@ void game(int argc, const char * argv[])
             char a = getch_();
             bool turning = false, moving = false;
             direction t;
-            if (a == '1')
-                setselectedweapon(0);
-            if (a == '2')
-                setselectedweapon(1);
-            if (a == '3')
-                setselectedweapon(2);
-            if (a == '4')
-                setselectedweapon(3);
-            if (a == '5')
-                setselectedweapon(4);
-            if (a == '6')
-                setselectedweapon(5);
+            if (char_int(a) != -1)
+                for (int i = 0; i < weapons::num_of_weapons + 1; i++)
+                    if (char_int(a) == i)
+                        setselectedweapon(i - 1);
             if (a == 'w')
             {
                 t = N;
@@ -311,7 +312,11 @@ void game(int argc, const char * argv[])
             if (a == 'E')
                 increment_attack();
             if (a == 'o')
+            {
+                env.allow_refresh = false;
+                //clear();
                 hiscore::display();
+            }
             if (a == 'O')
             {
                 t = HSC_SAV;

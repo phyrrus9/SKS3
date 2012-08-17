@@ -137,7 +137,7 @@ namespace hiscore
         
         get_scores(); //re-read in case of a bad save
         env.allow_refresh = false;
-        clear();
+        //clear();
         cout << setw(7) << "Name" << setw(9) << right << "Score" << endl << left
         << setw(18) << setfill('#') << "" << endl << setfill(' ');
         for (int i = 0; i < num_scores; i++)
@@ -159,7 +159,7 @@ namespace hiscore
         env.allow_refresh = false;
         small_delay();
         endwin(); //because it wont read if we dont
-        clear();
+        //clear();
         cout << "Please enter your name: ";
         char name[15];
         cin >> name;

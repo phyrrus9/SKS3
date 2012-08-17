@@ -59,8 +59,9 @@
 #define clear() system("clear")
 #define pause() env.paused = true
 #define unpause() env.paused = false
-#define VERSION_BUILD "SKS3 (1.7b)"
+#define VERSION_BUILD "SKS3 (1.8)"
 const int portnum = 5102;
+const int time_limit = 3600; //time limit in seconds
 const char echar = '~';
 using namespace std;
 char getch_(void);
@@ -72,4 +73,5 @@ void display(void);
 void colorify(void);
 void colorify(color);
 void terminate(int);
+int char_int(char);
 #endif

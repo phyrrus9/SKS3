@@ -168,6 +168,7 @@ void showhelp(void)
     << "D - Your fist (default)             x - Throwing star (level 2)" << endl
     << "| - Sword (level 5)                 © - Gun (level 10)" << endl
     << "{}- Canon (level 25)                ~ - Laser (level 50)" << endl
+    << "√ - Stocking (level 75)             ø - Admin gun (level 100)" << endl
     << "To select a weapon, just use the keypad number of your choice" << endl
     << "Other commands used in the game are:" << endl
     << "S - Save game                       R - Restore game" << endl
@@ -182,11 +183,7 @@ void showhelp(void)
     << "! - Vicious pitbull                 z - Zombie" << endl
     << "k - Key. Eat 500 of these for a massive score boost" << endl
     << "@ - Teleport ****** The teleport will instantly push you to the next level" << endl
-    << "    If you were to eat this, you get a massive score boost." << endl
-    << "You can change the color of the text (if your terminal does not support it)" << endl
-    << "To do so, type /colorify (or /env->pcolor) and then one of the following colors:" << endl
-    << "red, blue, green, yellow, normal" << endl
-    << "You can disable the fog by typing /env->foggy 0 and turn it on by using 1" << endl;
+    << "    If you were to eat this, you get a massive score boost." << endl;
     if (game_initialized)
     {
         cout << "Press these keys to diaplay other help dialogs " << endl;
