@@ -27,6 +27,26 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: main.cpp
+ Description: The main processing code of the game, every single
+ part of the game starts and ends up in either the main or game
+ function of this code. This is where all of the decision making
+ is done. If you want to add a new dialog to the game and have it
+ accessable to the players this is where you will mess with it.
+ This code will first initialize the environment variable and then
+ prompt for some basic settings for the game so we know what type
+ of game mode to set up. Next it will call the game function and
+ pass all of the parameters (unparsed but not for long as SKS4
+ will have patched most of the exploitable security errors in the
+ game) and the game function will set up the screen based on the
+ enviroment RAM and generate the map variables. Then it will
+ start the actual game process of parsing user commands and then
+ passing it on to the engine for further parsing.
+ This is where it all comes together so I suggest not messing with
+ this unless you know what you are doing and have already read all
+ of the other files so you know what all this stuff does.
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include "main.h"
 //#include "sks4200_mainfunc.h"

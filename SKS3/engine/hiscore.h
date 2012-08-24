@@ -27,6 +27,12 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: hiscore.h
+ Description: Definitions for variables and the score struct used
+ in the high score functions (hiscore.cpp). Function prototypes
+ for the high score functions.
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include "engine.h"
 namespace hiscore

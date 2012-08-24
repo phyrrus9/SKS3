@@ -27,6 +27,16 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: environment_functions.cpp
+ Description: Called in the main function of the program, sets up
+ things to do with the environment structure, timer class, and
+ other threadding stuff... Pretty basic but it is the single most
+ important file in this whole program. If the init function were
+ to break then you will end up corrupting the game and bad stuff
+ will happen and you will probably be killed in your sleep by a
+ pack of wile bigfoots.
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include "environment_functions.h"
 void environment_init(_environment &t)

@@ -27,6 +27,14 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: environment.h
+ Description: General definitions for the main RAM of the game.
+ This is probably the most important header file in the code as it
+ defines all of our global data which hopefully in SKS4 I will 
+ change this so it is all private data and cant be corrupted as
+ easily as it can right now.
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include <string.h>
 #include "hiscore.h"

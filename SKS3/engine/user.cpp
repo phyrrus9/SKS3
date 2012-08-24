@@ -27,6 +27,15 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: user.cpp
+ Description: This is the interface you see when you play the game
+ and any other stuff is done here. The thread responsible for doing
+ the screen refreshing automatically on demand is also written here
+ in fact you are probably looking at the top of it as you read this
+ This file also includes all of the help documents and settings
+ interfaces for the program.
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include "user.h"
 extern _environment env; //global variable

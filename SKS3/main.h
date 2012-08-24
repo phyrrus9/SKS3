@@ -27,6 +27,11 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: main.h
+ Description: Function prototypes for all the garbage the main
+ program uses. If you want to read the description look in main.cpp
+ Authors: phyrrus9 <phyrrus9@gmail.com>
 *****************************************************************/
 #ifndef SKS3_engine_h
 #include "engine/engine.h"

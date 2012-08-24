@@ -27,6 +27,14 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: engine.h
+ Description: Prototypes, constants, macros, and file includes used
+ across the entire game (because we only need to include engine.h
+ on any file that needs pretty much anything from the game and it
+ wont throw errors because we use ifdefs so it wont include twice
+ Authors: phyrrus9 <phyrrus9@gmail.com>
+ the GNU Project (ncurses)
  *****************************************************************/
 #ifndef SKS3_engine_h
 #define SKS3_engine_h

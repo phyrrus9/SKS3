@@ -27,6 +27,11 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: environment_functions.h
+ Description: Everything in here is commented, figure it all out
+ for yourself I dont have time to rewrite my comment lines sorry.
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include "engine.h"
 #include "Thread.h"

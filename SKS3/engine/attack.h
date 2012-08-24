@@ -27,6 +27,14 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: attack.h
+ Description: Prototype definitions for the attack functions, the
+ classes are not included in this file, they are in attack.cpp
+ because I hadnt figured out how to handle the header classes when
+ I wrote this code. If you want to move them feel free and tell me
+ your new code so I can credit you and use your code.
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include "engine.h"
 void attack_color_change(void);

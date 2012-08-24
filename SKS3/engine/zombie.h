@@ -27,6 +27,12 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: zombie.h
+ Description: Function prototypes for checking zombie locations,
+ doing damage to players. This also contains the definition for
+ the zombie movement thread and all its functions.
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include "engine.h"
 bool zombiecheck(int);

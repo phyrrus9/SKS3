@@ -27,6 +27,10 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: hiscore.cpp
+ Description: Functions to display fetch save and sort high scores
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include "hiscore.h"
 namespace hiscore

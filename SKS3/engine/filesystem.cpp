@@ -27,6 +27,11 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: filesystem.cpp
+ Description: Code responsible for interacting with the filesystem
+ and the environment variables.
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include "filesystem.h"
 extern _environment env; //global variable

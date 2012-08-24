@@ -27,6 +27,11 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: enumerations.h
+ Description: All of the global enumerations and weapons structs
+ that we use for computing damage taken and given to players.
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #ifndef enumerations
 #define enumerations

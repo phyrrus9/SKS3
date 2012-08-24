@@ -27,6 +27,12 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: zombie.cpp
+ Description: Functions to check if a zombie exists, do damage to
+ the player, contains the thread code for movement and class
+ constructors for the thread code movement.
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include "zombie.h"
 bool zombiecheck(int p)

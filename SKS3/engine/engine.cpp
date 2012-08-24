@@ -27,6 +27,18 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: engine.cpp
+ Description: The main engine code file, which is responsible for
+ all of the low level stuff used in the game like parsing engine
+ commands, changing the color variables, getting the single char
+ from the user without pressing enter (thank you ncurses library)
+ and terminating the program in the case of a segmentation fault
+ because of an unallocated (and locked) pointer sometimes caused
+ after restoring a game file that has cheats enabled and fog is
+ turned off (the addr will be different and out of our sandbox)
+ Authors: phyrrus9 <phyrrus9@gmail.com>
+ the GNU Project (ncurses)
  *****************************************************************/
 #ifndef SKS3_engine_h
 #include "engine.h"

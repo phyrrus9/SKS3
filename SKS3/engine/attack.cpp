@@ -27,6 +27,13 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: attack.cpp
+ Description: This stuff all relates to what happens when you press
+ the attack key, including threads for changing the statusbar color
+ when you take damage or gain life. Very important stuff here as it
+ has complete control over the map.
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include "attack.h"
 extern _environment env; //global var

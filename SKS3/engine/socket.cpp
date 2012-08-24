@@ -27,6 +27,13 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: socket.cpp
+ Description: Multiplayer code, this will control the server and
+ client functions used to pass the socket message between clients
+ as well as some error handling functions and stuff to properly
+ shut the game down to avoid segfaults and portbinds.
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include "socket.h"
 extern _environment env; //global data

@@ -27,6 +27,11 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: movement.h
+ Description: Prototypes for some macros and interaction with the
+ movement of your character across the screen. See movement.cpp
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include "engine.h"
 #define d(a) if (d == a) //make a nice little function

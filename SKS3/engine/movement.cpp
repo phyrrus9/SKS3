@@ -27,6 +27,14 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: movement.cpp
+ Description: Code that handles moving and interacting with the
+ little red character you see on your screen. It is probablt the
+ most unorganized part of the program because it has crap like the
+ multiplayer sockets, map population code and all that stuff that
+ should be somewhere else...
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include "movement.h"
 extern _environment env; //global variable

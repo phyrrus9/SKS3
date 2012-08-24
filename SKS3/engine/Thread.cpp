@@ -27,6 +27,14 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: Thread.cpp
+ Description: Thread class functions, most of them are preserved
+ from the original Tpool for osx port by airekans (found on his
+ github at https://github.com/airekans/Tpool ) but there are a
+ few modifications made for better handling.
+ Authors: phyrrus9 <phyrrus9@gmail.com>
+ airekans (Yaolong Huang) airekans@gmail.com
  *****************************************************************/
 ///////////////////////////////////////////////////////////////
 //Tpool-iPhone project. I don't know really how much of this //

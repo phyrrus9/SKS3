@@ -27,6 +27,11 @@
  If you want to know how many lines of code are in this project,
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
+ =================================================================
+ File: socket.h
+ Description: Prototypes for the multiplayer code, more is written
+ about this code in the actual socket.cpp file so look there...
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
