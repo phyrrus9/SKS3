@@ -35,9 +35,9 @@
  control panels because the header is included like it is.
  Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
-#include "windows.h"
 #ifndef settings_h
 #define settings_h
+#include "windows.h"
 void settings_window(void);
 void key_settings_window(void);
 void developer_settings_window(void);
