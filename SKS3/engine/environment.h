@@ -55,9 +55,15 @@ struct _keys
     char settings;
 };
 
+struct _zombie
+{
+    int zombie_active;
+};
+
 struct _settings
 {
     _keys keys;
+    _zombie zombie;
 };
 
 struct _environment

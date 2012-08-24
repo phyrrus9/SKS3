@@ -132,8 +132,8 @@ void populate(void)
             if (r == 6)
             {
                 env.map[i] = 'z';
-                if (i % 4 == 0)
-                    zombie *z = new zombie(i); //activate only 25% of zombies
+                if (i % env.settings.zombie.zombie_active == 0)
+                    zombie *z = new zombie(i); //activate only x% of zombies
                 /************************************************
                  In Xcode, this line will throw a warning,
                  this is only because I never actually use
@@ -156,7 +156,7 @@ void populate(void)
                 if (r > 15 && r < 20)
                 {
                     env.map[i] = 'z';
-                    if (i % 4 == 0)
+                    if (i % env.settings.zombie.zombie_active == 0)
                         zombie *z = new zombie(i); //activate more zombies as pro
                     env.kills_needed++;
                 }

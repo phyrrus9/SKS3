@@ -28,23 +28,34 @@
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
  =================================================================
- File: settings.h
- Description: Function prototypes and structure definitions for
- the control panel. More information on each function in the
- code file settings.cpp. This is like the engine for the settings
- control panels because the header is included like it is.
+ File: dev_control_panel.cpp
+ Description: Code for the development control panel.
  Authors: phyrrus9 <phyrrus9@gmail.com>
+ the GNU Project (ncurses)
  *****************************************************************/
-#include "../engine.h"
-#ifndef settings_h
-#define settings_h
-void settings_window(void);
-void key_settings_window(void);
-void developer_settings_window(void);
-void setdisplay(WINDOW *, const char *);
-void cldisplay(WINDOW *);
-struct wpos
+#include "settings.h"
+void developer_settings_window(void)
 {
-    int x, y;
-};
-#endif
+    WINDOW *vin;
+    initscr();
+    refresh();
+    noecho();
+    int height = 12, width = 62;
+    int starty = (LINES - height) / 2;	/* Calculating for a center placement */
+	int startx = (COLS - width) / 2;	/* of the window		*/
+    vin=newwin(height,width,starty,startx);
+    wmove(vin,0,0);
+    setdisplay(vin, " Developer settings");
+    waddstr(vin, " Sorry, there is not any configurable controls here       \n"
+                 " If you would like to learn about how you can develop for \n"
+                 " the developers of this program, please visit the github  \n"
+                 " page for SKS3 at https://github.com/phyrrus9/SKS3 and get\n"
+                 " a copy of the source code (git clone) for development use\n"
+                 " and when you are finished please email me (Ethan Laur) at\n"
+                 " phyrrus9@gmail.com with your changes so I can credit you \n"
+                 " and add your code to the main stream released as binaries\n"
+                 " Thank you for your support, please press any key to exit \n");
+    wrefresh(vin);
+    getch();
+    cldisplay(vin);
+}

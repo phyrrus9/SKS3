@@ -58,144 +58,38 @@ void settings_window(void)
     WINDOW *vin;
     initscr();
     refresh();
-    vin = newwin(0, 0, 0, 0);
+    noecho(); //no echo on getch
+    int height = 10, width = 35;
+    int starty = (LINES - height) / 2;	/* Calculating for a center placement */
+	int startx = (COLS - width) / 2;	/* of the window		*/
+    vin=newwin(height,width,starty,startx);
     wmove(vin, 0, 0);
     char ch;
     while (true)
     {
-        setdisplay(vin, "Control panel");
-        wprintw(vin, "Please select the correct panel\n"
-                     "1.) Key control panel          \n"
-                     "*.) Developer control panel    \n"
-                     "2.) Back to game               \n\n"
-                     " * denotes a disabled panel    \n");
-        wprintw(vin, ">");
+        setdisplay(vin, " Control panel");
+        wprintw(vin, " Please select the correct panel\n "
+                     " 1.) Key control panel          \n "
+                     " 2.) Developer control panel    \n "
+                     " 3.) Back to game               \n\n "
+                     " * denotes a disabled panel    \n ");
         wrefresh(vin);
         ch = getch();
+        cldisplay(vin);
         if (ch == '1')
         {
             key_settings_window();
             controlled = true;
         }
         if (ch == '2')
+        {
+            developer_settings_window();
+        }
+        if (ch == '3')
             break;
         if (controlled)
             break;
     }
-}
-
-void key_settings_window(void)
-{
-    /*
-     * Key settings code. This code
-     * will create a new window for
-     * configuring the game keys
-     * and popping them into the
-     * environment.
-     */
-    
-    WINDOW *vin;
-    initscr();
-    refresh();
-    vin=newwin(0,0,0,0);
-    wmove(vin,0,0);
-    setdisplay(vin, "Key settings");
-    wprintw(vin, "Up movement key\n");
-    wprintw(vin, "Current: %c\n", env.settings.keys.w);
-    wprintw(vin,"New:");
-    wrefresh(vin);
-    env.settings.keys.w = getch();
-    setdisplay(vin, "Key settings");
-    wprintw(vin, "Left movement key\n");
-    wprintw(vin, "Current: %c\n", env.settings.keys.a);
-    wprintw(vin,"New:");
-    wrefresh(vin);
-    env.settings.keys.a = getch();
-    setdisplay(vin, "Key settings");
-    wprintw(vin, "Down movement key\n");
-    wprintw(vin, "Current: %c\n", env.settings.keys.s);
-    wprintw(vin,"New:");
-    wrefresh(vin);
-    env.settings.keys.s = getch();
-    setdisplay(vin, "Key settings");
-    wprintw(vin, "Right movement key\n");
-    wprintw(vin, "Current: %c\n", env.settings.keys.d);
-    wprintw(vin,"New:");
-    wrefresh(vin);
-    env.settings.keys.d = getch();
-    
-    setdisplay(vin, "Key settings");
-    wprintw(vin, "Up look key\n");
-    wprintw(vin, "Current: %c\n", env.settings.keys.i);
-    wprintw(vin,"New:");
-    wrefresh(vin);
-    env.settings.keys.i = getch();
-    setdisplay(vin, "Key settings");
-    wprintw(vin, "Down look key\n");
-    wprintw(vin, "Current: %c\n", env.settings.keys.j);
-    wprintw(vin,"New:");
-    wrefresh(vin);
-    env.settings.keys.j = getch();
-    setdisplay(vin, "Key settings");
-    wprintw(vin, "Left look key\n");
-    wprintw(vin, "Current: %c\n", env.settings.keys.k);
-    wprintw(vin,"New:");
-    wrefresh(vin);
-    env.settings.keys.k = getch();
-    setdisplay(vin, "Key settings");
-    wprintw(vin, "Right look key\n");
-    wprintw(vin, "Current: %c\n", env.settings.keys.l);
-    wprintw(vin,"New:");
-    wrefresh(vin);
-    env.settings.keys.l = getch();
-    
-    setdisplay(vin, "Key settings");
-    wprintw(vin, "Save key\n");
-    wprintw(vin, "Current: %c\n", env.settings.keys.S);
-    wprintw(vin,"New:");
-    wrefresh(vin);
-    env.settings.keys.S = getch();
-    setdisplay(vin, "Key settings");
-    wprintw(vin, "Restore key\n");
-    wprintw(vin, "Current: %c\n", env.settings.keys.R);
-    wprintw(vin,"New:");
-    wrefresh(vin);
-    env.settings.keys.R = getch();
-    
-    setdisplay(vin, "Key settings");
-    wprintw(vin, "Attack key\n");
-    wprintw(vin, "Current: %c\n", env.settings.keys.attack);
-    wprintw(vin,"New:");
-    wrefresh(vin);
-    env.settings.keys.attack = getch();
-    setdisplay(vin, "Key settings");
-    wprintw(vin, "Pause key\n");
-    wprintw(vin, "Current: %c\n", env.settings.keys.pause);
-    wprintw(vin,"New:");
-    wrefresh(vin);
-    env.settings.keys.pause = getch();
-    setdisplay(vin, "Key settings");
-    wprintw(vin, "Quit key\n");
-    wprintw(vin, "Current: %c\n", env.settings.keys.quit);
-    wprintw(vin,"New:");
-    wrefresh(vin);
-    env.settings.keys.quit = getch();
-    setdisplay(vin, "Key settings");
-    wprintw(vin, "Engine command key\n");
-    wprintw(vin, "Current: %c\n", env.settings.keys.engine);
-    wprintw(vin,"New:");
-    wrefresh(vin);
-    env.settings.keys.engine = getch();
-    
-    setdisplay(vin, "Key settings");
-    wprintw(vin, "Control panel key\n");
-    wprintw(vin, "Current: %c\n", env.settings.keys.settings);
-    wprintw(vin,"New:");
-    wrefresh(vin);
-    env.settings.keys.settings = getch();
-    
-    delwin(vin);
-    endwin();
 }
 
 void setdisplay(WINDOW * w, const char * title)
@@ -205,8 +99,17 @@ void setdisplay(WINDOW * w, const char * title)
      * This is an optimization and really
      * shouldnt be changed.
      */
-    
     wclear(w);
-    wprintw(w, "%s\n", title);
+    wprintw(w, "\n%s\n", title);
+    //box(w, '|', 0);
+    wborder(w, '|', '|', '-', '-', '+', '+', '+', '+');
     wrefresh(w);
+}
+
+void cldisplay(WINDOW * w)
+{
+    wborder(w, ' ', ' ', ' ',' ',' ',' ',' ',' ');
+    wclear(w);
+    wrefresh(w);
+    refresh();
 }

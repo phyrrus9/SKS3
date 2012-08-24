@@ -410,6 +410,7 @@ void game(int argc, const char * argv[])
             if (a == env.settings.keys.settings)
             {
                 env.allow_refresh = false;
+                clear();
                 settings_window();
                 env.allow_refresh = true;
             }

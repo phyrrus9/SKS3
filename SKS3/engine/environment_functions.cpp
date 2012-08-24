@@ -198,5 +198,6 @@ void settings_init(_settings & t)
     t.keys.S = 'S';
     t.keys.R = 'R';
     t.keys.settings = '+';
+    t.zombie.zombie_active = 4;
     settings_read();
 }
