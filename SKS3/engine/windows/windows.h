@@ -28,61 +28,21 @@
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
  =================================================================
- File: engine.h
- Description: Prototypes, constants, macros, and file includes used
- across the entire game (because we only need to include engine.h
- on any file that needs pretty much anything from the game and it
- wont throw errors because we use ifdefs so it wont include twice
+ File: windows/windows.h
+ Description: Function prototypes and structure definitions for 
+ the window management system. This is the window engine header.
  Authors: phyrrus9 <phyrrus9@gmail.com>
- the GNU Project (ncurses)
  *****************************************************************/
-#ifndef SKS3_engine_h
-#define SKS3_engine_h
-#include <iostream>
-#include <fstream>
-#include <ncurses.h>
-#include <iomanip>
-#include <signal.h>
-#include <string.h>
-#include <sstream>
-#include "socket.h"
-#include "enumerations.h"
-#include "environment.h"
-#include "environment_functions.h"
-#include "filesystem.h"
-#include "movement.h"
-#include "attack.h"
-#include "zombie.h"
-#include "Thread.h"
-#include "hiscore.h"
+#include "../engine.h"
+#ifndef settings_h
+//sorry this has to be done but just leaving it
+//with being just the #include tended to throw
+//errors like "include nested too deeply", so
+//I just made sure it included once instead of inf
+#include "settings.h"
+#endif
 #ifndef SKS3_windows_h
-#include "windows/windows.h"
-#endif
-#ifdef __APPLE__
-#define play_music(a) system(a)
-#define kill_music(b) system(b)
-#endif
-#ifndef __APPLE__
-#define play_music(a) //hello world
-#define kill_music(b) //hello world
-#endif
-//#define endl "\n\r"x
-#define clear() system("clear")
-#define pause() env.paused = true
-#define unpause() env.paused = false
-#define VERSION_BUILD "SKS3 (1.9.2)"
-const int portnum = 5102;
-const int time_limit = 3600; //time limit in seconds
-const char echar = '~';
-using namespace std;
-char getch_(void);
-void enginecmd(string, string);
-void showhelp(void);
-void save(void);
-void restore(void);
-void display(void);
-void colorify(void);
-void colorify(color);
-void terminate(int);
-int char_int(char);
+#define SKS3_windows_h
+void setdisplay(WINDOW *, const char *);
+void cldisplay(WINDOW *);
 #endif

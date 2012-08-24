@@ -28,61 +28,35 @@
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
  =================================================================
- File: engine.h
- Description: Prototypes, constants, macros, and file includes used
- across the entire game (because we only need to include engine.h
- on any file that needs pretty much anything from the game and it
- wont throw errors because we use ifdefs so it wont include twice
+ File: windows/windows.cpp
+ Description: Code for managing windows. The engine for all of the
+ windows used in this game.
  Authors: phyrrus9 <phyrrus9@gmail.com>
- the GNU Project (ncurses)
  *****************************************************************/
-#ifndef SKS3_engine_h
-#define SKS3_engine_h
-#include <iostream>
-#include <fstream>
-#include <ncurses.h>
-#include <iomanip>
-#include <signal.h>
-#include <string.h>
-#include <sstream>
-#include "socket.h"
-#include "enumerations.h"
-#include "environment.h"
-#include "environment_functions.h"
-#include "filesystem.h"
-#include "movement.h"
-#include "attack.h"
-#include "zombie.h"
-#include "Thread.h"
-#include "hiscore.h"
-#ifndef SKS3_windows_h
-#include "windows/windows.h"
-#endif
-#ifdef __APPLE__
-#define play_music(a) system(a)
-#define kill_music(b) system(b)
-#endif
-#ifndef __APPLE__
-#define play_music(a) //hello world
-#define kill_music(b) //hello world
-#endif
-//#define endl "\n\r"x
-#define clear() system("clear")
-#define pause() env.paused = true
-#define unpause() env.paused = false
-#define VERSION_BUILD "SKS3 (1.9.2)"
-const int portnum = 5102;
-const int time_limit = 3600; //time limit in seconds
-const char echar = '~';
-using namespace std;
-char getch_(void);
-void enginecmd(string, string);
-void showhelp(void);
-void save(void);
-void restore(void);
-void display(void);
-void colorify(void);
-void colorify(color);
-void terminate(int);
-int char_int(char);
-#endif
+#include "windows.h"
+void setdisplay(WINDOW * w, const char * title)
+{
+    /*
+     * Function to write title to a window.
+     * This is an optimization and really
+     * shouldnt be changed.
+     */
+    wclear(w);
+    wprintw(w, "\n%s\n", title);
+    //box(w, '|', 0);
+    wborder(w, '|', '|', '-', '-', '+', '+', '+', '+');
+    wrefresh(w);
+}
+
+void cldisplay(WINDOW * w)
+{
+    /*
+     * Function to clear out the border and
+     * text in a window so we can use that
+     * part of the screen for something else
+     */
+    wborder(w, ' ', ' ', ' ',' ',' ',' ',' ',' ');
+    wclear(w);
+    wrefresh(w);
+    refresh();
+}

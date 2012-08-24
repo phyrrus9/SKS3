@@ -28,7 +28,7 @@
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
  =================================================================
- File: settings.cpp
+ File: windows/settings.cpp
  Description: This code contains the instructions for the settings
  windows used when the user presses the settings key. It will
  display a menu with various sub control panels and allow you to
@@ -90,26 +90,4 @@ void settings_window(void)
         if (controlled)
             break;
     }
-}
-
-void setdisplay(WINDOW * w, const char * title)
-{
-    /*
-     * Function to write title to a window.
-     * This is an optimization and really
-     * shouldnt be changed.
-     */
-    wclear(w);
-    wprintw(w, "\n%s\n", title);
-    //box(w, '|', 0);
-    wborder(w, '|', '|', '-', '-', '+', '+', '+', '+');
-    wrefresh(w);
-}
-
-void cldisplay(WINDOW * w)
-{
-    wborder(w, ' ', ' ', ' ',' ',' ',' ',' ',' ');
-    wclear(w);
-    wrefresh(w);
-    refresh();
 }

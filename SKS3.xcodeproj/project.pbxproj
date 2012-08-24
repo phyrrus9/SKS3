@@ -18,6 +18,7 @@
 		4AC30A1415E71B7E005F767F /* settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AC30A1215E71B7E005F767F /* settings.cpp */; };
 		4AC30A1715E7CE3E005F767F /* keys_control_panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AC30A1615E7CE3E005F767F /* keys_control_panel.cpp */; };
 		4AC30A1915E7CEAD005F767F /* dev_control_panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AC30A1815E7CEAC005F767F /* dev_control_panel.cpp */; };
+		4AC30A1B15E7DF4E005F767F /* windows.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AC30A1A15E7DF4E005F767F /* windows.cpp */; };
 		4AE9022B15A4888A0079BAAF /* attack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9021D15A4888A0079BAAF /* attack.cpp */; };
 		4AE9022C15A4888A0079BAAF /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9021F15A4888A0079BAAF /* engine.cpp */; };
 		4AE9022D15A4888A0079BAAF /* filesystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9022315A4888A0079BAAF /* filesystem.cpp */; };
@@ -59,6 +60,8 @@
 		4AC30A1315E71B7E005F767F /* settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settings.h; sourceTree = "<group>"; };
 		4AC30A1615E7CE3E005F767F /* keys_control_panel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = keys_control_panel.cpp; sourceTree = "<group>"; };
 		4AC30A1815E7CEAC005F767F /* dev_control_panel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dev_control_panel.cpp; sourceTree = "<group>"; };
+		4AC30A1A15E7DF4E005F767F /* windows.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = windows.cpp; sourceTree = "<group>"; };
+		4AC30A1C15E7DF5B005F767F /* windows.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = windows.h; sourceTree = "<group>"; };
 		4AE9021D15A4888A0079BAAF /* attack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = attack.cpp; sourceTree = "<group>"; };
 		4AE9021E15A4888A0079BAAF /* attack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = attack.h; sourceTree = "<group>"; };
 		4AE9021F15A4888A0079BAAF /* engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = engine.cpp; sourceTree = "<group>"; };
@@ -138,6 +141,8 @@
 			isa = PBXGroup;
 			children = (
 				4AC30A1215E71B7E005F767F /* settings.cpp */,
+				4AC30A1A15E7DF4E005F767F /* windows.cpp */,
+				4AC30A1C15E7DF5B005F767F /* windows.h */,
 				4AC30A1615E7CE3E005F767F /* keys_control_panel.cpp */,
 				4AC30A1815E7CEAC005F767F /* dev_control_panel.cpp */,
 				4AC30A1315E71B7E005F767F /* settings.h */,
@@ -241,6 +246,7 @@
 				4AC30A1415E71B7E005F767F /* settings.cpp in Sources */,
 				4AC30A1715E7CE3E005F767F /* keys_control_panel.cpp in Sources */,
 				4AC30A1915E7CEAD005F767F /* dev_control_panel.cpp in Sources */,
+				4AC30A1B15E7DF4E005F767F /* windows.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

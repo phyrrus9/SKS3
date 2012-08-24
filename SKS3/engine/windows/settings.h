@@ -28,21 +28,19 @@
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
  =================================================================
- File: settings.h
+ File: windows/settings.h
  Description: Function prototypes and structure definitions for
  the control panel. More information on each function in the
  code file settings.cpp. This is like the engine for the settings
  control panels because the header is included like it is.
  Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
-#include "../engine.h"
+#include "windows.h"
 #ifndef settings_h
 #define settings_h
 void settings_window(void);
 void key_settings_window(void);
 void developer_settings_window(void);
-void setdisplay(WINDOW *, const char *);
-void cldisplay(WINDOW *);
 struct wpos
 {
     int x, y;

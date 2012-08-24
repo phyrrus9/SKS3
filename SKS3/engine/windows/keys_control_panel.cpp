@@ -28,7 +28,7 @@
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
  =================================================================
- File: keys_control_panel.cpp
+ File: windows/keys_control_panel.cpp
  Description: Code for the keys configuration control panel.
  Authors: phyrrus9 <phyrrus9@gmail.com>
  the GNU Project (ncurses)

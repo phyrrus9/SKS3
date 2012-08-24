@@ -28,7 +28,7 @@
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
  =================================================================
- File: dev_control_panel.cpp
+ File: windows/dev_control_panel.cpp
  Description: Code for the development control panel.
  Authors: phyrrus9 <phyrrus9@gmail.com>
  the GNU Project (ncurses)
@@ -36,6 +36,14 @@
 #include "settings.h"
 void developer_settings_window(void)
 {
+    /*
+     * Developer control panel
+     * This is what we will use to control
+     * developer stuff that we make public
+     * to help debug the program like thread
+     * hooks, pointer references, and pauses
+     */
+    
     WINDOW *vin;
     initscr();
     refresh();

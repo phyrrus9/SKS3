@@ -56,6 +56,7 @@ bool multiplayer = false;
 bool game_initialized = false;
 extern int client_port;
 extern int server_port;
+
 class newlevel_thread : public tpool::Thread
 {
     /*
@@ -74,6 +75,7 @@ class newlevel_thread : public tpool::Thread
         }
     }
 };
+
 int main(int argc, const char * argv[])
 {
     /*
@@ -186,6 +188,7 @@ int main(int argc, const char * argv[])
     showhelp();
     game(argc, argv);
 }
+
 void game(int argc, const char * argv[])
 {
     /*
@@ -436,6 +439,7 @@ void game(int argc, const char * argv[])
     }
     return;
 }
+
 void displaylauncher(void)
 {
     /*
