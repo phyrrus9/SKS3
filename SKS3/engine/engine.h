@@ -55,6 +55,7 @@
 #include "zombie.h"
 #include "Thread.h"
 #include "hiscore.h"
+#include "windows/settings.h"
 #ifdef __APPLE__
 #define play_music(a) system(a)
 #define kill_music(b) system(b)
@@ -67,7 +68,7 @@
 #define clear() system("clear")
 #define pause() env.paused = true
 #define unpause() env.paused = false
-#define VERSION_BUILD "SKS3 (1.8)"
+#define VERSION_BUILD "SKS3 (1.9)"
 const int portnum = 5102;
 const int time_limit = 3600; //time limit in seconds
 const char echar = '~';

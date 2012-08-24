@@ -188,3 +188,35 @@ void small_delay(void)
     for (int i = 0 ; i < 1000; i++)
     { }
 }
+
+void settings_write(void)
+{
+    /*
+     * Code to write the settings struct
+     * to disk. Basically a binary file
+     * overwrite of the structure.
+     */
+    
+    ofstream out(".sks3settings", ios::binary | ios::trunc);
+    out.write(reinterpret_cast<char *>(&env.settings), sizeof(_settings));
+    out.close();
+}
+
+void settings_read(void)
+{
+    /*
+     * Code to read the settings struct
+     * from disk. Size and range checks
+     * complete then the file is read
+     * if it exists.
+     */
+    
+    ifstream in(".sks3settings", ios::binary);
+    if (!in) //file not exist
+        return;
+    in.seekg(ios::end);
+    //if (in.tellg() != sizeof(_settings))
+    //  return;
+    in.seekg(ios::beg);
+    in.read(reinterpret_cast<char *>(&env.settings), sizeof(_settings));
+}

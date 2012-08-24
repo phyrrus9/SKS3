@@ -48,6 +48,7 @@ void environment_init(_environment &t)
      * it would not compile for any system other than mac os x
      * that way, and even then it threw a few hundred warnings.
      */
+    strcpy(t.version, VERSION_BUILD);
     t.zombies = 0;
     t.paused = false;
     t.music = true;
@@ -97,6 +98,8 @@ void environment_init(_environment &t)
     game_timer_init(t.timer);
     //high score stuff
     hiscore::get_scores();
+    //settings stuff
+    settings_init(t.settings);
 }
 
 void weapons_init(weapons::weaponlist &t)
@@ -176,4 +179,24 @@ void game_timer_increment(game_timer & t)
         t.minute++;
         t.second = t.second - 60;
     }
+}
+
+void settings_init(_settings & t)
+{
+    t.keys.attack = 'e';
+    t.keys.pause = 'p';
+    t.keys.quit = 'Q';
+    t.keys.engine = '/';
+    t.keys.w = 'w';
+    t.keys.a = 'a';
+    t.keys.s = 's';
+    t.keys.d = 'd';
+    t.keys.i = 'i';
+    t.keys.j = 'j';
+    t.keys.k = 'k';
+    t.keys.l = 'l';
+    t.keys.S = 'S';
+    t.keys.R = 'R';
+    t.keys.settings = '+';
+    settings_read();
 }

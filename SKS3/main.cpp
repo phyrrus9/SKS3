@@ -84,6 +84,7 @@ int main(int argc, const char * argv[])
      * After everything is set up, it forwards its args to the 
      * game function and all is good.
      */
+    resizeterm(181, 48);
     environment_init(env);
     long seed = time(0);
     clear();
@@ -287,47 +288,47 @@ void game(int argc, const char * argv[])
                 for (int i = 0; i < weapons::num_of_weapons + 1; i++)
                     if (char_int(a) == i)
                         setselectedweapon(i - 1);
-            if (a == 'w')
+            if (a == env.settings.keys.w)
             {
                 t = N;
                 moving = true;
             }
-            if (a == 'a')
+            if (a == env.settings.keys.a)
             {
                 t = E;
                 moving = true;
             }
-            if (a == 's')
+            if (a == env.settings.keys.s)
             {
                 t = S;
                 moving = true;
             }
-            if (a == 'd')
+            if (a == env.settings.keys.d)
             {
                 t = W;
                 moving = true;
             }
-            if (a == 'i')
+            if (a == env.settings.keys.i)
             {
                 turning = true;
                 t = N;
             }
-            if (a == 'j')
+            if (a == env.settings.keys.j)
             {
                 turning = true;
                 t = E;
             }
-            if (a == 'k')
+            if (a == env.settings.keys.k)
             {
                 turning = true;
                 t = S;
             }
-            if (a == 'l')
+            if (a == env.settings.keys.l)
             {
                 turning = true;
                 t = W;
             }
-            if (a == 'e')
+            if (a == env.settings.keys.attack)
                 attack();
             if (a == 'E')
                 increment_attack();
@@ -352,17 +353,17 @@ void game(int argc, const char * argv[])
                 t = RESS;
                 _move;
             }
-            if (a == 'S')
+            if (a == env.settings.keys.S)
             {
                 t = SAV;
                 _move;
             }
-            if (a == 'R')
+            if (a == env.settings.keys.R)
             {
                 t = RES;
                 _move;
             }
-            if (a == 'Q')
+            if (a == env.settings.keys.quit)
             {
                 t = QUI;
                 _move;
@@ -372,7 +373,7 @@ void game(int argc, const char * argv[])
                 t = HLP;
                 _move;
             }
-            if (a == 'p')
+            if (a == env.settings.keys.pause)
             {
                 if (env.paused)
                     t = UNPAU;
@@ -406,7 +407,13 @@ void game(int argc, const char * argv[])
             }
             if (a == 'N')
                 execl(argv[0], argv[0], (char *)NULL);
-            if (a == '/')
+            if (a == env.settings.keys.settings)
+            {
+                env.allow_refresh = false;
+                settings_window();
+                env.allow_refresh = true;
+            }
+            if (a == env.settings.keys.engine)
             {
                 cout << ">";
                 env.allow_refresh = false;

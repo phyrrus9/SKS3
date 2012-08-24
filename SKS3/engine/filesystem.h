@@ -38,3 +38,5 @@ void save_slot(void); //save slot
 void save(void);
 void restore(void);
 void small_delay(void); //make a really small delay so we can print stuff
+void settings_write(void);
+void settings_read(void);

@@ -163,13 +163,18 @@ void showhelp(void)
     << "^ - You are looking up              > - You are looking to the right" << endl
     << "v - You are looking down            < - You are looking to the left" << endl
     << "Your player will be the red character on the screen, you may move by pressing:" << endl
-    << "w - Move Up                         i - Look Up" << endl
-    << "a - Move Left                       j - Look Left" << endl
-    << "s - Move Down                       k - Look Down" << endl
-    << "d - Move Right                      l - Look Right" << endl
+    << env.settings.keys.w << " - Move Up                         " << env.settings.keys.i <<
+                                                                  " - Look Up" << endl
+    << env.settings.keys.a << " - Move Left                       " << env.settings.keys.j <<
+                                                                  " - Look Left" << endl
+    << env.settings.keys.s << " - Move Down                       " << env.settings.keys.k <<
+                                                                  " - Look Down" << endl
+    << env.settings.keys.d << " - Move Right                      " << env.settings.keys.l <<
+                                                                  " - Look Right" << endl
     << "No need to press enter, character icon will update automatically" << endl
     << "You do not need to run into a target to attack it, you may use the following:" << endl
-    << "e - Attack target facing arrow" << endl
+    << env.settings.keys.attack <<
+    " - Attack target facing arrow" << endl
     << "E - Increment your attack points" << endl
     << "Weapons are available in the game and will be added to your view when earned" << endl
     << "The current selection will show up in red in the weapons selector." << endl
@@ -180,12 +185,13 @@ void showhelp(void)
     << "√ - Stocking (level 75)             ø - Admin gun (level 100)" << endl
     << "To select a weapon, just use the keypad number of your choice" << endl
     << "Other commands used in the game are:" << endl
-    << "S - Save game                       R - Restore game" << endl
+    << env.settings.keys.S << " - Save game                       " << env.settings.keys.R << "- Restore game" << endl
     << "&S- Save to slot                    &R- Restore from slot      -- & denotes pressing alt(PC/linux) or option(osx)" << endl
     << "o - View high scores                O - save your score" << endl
-    << "Q - Quit game                       N - New game" << endl
+    << env.settings.keys.quit << " - Quit game                       N - New game" << endl
     << "p - Pause or unpause game           m - Start or stop music" << endl
     << "H - Show help                       n - Next song if music is on" << endl
+    << env.settings.keys.settings << " - Control panel" << endl
     << "Characters in the game are:" << endl
     << "~ - Neutral (empty)                 % - Large bug" << endl
     << "& - Small bug                       $ - Worm" << endl

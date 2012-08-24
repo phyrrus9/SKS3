@@ -15,6 +15,7 @@
 		4A748946158277F80048CFF8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A748945158277F80048CFF8 /* main.cpp */; };
 		4ABF2DBE15A7936C008E7535 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ABF2DBD15A7936C008E7535 /* main.cpp */; };
 		4ABF2DE115A79EE3008E7535 /* sks4200.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ABF2DDF15A79EE3008E7535 /* sks4200.cpp */; };
+		4AC30A1415E71B7E005F767F /* settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AC30A1215E71B7E005F767F /* settings.cpp */; };
 		4AE9022B15A4888A0079BAAF /* attack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9021D15A4888A0079BAAF /* attack.cpp */; };
 		4AE9022C15A4888A0079BAAF /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9021F15A4888A0079BAAF /* engine.cpp */; };
 		4AE9022D15A4888A0079BAAF /* filesystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9022315A4888A0079BAAF /* filesystem.cpp */; };
@@ -52,6 +53,8 @@
 		4ABF2DDF15A79EE3008E7535 /* sks4200.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sks4200.cpp; path = sks4200/sks4200.cpp; sourceTree = "<group>"; };
 		4ABF2DE015A79EE3008E7535 /* sks4200.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sks4200.h; path = sks4200/sks4200.h; sourceTree = "<group>"; };
 		4ABF2DE215A87B4F008E7535 /* ks4200.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ks4200.h; sourceTree = "<group>"; };
+		4AC30A1215E71B7E005F767F /* settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = settings.cpp; sourceTree = "<group>"; };
+		4AC30A1315E71B7E005F767F /* settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = settings.h; sourceTree = "<group>"; };
 		4AE9021D15A4888A0079BAAF /* attack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = attack.cpp; sourceTree = "<group>"; };
 		4AE9021E15A4888A0079BAAF /* attack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = attack.h; sourceTree = "<group>"; };
 		4AE9021F15A4888A0079BAAF /* engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = engine.cpp; sourceTree = "<group>"; };
@@ -127,9 +130,19 @@
 			name = sks4200;
 			sourceTree = "<group>";
 		};
+		4AC30A1115E71B7E005F767F /* windows */ = {
+			isa = PBXGroup;
+			children = (
+				4AC30A1215E71B7E005F767F /* settings.cpp */,
+				4AC30A1315E71B7E005F767F /* settings.h */,
+			);
+			path = windows;
+			sourceTree = "<group>";
+		};
 		4AE9021C15A4888A0079BAAF /* engine */ = {
 			isa = PBXGroup;
 			children = (
+				4AC30A1115E71B7E005F767F /* windows */,
 				4A11A4E115DB4DFE001057FF /* hiscore.cpp */,
 				4A11A4E215DB4DFE001057FF /* hiscore.h */,
 				4A0C061B15BC50D300C125E6 /* Thread.cpp */,
@@ -219,6 +232,7 @@
 				4A1F20F315A8FB7900982D5F /* zombie.cpp in Sources */,
 				4A0C061D15BC50D300C125E6 /* Thread.cpp in Sources */,
 				4A11A4E315DB4DFE001057FF /* hiscore.cpp in Sources */,
+				4AC30A1415E71B7E005F767F /* settings.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

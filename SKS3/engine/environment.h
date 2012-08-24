@@ -39,13 +39,30 @@
 #include <string.h>
 #include "hiscore.h"
 #include "enumerations.h"
+#ifndef environment_h
+#define environment_h
 struct game_timer
 {
     int second, minute, clock;
 };
 
+struct _keys
+{
+    char attack, pause, quit, engine;
+    char w, a, s, d;
+    char i, j, k, l;
+    char S, R;
+    char settings;
+};
+
+struct _settings
+{
+    _keys keys;
+};
+
 struct _environment
 {
+    char version[25];
     bool paused, music, socket_paused, multiplayer, time_up;
     char map[900], grid[900];
     char * view;
@@ -60,4 +77,6 @@ struct _environment
     char socket_message[256];
     game_timer timer;
     hiscore::score hiscorelist[hiscore::num_scores]; //all x high scores
+    _settings settings;
 };
+#endif
