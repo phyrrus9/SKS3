@@ -38,6 +38,7 @@
  *****************************************************************/
 #ifndef SKS3_engine_h
 #define SKS3_engine_h
+#include <limits.h> //for linux INT_MAX
 #include <iostream>
 #include <fstream>
 #include <ncurses.h>
