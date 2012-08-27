@@ -34,6 +34,8 @@
  Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include "engine.h"
+#ifndef movement_h
+#define movement_h
 #define d(a) if (d == a) //make a nice little function
 void populate(void);
 void move(direction);
@@ -41,3 +43,4 @@ void turn(direction);
 void showmap(void);
 void showplayer(void);
 void light(int);
+#endif

@@ -36,8 +36,17 @@
  carry this block of code to tell who the original authors are and
  also a list of changes made by the third party and contact details
  so that other parties may reach them for help about their code.
+ =================================================================
+ File: ks4200/ks4200.h
+ Description: Prototypes and includes for the original key seeker
+ 4200 module game. This game is very much different from the third
+ release candidate and is not in any way readable by a human, so
+ dont even try to proceed to main.cpp.
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 /* do not ever ask about this file */
+#ifndef ks4200_include
+#define ks4200_inclue
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -46,4 +55,16 @@
 #include <stdexcept>
 #include <fstream>
 #include <time.h>
+#endif
+
+#define WALL (0)
+#define OPEN (1)
+#define COIN (3)
+#define CHG (4)
+#define KEY (5)
+#define WINCOINS (24)
+#define CRATE (81)
+
 int ks4200(const char *);
+
+using namespace std;

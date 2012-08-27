@@ -41,6 +41,10 @@
  this way as long as this code is distributed for public use.
  Dereck Wonnacott <dereck@gmail.com> for examples and snippets
  The GNU Project <http://gnu.org> for ncurses
+ =================================================================
+ File: sks4200/sks4200.h
+ Description: Prototype for launching the sks4200 submodule game
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  ****************************************************************/
 
 #include <cstdlib>

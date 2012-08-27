@@ -36,11 +36,10 @@
  easily as it can right now.
  Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
-#include <string.h>
-#include "hiscore.h"
-#include "enumerations.h"
+#include "engine.h"
 #ifndef environment_h
 #define environment_h
+#include "hiscore.h"
 struct game_timer
 {
     int second, minute, clock;

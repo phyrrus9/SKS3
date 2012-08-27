@@ -38,14 +38,39 @@
  *****************************************************************/
 #ifndef SKS3_engine_h
 #define SKS3_engine_h
+
+#ifndef linux_headers
+#define linux_headers
+#ifndef __APPLE__
 #include <limits.h> //for linux INT_MAX
+#endif
+#endif
+
+#ifndef engine_streams
+#define engine_streams
 #include <iostream>
 #include <fstream>
+#include <sstream>
+#include "streamlib/streams.h" //for various streamlib functions
+#endif
+
+#ifndef engine_system
+#define engine_system
 #include <ncurses.h>
 #include <iomanip>
 #include <signal.h>
 #include <string.h>
-#include <sstream>
+#include <unistd.h>
+#include <cstdlib>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#endif
+
+#ifndef user_includes
+#define user_includes
 #include "socket.h"
 #include "enumerations.h"
 #include "environment.h"
@@ -59,10 +84,13 @@
 #ifndef SKS3_windows_h
 #include "windows/windows.h"
 #endif
+#endif
+
 #ifdef __APPLE__
 #define play_music(a) system(a)
 #define kill_music(b) system(b)
 #endif
+
 #ifndef __APPLE__
 #define play_music(a) //hello world
 #define kill_music(b) //hello world
@@ -71,7 +99,7 @@
 #define clear() system("clear")
 #define pause() env.paused = true
 #define unpause() env.paused = false
-#define VERSION_BUILD "SKS3 (1.9.2)"
+#define VERSION_BUILD "SKS3 (1.9.3)"
 const int portnum = 5102;
 const int time_limit = 3600; //time limit in seconds
 const char echar = '~';

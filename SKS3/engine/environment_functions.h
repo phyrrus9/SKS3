@@ -34,6 +34,8 @@
  Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include "engine.h"
+#ifndef environment_functions_h
+#define environment_functions_h
 #include "Thread.h"
 extern _environment env;
 void environment_init(_environment &); //initialize an environment variable. don't know why you would ever need two of these, but it is here just in case (plus it takes away the need to ensure all the externs are set up all the way and prevents the accidental use of two or more environment variables)
@@ -41,3 +43,4 @@ void weapons_init(weapons::weaponlist &); //initializes all the weapons stuff, f
 void game_timer_init(game_timer &); //initializes the game timer with double zeros.
 void game_timer_increment(game_timer&); //adds one second
 void settings_init(_settings &); //initialize the game settings
+#endif

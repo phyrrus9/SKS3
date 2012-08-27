@@ -35,6 +35,8 @@
  Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include "engine.h"
+#ifndef user_h
+#define user_h
 void showhelp(void); //shows the help screen
 void display(void); //shows the bar at top of screen
 void multidisplay(void); //for multiplayer
@@ -43,3 +45,4 @@ void about_zombie(void);
 void copyright(void);
 void music_stop(void); //stop the music
 void music_start(void); //start the music
+#endif

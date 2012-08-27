@@ -33,18 +33,11 @@
  about this code in the actual socket.cpp file so look there...
  Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h> 
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netdb.h> 
-#include <sstream>
 #include "engine.h"
-
+#ifndef socket_h
+#define socket_h
 void dlog(const char *); //log for debugging
 void server(int); //runs the socket that recieves the data from the client
 void server_end(void); //closes the server socket
 void client(char *, int); //sends data to the other computer
+#endif

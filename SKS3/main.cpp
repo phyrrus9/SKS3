@@ -86,6 +86,11 @@ int main(int argc, const char * argv[])
      * After everything is set up, it forwards its args to the 
      * game function and all is good.
      */
+    if (streamlib_version != GLOBAL_STREAMLIB_VERSION)
+    {
+        cout << "Error! Streamlib error" << endl;
+        exit(-1);
+    }
     resizeterm(181, 48);
     environment_init(env);
     long seed = time(0);

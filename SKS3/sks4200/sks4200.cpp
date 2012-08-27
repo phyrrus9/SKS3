@@ -41,11 +41,22 @@
  this way as long as this code is distributed for public use.
  Dereck Wonnacott <dereck@gmail.com> for examples and snippets
  The GNU Project <http://gnu.org> for ncurses
+ =================================================================
+ File: sks4200/sks4200.cpp
+ Description: Function code for launching the sks4200 game module
+ which is included in this project (in the ./SKS3/sks4200 folder)
+ and can be compiled using either make sks4200 in the root prohect
+ directory or just make in the sks4200 directory
+ Authors: phyrrus9 <phyrrus9@gmail.com>
  ****************************************************************/
 #include "sks4200.h"
 
 
 void launch_sks4200(void)
 {
+    /*
+     * Launches the sks4200 game submodule
+     */
+    
     system("/usr/bin/sks4200");
 }

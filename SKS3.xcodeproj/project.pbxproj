@@ -19,6 +19,7 @@
 		4AC30A1715E7CE3E005F767F /* keys_control_panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AC30A1615E7CE3E005F767F /* keys_control_panel.cpp */; };
 		4AC30A1915E7CEAD005F767F /* dev_control_panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AC30A1815E7CEAC005F767F /* dev_control_panel.cpp */; };
 		4AC30A1B15E7DF4E005F767F /* windows.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AC30A1A15E7DF4E005F767F /* windows.cpp */; };
+		4AC30A4715EC27DC005F767F /* stream.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC30A4615EC27DC005F767F /* stream.a */; };
 		4AE9022B15A4888A0079BAAF /* attack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9021D15A4888A0079BAAF /* attack.cpp */; };
 		4AE9022C15A4888A0079BAAF /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9021F15A4888A0079BAAF /* engine.cpp */; };
 		4AE9022D15A4888A0079BAAF /* filesystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9022315A4888A0079BAAF /* filesystem.cpp */; };
@@ -62,6 +63,7 @@
 		4AC30A1815E7CEAC005F767F /* dev_control_panel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dev_control_panel.cpp; sourceTree = "<group>"; };
 		4AC30A1A15E7DF4E005F767F /* windows.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = windows.cpp; sourceTree = "<group>"; };
 		4AC30A1C15E7DF5B005F767F /* windows.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = windows.h; sourceTree = "<group>"; };
+		4AC30A4615EC27DC005F767F /* stream.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = stream.a; path = SKS3/engine/stream.a; sourceTree = "<group>"; };
 		4AE9021D15A4888A0079BAAF /* attack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = attack.cpp; sourceTree = "<group>"; };
 		4AE9021E15A4888A0079BAAF /* attack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = attack.h; sourceTree = "<group>"; };
 		4AE9021F15A4888A0079BAAF /* engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = engine.cpp; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AC30A4715EC27DC005F767F /* stream.a in Frameworks */,
 				4A35A0AF157E5F03006EB744 /* libncurses.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,6 +96,7 @@
 		4A14DE8E157D3321007F17EB = {
 			isa = PBXGroup;
 			children = (
+				4AC30A4615EC27DC005F767F /* stream.a */,
 				4A35A0AE157E5F03006EB744 /* libncurses.dylib */,
 				4A14DE9C157D3321007F17EB /* SKS3 */,
 				4A14DE9A157D3321007F17EB /* Products */,
@@ -325,6 +329,10 @@
 		4A14DEA4157D3321007F17EB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/SKS3/engine\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;
 			};
@@ -333,6 +341,10 @@
 		4A14DEA5157D3321007F17EB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/SKS3/engine\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;
 			};
