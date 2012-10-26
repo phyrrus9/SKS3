@@ -48,22 +48,52 @@ void developer_settings_window(void)
     initscr();
     refresh();
     noecho();
-    int height = 12, width = 62;
+    int height = 6, width = 42;
+    int wheight = 11, wwidth = 42;
     int starty = (LINES - height) / 2;	/* Calculating for a center placement */
 	int startx = (COLS - width) / 2;	/* of the window		*/
-    vin=newwin(height,width,starty,startx);
+    vin=newwin(wheight,wwidth,starty,startx);
     wmove(vin,0,0);
+    char tmpc;
+    //first, before we can allow this to happen we need to display
+    //a warning so the user knows we mean business.
     setdisplay(vin, " Developer settings");
-    waddstr(vin, " Sorry, there is not any configurable controls here       \n"
-                 " If you would like to learn about how you can develop for \n"
-                 " the developers of this program, please visit the github  \n"
-                 " page for SKS3 at https://github.com/phyrrus9/SKS3 and get\n"
-                 " a copy of the source code (git clone) for development use\n"
-                 " and when you are finished please email me (Ethan Laur) at\n"
-                 " phyrrus9@gmail.com with your changes so I can credit you \n"
-                 " and add your code to the main stream released as binaries\n"
-                 " Thank you for your support, please press any key to exit \n");
+    wprintw(vin, " Warning, this is the developer console\n"
+                 " this is not something to play with. so\n"
+                 " please be careful. This panel will let\n"
+                 " you do things beyond your far dreams, \n"
+                 " which makes it dangerous. If you don't\n"
+                 " know how to handle this, press Q now, \n"
+                 " If you know the risks, and you wish to\n"
+                 " proceed, press any other key.");
     wrefresh(vin);
-    getch();
+    tmpc = getch_();
+    werase(vin);
+    wrefresh(vin);
+    if (tmpc != 'Q')
+    {
+        wresize(vin, height, width);
+        setdisplay(vin, " Developer settings");
+        wprintw(vin, " Enable cheats?\n");
+        wprintw(vin, " Old: %.1d\n", env.cheats);
+        wprintw(vin, " New: ");
+        wrefresh(vin);
+        tmpc = getch_();
+        env.cheats = tmpc - 48;
+        wrefresh(vin);
+        setdisplay(vin, " Developer settings");
+        wprintw(vin, " Enable fog?\n");
+        wprintw(vin, " Old: %.1d\n", env.showmap);
+        wprintw(vin, " New: ");
+        wrefresh(vin);
+        tmpc = getch_();
+        env.showmap = tmpc - 48;
+        wrefresh(vin);
+        setdisplay(vin, " Developer settings");
+        wprintw(vin, " Setup complete. Press any key to return\n");
+        wprintw(vin, " "); //so the cursor doesn't overwrite the | on the left side
+        wrefresh(vin);
+        getch();
+    }
     cldisplay(vin);
 }

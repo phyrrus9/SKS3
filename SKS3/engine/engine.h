@@ -99,7 +99,7 @@
 #define clear() system("clear")
 #define pause() env.paused = true
 #define unpause() env.paused = false
-#define VERSION_BUILD "SKS3 (1.9.3)"
+#define VERSION_BUILD "SKS3 (1.9.4)"
 const int portnum = 5102;
 const int time_limit = 3600; //time limit in seconds
 const char echar = '~';
