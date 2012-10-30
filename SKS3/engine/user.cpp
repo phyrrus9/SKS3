@@ -186,7 +186,7 @@ void showhelp(void)
     << "To select a weapon, just use the keypad number of your choice" << endl
     << "Other commands used in the game are:" << endl
     << env.settings.keys.S << " - Save game                       " << env.settings.keys.R << "- Restore game" << endl
-    << "&S- Save to slot                    &R- Restore from slot      -- & denotes pressing alt(PC/linux) or option(osx)" << endl
+    << env.settings.keys.ss << "- Save to slot                     " << env.settings.keys.rs << "- Restore from slot" << endl
     << "o - View high scores                O - save your score" << endl
     << env.settings.keys.quit << " - Quit game                       N - New game" << endl
     << "p - Pause or unpause game           m - Start or stop music" << endl

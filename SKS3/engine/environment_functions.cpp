@@ -100,6 +100,8 @@ void environment_init(_environment &t)
     hiscore::get_scores();
     //settings stuff
     settings_init(t.settings);
+    //devel mode
+    t.developer_mode = false;
 }
 
 void weapons_init(weapons::weaponlist &t)
@@ -197,6 +199,8 @@ void settings_init(_settings & t)
     t.keys.l = 'l';
     t.keys.S = 'S';
     t.keys.R = 'R';
+    t.keys.ss = '@';
+    t.keys.rs = '#';
     t.keys.settings = '+';
     t.zombie.zombie_active = 4;
     settings_read();

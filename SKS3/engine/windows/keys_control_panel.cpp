@@ -117,6 +117,19 @@ void key_settings_window(void)
     env.settings.keys.R = getch();
     
     setdisplay(vin, " Key settings");
+    wprintw(vin, " Save slot key\n");
+    wprintw(vin, " Current: %c\n", env.settings.keys.ss);
+    wprintw(vin," New:");
+    wrefresh(vin);
+    env.settings.keys.ss = getch();
+    setdisplay(vin, " Key settings");
+    wprintw(vin, " Restore slot key\n");
+    wprintw(vin, " Current: %c\n", env.settings.keys.rs);
+    wprintw(vin," New:");
+    wrefresh(vin);
+    env.settings.keys.rs = getch();
+    
+    setdisplay(vin, " Key settings");
     wprintw(vin, " Attack key\n");
     wprintw(vin, " Current: %c\n", env.settings.keys.attack);
     wprintw(vin," New:");

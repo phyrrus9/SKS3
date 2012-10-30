@@ -67,10 +67,20 @@ void settings_window(void)
     char ch;
     while (true)
     {
+        wresize(vin, height, width);
         setdisplay(vin, " Control panel");
         wprintw(vin, " Please select the correct panel\n "
                      " 1.) Key control panel          \n "
-                     " 2.) Developer control panel    \n "
+                     " 2.)");
+        if (!env.developer_mode)
+        {
+            wprintw(vin, "*");
+        }
+        else
+        {
+            wprintw(vin, " ");
+        }
+        wprintw(vin,      "Developer control panel    \n "
                      " 3.) Back to game               \n\n "
                      " * denotes a disabled panel    \n ");
         wrefresh(vin);
@@ -83,7 +93,23 @@ void settings_window(void)
         }
         if (ch == '2')
         {
-            developer_settings_window();
+            if (!env.developer_mode)
+            {
+                werase(vin);
+                wresize(vin, 6, width);
+                setdisplay(vin, "              Error!            ");
+                wprintw(vin, " Sorry, developer mode is not yet\n");
+                wprintw(vin, " enabled for this game. To do so,\n");
+                wprintw(vin, " run the game with developer-mode ");
+                wrefresh(vin);
+                getch_();
+                werase(vin);
+                wrefresh(vin);
+            }
+            else
+            {
+                developer_settings_window();
+            }
         }
         if (ch == '3')
             break;

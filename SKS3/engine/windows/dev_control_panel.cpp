@@ -72,28 +72,70 @@ void developer_settings_window(void)
     wrefresh(vin);
     if (tmpc != 'Q')
     {
-        wresize(vin, height, width);
-        setdisplay(vin, " Developer settings");
-        wprintw(vin, " Enable cheats?\n");
-        wprintw(vin, " Old: %.1d\n", env.cheats);
-        wprintw(vin, " New: ");
-        wrefresh(vin);
-        tmpc = getch_();
-        env.cheats = tmpc - 48;
-        wrefresh(vin);
-        setdisplay(vin, " Developer settings");
-        wprintw(vin, " Enable fog?\n");
-        wprintw(vin, " Old: %.1d\n", env.showmap);
-        wprintw(vin, " New: ");
-        wrefresh(vin);
-        tmpc = getch_();
-        env.showmap = tmpc - 48;
-        wrefresh(vin);
-        setdisplay(vin, " Developer settings");
-        wprintw(vin, " Setup complete. Press any key to return\n");
-        wprintw(vin, " "); //so the cursor doesn't overwrite the | on the left side
-        wrefresh(vin);
-        getch();
+        while (tmpc != '3')
+        {
+            wresize(vin, height, width);
+            setdisplay(vin, " Developer settings");
+            wprintw(vin, " 1. Game settings\n");
+            wprintw(vin, " 2. Engine settings\n", env.cheats);
+            wprintw(vin, " 3. Return ");
+            wrefresh(vin);
+            tmpc = getch_();
+        
+            if (tmpc == '1')
+            {
+                setdisplay(vin, " Game settings");
+                wprintw(vin, " Enable cheats?\n");
+                wprintw(vin, " Old: %.1d\n", env.cheats);
+                wprintw(vin, " New: ");
+                wrefresh(vin);
+                tmpc = getch_();
+                env.cheats = tmpc - 48;
+                wrefresh(vin);
+                setdisplay(vin, " Developer settings");
+                wprintw(vin, " Enable fog?\n");
+                wprintw(vin, " Old: %.1d\n", env.showmap);
+                wprintw(vin, " New: ");
+                wrefresh(vin);
+                tmpc = getch_();
+                env.showmap = tmpc - 48;
+            }
+        
+            if (tmpc == '2')
+            {
+                while (tmpc != 'z')
+                {
+                    setdisplay(vin, " Engine settings");
+                    wprintw(vin, " a. Modify save file location\n");
+                    wprintw(vin, " z. Return to developer menu. ");
+                    wrefresh(vin);
+                    tmpc = getch_();
+                    if (tmpc == 'a')
+                    {
+                        wresize(vin, height + 1, width);
+                        char * tempstr = new char[30];
+                        setdisplay(vin, " Engine save file");
+                        wprintw(vin, " Current: %s\n", env.savefile.c_str());
+                        wprintw(vin, " Please enter a new name. You\n");
+                        wprintw(vin, " will not see this until pressing\n");
+                        wprintw(vin, " the enter key. ");
+                        wrefresh(vin);
+                        scanf("%s", tempstr);
+                        env.savefile = tempstr;
+                        delete tempstr;
+                        werase(vin);
+                        wrefresh(vin);
+                        wresize(vin, height, width);
+                        setdisplay(vin, " Engine save file");
+                        wprintw(vin, " Save file: %s\n", env.savefile.c_str());
+                        wprintw(vin, " Press any key to return\n ");
+                        wrefresh(vin);
+                        getch_();
+                        werase(vin);
+                    }
+                }
+            }
+        }
     }
     cldisplay(vin);
 }

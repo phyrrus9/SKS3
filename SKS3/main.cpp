@@ -94,6 +94,19 @@ int main(int argc, const char * argv[])
     resizeterm(181, 48);
     environment_init(env);
     long seed = time(0);
+    /* BEGIN DEVELOPER MODE CHECK */
+    if (argc > 1)
+    {
+        if (strcmp(argv[1], "developer-mode") == 0)
+        {
+            env.developer_mode = true;
+            if (argc > 2)
+            {
+                seed = atol(argv[2]);
+            }
+        }
+    }
+    /* END DEVELOPER MODE CHECK */
     clear();
     displaylauncher();
     cout << ">";
@@ -185,7 +198,7 @@ int main(int argc, const char * argv[])
     }
     if (selection >= 9 || selection <= 0)
         exit(EXIT_SUCCESS);
-    if (argc > 1)
+    if (argc > 1 && !env.developer_mode)
     {
         seed = atoi(argv[1]);
     }
@@ -351,12 +364,12 @@ void game(int argc, const char * argv[])
                 t = HSC_SAV;
                 _move;
             }
-            if (a == -97) //alt/option + s
+            if (a == env.settings.keys.ss)
             {
                 t = SAVS;
                 _move;
             }
-            if (a == -82) //alt/option + r
+            if (a == env.settings.keys.ss)
             {
                 t = RESS;
                 _move;

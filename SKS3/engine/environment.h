@@ -51,6 +51,7 @@ struct _keys
     char w, a, s, d;
     char i, j, k, l;
     char S, R;
+    char ss, rs;
     char settings;
 };
 
@@ -83,5 +84,6 @@ struct _environment
     game_timer timer;
     hiscore::score hiscorelist[hiscore::num_scores]; //all x high scores
     _settings settings;
+    bool developer_mode;
 };
 #endif
