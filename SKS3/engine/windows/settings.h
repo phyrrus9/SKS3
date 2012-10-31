@@ -41,6 +41,7 @@
 void settings_window(void);
 void key_settings_window(void);
 void developer_settings_window(void);
+void information_window(void);
 struct wpos
 {
     int x, y;

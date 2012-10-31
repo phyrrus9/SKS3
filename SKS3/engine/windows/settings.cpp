@@ -68,10 +68,10 @@ void settings_window(void)
     while (true)
     {
         wresize(vin, height, width);
-        setdisplay(vin, " Control panel");
-        wprintw(vin, " Please select the correct panel\n "
-                     " 1.) Key control panel          \n "
-                     " 2.)");
+        setdisplay(vin, "          Control panel    ");
+        wprintw(vin,    " Please select the correct panel\n "
+                        " 1.) Key control panel          \n "
+                        " 2.)");
         if (!env.developer_mode)
         {
             wprintw(vin, "*");
@@ -81,7 +81,8 @@ void settings_window(void)
             wprintw(vin, " ");
         }
         wprintw(vin,      "Developer control panel    \n "
-                     " 3.) Back to game               \n\n "
+                     " 3.) Developer information      \n "
+                     " 4.) Back to game               \n\n "
                      " * denotes a disabled panel    \n ");
         wrefresh(vin);
         ch = getch();
@@ -112,6 +113,10 @@ void settings_window(void)
             }
         }
         if (ch == '3')
+        {
+            information_window();
+        }
+        if (ch == '4')
             break;
         if (controlled)
             break;

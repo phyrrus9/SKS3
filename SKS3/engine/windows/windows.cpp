@@ -44,7 +44,8 @@ void setdisplay(WINDOW * w, const char * title)
     wclear(w);
     wprintw(w, "\n%s\n", title);
     //box(w, '|', 0);
-    wborder(w, '|', '|', '-', '-', '+', '+', '+', '+');
+    wborder(  w, 0  , 0  , 0  , 0  , 0  , 0  , 0  , 0  );
+    //wborder(w, '|', '|', '-', '-', '+', '+', '+', '+');
     wrefresh(w);
 }
 

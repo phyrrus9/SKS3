@@ -13,6 +13,7 @@
 		4A1F20F315A8FB7900982D5F /* zombie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A1F20F115A8FB7900982D5F /* zombie.cpp */; };
 		4A35A0AF157E5F03006EB744 /* libncurses.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A35A0AE157E5F03006EB744 /* libncurses.dylib */; };
 		4A748946158277F80048CFF8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A748945158277F80048CFF8 /* main.cpp */; };
+		4AB58230164176EB003AEC4D /* information_control_panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5822F164176EB003AEC4D /* information_control_panel.cpp */; };
 		4ABF2DBE15A7936C008E7535 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ABF2DBD15A7936C008E7535 /* main.cpp */; };
 		4ABF2DE115A79EE3008E7535 /* sks4200.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ABF2DDF15A79EE3008E7535 /* sks4200.cpp */; };
 		4AC30A1415E71B7E005F767F /* settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AC30A1215E71B7E005F767F /* settings.cpp */; };
@@ -53,6 +54,7 @@
 		4A35A0AE157E5F03006EB744 /* libncurses.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libncurses.dylib; path = usr/lib/libncurses.dylib; sourceTree = SDKROOT; };
 		4A748945158277F80048CFF8 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4A86878C159686E4001FF5E0 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		4AB5822F164176EB003AEC4D /* information_control_panel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = information_control_panel.cpp; sourceTree = "<group>"; };
 		4ABF2DBD15A7936C008E7535 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4ABF2DDF15A79EE3008E7535 /* sks4200.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sks4200.cpp; path = sks4200/sks4200.cpp; sourceTree = "<group>"; };
 		4ABF2DE015A79EE3008E7535 /* sks4200.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sks4200.h; path = sks4200/sks4200.h; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				4AC30A1615E7CE3E005F767F /* keys_control_panel.cpp */,
 				4AC30A1815E7CEAC005F767F /* dev_control_panel.cpp */,
 				4AC30A1315E71B7E005F767F /* settings.h */,
+				4AB5822F164176EB003AEC4D /* information_control_panel.cpp */,
 			);
 			path = windows;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				4AC30A1715E7CE3E005F767F /* keys_control_panel.cpp in Sources */,
 				4AC30A1915E7CEAD005F767F /* dev_control_panel.cpp in Sources */,
 				4AC30A1B15E7DF4E005F767F /* windows.cpp in Sources */,
+				4AB58230164176EB003AEC4D /* information_control_panel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
