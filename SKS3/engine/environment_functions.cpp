@@ -102,6 +102,8 @@ void environment_init(_environment &t)
     settings_init(t.settings);
     //devel mode
     t.developer_mode = false;
+    //simple score mod
+    t.score_multiplier = 1;
 }
 
 void weapons_init(weapons::weaponlist &t)

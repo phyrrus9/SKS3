@@ -47,3 +47,4 @@ extern void music_stop(void);
 int main(int argc, const char * argv[]); //main function
 void game(int argc, const char * argv[]); //the game itself
 void displaylauncher(void); //shows the main menu selection
+void selectdifficulty(void); //select some environment options

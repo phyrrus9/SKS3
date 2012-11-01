@@ -75,7 +75,7 @@ struct _environment
     bool showmap, single, cheats, zombies_do_damage, refresh_screen, allow_refresh;
     bool weapons[weapons::num_of_weapons];
     int health, lives, score, position, moves, kills, kills_needed, total_enemies, levels_completed, attack,
-    totalscore, selectedweapon, min_zombie_does_damage_level, keys, number_of_songs, current_song, zombies;
+    totalscore, selectedweapon, min_zombie_does_damage_level, keys, number_of_songs, current_song, zombies, score_multiplier;
     std::string savefile;
     color bgcolor, playercolor, statuscolor;
     character::player player;

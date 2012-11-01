@@ -93,34 +93,34 @@ void eat(int p)
     if (env.map[p] == '%')
     {
         env.health -= 5;
-        env.score += targetnoms::SMALLBUG;
+        env.score += targetnoms::SMALLBUG * env.score_multiplier;
         ate = true;
         attack_color_change();
     }
     if (env.map[p] == '&')
     {
         env.health -= 4;
-        env.score += targetnoms::LARGEBUG;
+        env.score += targetnoms::LARGEBUG * env.score_multiplier;
         ate = true;
         attack_color_change();
     }
     if (env.map[p] == '$')
     {
         env.health -= 3;
-        env.score += targetnoms::WORM;
+        env.score += targetnoms::WORM * env.score_multiplier;
         ate = true;
         attack_color_change();
     }
     if (env.map[p] == '!')
     {
         env.health -= 25;
-        env.score += targetnoms::PITBULL;
+        env.score += targetnoms::PITBULL * env.score_multiplier;
         ate = true;
         attack_color_change();
     }
     if (env.map[p] == 'z')
     {
-        env.score += 5; //yes, I know its cheap
+        env.score += 5 * env.score_multiplier; //yes, I know its cheap
                         //but it has to be done
         attack_color_change();
         ate = true;

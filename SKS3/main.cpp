@@ -125,14 +125,15 @@ int main(int argc, const char * argv[])
     }
     if (selection == 1 || selection == 2)
     {
-        int difficulty_selection = 0;
-        while (difficulty_selection < 1 || difficulty_selection > 2)
+        int difficulty_selection = 1; //patch for difficulty selections
+        //while (difficulty_selection < 1 || difficulty_selection > 2)
         {
-            cout << "Please select a difficulty:" << endl
+            selectdifficulty();
+            /*cout << "Please select a difficulty:" << endl
                 << "1. Normal (1x damage and strength)" << endl
                 << "2. Hard   (2x damage and strength)" << endl
                 << "--> Hard also has around 2.5x more enemies" << endl;
-            cin >> difficulty_selection;
+            cin >> difficulty_selection;*/
         }
         env.difficulty = (character::difficulty)(difficulty_selection - 1);
     }
@@ -456,6 +457,168 @@ void game(int argc, const char * argv[])
         }
     }
     return;
+}
+
+void selectdifficulty(void)
+{
+    /*
+     * Select the difficulty to play the game at. Very simple
+     * function that uses ncurses windows to accomplish the
+     * goal. Added in version 2.0, will be used instead of
+     * the old system (of just 1 and 2) but will probably
+     * at some point add support for the overseed in that
+     * system for something like a level 6. Though at level
+     * 6 you would only last 2 moves.
+     */
+    
+    WINDOW *vin;
+    initscr();
+    refresh();
+    noecho();
+    int height = 11, width = 60;
+    int starty = (LINES - height) / 2;	/* Calculating for a center placement */
+	int startx = (COLS - width) / 2;	/* of the window		*/
+    vin=newwin(height,width,starty,startx);
+    wmove(vin,0,0);
+    char c;
+    bool finished = false;
+    while (!finished)
+    {
+        wclear(vin);
+        setdisplay(vin, " Select difficulty");
+        wprintw(vin, " Please select a difficulty. Press i# for information\n or press Q to exit\n");
+        wprintw(vin," 1. Easy\n"
+                    " 2. Normal\n"
+                    " 3. Hard\n"
+                    " 4. Insane\n"
+                    " 5. Good luck!\n");
+        wprintw(vin, " :");
+        wrefresh(vin);
+        c = getch_();
+        if (c == 'Q')
+        {
+            _exit(1);
+        }
+        if (c == '1')
+        {
+            env.lives = 5;
+            env.health = 100;
+            env.zombies_do_damage = false;
+            env.min_zombie_does_damage_level = 100;
+            finished = true;
+        }
+        if (c == '2')
+        {
+            env.lives = 3;
+            env.health = 100;
+            env.zombies_do_damage = true;
+            env.zombies_do_damage = 5;
+            finished = true;
+        }
+        if (c == '3')
+        {
+            env.lives = 2;
+            env.health = 50;
+            env.zombies_do_damage = true;
+            env.min_zombie_does_damage_level = 2;
+            env.score_multiplier = 2;
+            finished = true;
+        }
+        if (c == '4')
+        {
+            env.lives = 1;
+            env.health = 100;
+            env.zombies_do_damage = true;
+            env.min_zombie_does_damage_level = 0;
+            env.score_multiplier = 3;
+            finished = true;
+        }
+        if (c == '5')
+        {
+            env.lives = 0;
+            env.health = 100;
+            env.zombies_do_damage = true;
+            env.min_zombie_does_damage_level = 0;
+            env.score_multiplier = 5;
+            finished = true;
+        }
+        if (c == 'i')
+        {
+            wclear(vin);
+            setdisplay(vin, " Information");
+            wprintw(vin, " Please give the difficulty number\n :");
+            wrefresh(vin);
+            c = getch_();
+            wclear(vin);
+            setdisplay(vin, " Information");
+            switch (c)
+            {
+                    /*
+                     * Test switch for information. If you are
+                     * wondering what the %% is for, the wprintw
+                     * statements work like printf and "% " prints
+                     * a null character. "%%" prints "%"
+                     */
+                    
+                case '1':
+                    wprintw(vin," Level 1: Easy\n"
+                            " This level is the simplest of the five levels\n"
+                            " because it gives you the following:\n"
+                            " 1. 5 spare lives\n"
+                            " 2. 100%% Health\n"
+                            " 3. No zombie damage (ever)\n");
+                    wprintw(vin, " Press any key to return. ");
+                    wrefresh(vin);
+                    getch_();
+                    break;
+                case '2':
+                    wprintw(vin," Level 2: Normal\n"
+                            " With this level, you get the following:\n"
+                            " 1. 3 spare lives\n"
+                            " 2. 100%% Health\n"
+                            " 3. No zombie damage until level 5\n");
+                    wprintw(vin, " Press any key to return. ");
+                    wrefresh(vin);
+                    getch_();
+                    break;
+                case '3':
+                    wprintw(vin," Level 3: Hard\n"
+                            " With this level, you get the following:\n"
+                            " 1. 2 spare lives\n"
+                            " 2. 50%% Health\n"
+                            " 3. No zombie damage until level 2\n"
+                            " 4. Score multiplier of x2\n");
+                    wprintw(vin, " Press any key to return. ");
+                    wrefresh(vin);
+                    getch_();
+                    break;
+                case '4':
+                    wprintw(vin," Level 4: Insane\n"
+                            " With this level, you get the following:\n"
+                            " 1. 2 spare lives\n"
+                            " 2. 100%% Health\n"
+                            " 3. Zombies always do damage\n"
+                            " 4. Score multiplier of x3\n");
+                    wprintw(vin, " Press any key to return. ");
+                    wrefresh(vin);
+                    getch_();
+                    break;
+                case '5':
+                    wprintw(vin," Level 5: Good luck!\n"
+                            " With this level, you get the following:\n"
+                            " 1. 0 spare lives\n"
+                            " 2. 100%% Health\n"
+                            " 3. Zombies always do damage\n"
+                            " 4. Score multiplier of x5\n");
+                    wprintw(vin, " You probably will not make it past 3 levels\n");
+                    wprintw(vin, " Press any key to return. ");
+                    wrefresh(vin);
+                    getch_();
+                    break;
+            }
+        }
+    }
+    endwin();
 }
 
 void displaylauncher(void)
