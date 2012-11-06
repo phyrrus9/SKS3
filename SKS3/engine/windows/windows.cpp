@@ -61,3 +61,25 @@ void cldisplay(WINDOW * w)
     wrefresh(w);
     refresh();
 }
+
+char wpopuperror(const char * title, const char * text, int height, int width)
+{
+    WINDOW *vin;
+    initscr();
+    refresh();
+    noecho(); //no echo on getch
+    height = height + 3; //3 lines for title bar and such
+    width = width + 4; //for the padding
+    int starty = (LINES - height) / 2;	/* Calculating for a center placement */
+	int startx = (COLS - width) / 2;	/* of the window		*/
+    vin=newwin(height,width,starty,startx);
+    setdisplay(vin, title);
+    wprintw(vin, text);
+    wrefresh(vin);
+    char c = getch_();
+    wclear(vin);
+    werase(vin);
+    cldisplay(vin);
+    endwin();
+    return c;
+}

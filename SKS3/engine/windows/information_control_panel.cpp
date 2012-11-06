@@ -28,8 +28,9 @@
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
  =================================================================
- File: windows/keys_control_panel.cpp
- Description: Code for the keys configuration control panel.
+ File: windows/information_control_panel.cpp
+ Description: Code to display some information about the developer
+ control panel. This is not anything that can be configured.
  Authors: phyrrus9 <phyrrus9@gmail.com>
  the GNU Project (ncurses)
  *****************************************************************/

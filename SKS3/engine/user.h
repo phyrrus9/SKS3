@@ -39,6 +39,7 @@
 #define user_h
 void showhelp(void); //shows the help screen
 void display(void); //shows the bar at top of screen
+void display_v3(void); //ncurses version of display (enginev3)
 void multidisplay(void); //for multiplayer
 void enginecmd_display(void);
 void about_zombie(void);

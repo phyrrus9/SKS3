@@ -43,6 +43,7 @@
  *****************************************************************/
 #include "settings.h"
 
+using namespace phyrrus9::nwin;
 void settings_window(void)
 {
     /*
@@ -54,15 +55,14 @@ void settings_window(void)
      * will be written to disk.
      */
     
+    pause();
     bool controlled = false;
     WINDOW *vin;
     initscr();
     refresh();
     noecho(); //no echo on getch
-    int height = 10, width = 35;
-    int starty = (LINES - height) / 2;	/* Calculating for a center placement */
-	int startx = (COLS - width) / 2;	/* of the window		*/
-    vin=newwin(height,width,starty,startx);
+    int height = 11, width = 35;
+    vin = phyrrus9::nwin::wcreatewin(height, width);//newwin(height,width,starty,startx);
     wmove(vin, 0, 0);
     char ch;
     while (true)
@@ -82,7 +82,8 @@ void settings_window(void)
         }
         wprintw(vin,      "Developer control panel    \n "
                      " 3.) Developer information      \n "
-                     " 4.) Back to game               \n\n "
+                     " 4.) Move save file to save.dat \n "
+                     " 5.) Back to game               \n\n "
                      " * denotes a disabled panel    \n ");
         wrefresh(vin);
         ch = getch();
@@ -96,14 +97,35 @@ void settings_window(void)
         {
             if (!env.developer_mode)
             {
-                werase(vin);
-                wresize(vin, 6, width);
+                if (!env.can_enable_developer_mode)
+                {
+                    wresizewindow(vin, 6, width);
+                }
+                else
+                {
+                    wresizewindow(vin, 7, width);
+                }
                 setdisplay(vin, "              Error!            ");
                 wprintw(vin, " Sorry, developer mode is not yet\n");
                 wprintw(vin, " enabled for this game. To do so,\n");
                 wprintw(vin, " run the game with developer-mode ");
+                if (env.can_enable_developer_mode)
+                {
+                    wprintw(vin, "\n To enable this, press 1 now ");
+                }
                 wrefresh(vin);
-                getch_();
+                char dc = getch_();
+                if (dc == '1' && env.can_enable_developer_mode)
+                {
+                    env.developer_mode = true;
+                    wresizewindow(vin, 4, 30);
+                    setdisplay(vin, "        Developer mode");
+                    wprintw(vin,    " Developer mode was enabled. ");
+                    wrefresh(vin);
+                    getch_();
+                    werase(vin);
+                    wrefresh(vin);
+                }
                 werase(vin);
                 wrefresh(vin);
             }
@@ -117,8 +139,30 @@ void settings_window(void)
             information_window();
         }
         if (ch == '4')
+        {
+            uiwindow w;
+            int _h = 4, _w = 35;
+            w.resize(_h, _w);
+            w.setborder(true);
+            w.title("Save file move");
+            w.print("|Please enter your save number ");
+            w.refresh();
+            std::string file = select_slot(char_int(getch_()));
+            std::string command = "cp ";
+            command += file;
+            command += " ./save.dat";
+            system(command.c_str());
+            w.empty();
+            w.title("Save file moved");
+            w.print("|Your savefile was moved! ");
+            w.refresh();
+            getch_();
+            w.empty();
+        }
+        if (ch == '5')
             break;
         if (controlled)
             break;
     }
+    unpause();
 }

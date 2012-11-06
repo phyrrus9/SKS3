@@ -103,6 +103,8 @@ class music_thread : public tpool::Thread
         numberlist >> env.number_of_songs; //read it
         ifstream * songs = new ifstream[env.number_of_songs];
         song * songslist = new song[env.number_of_songs];
+        int last_song = -1;
+        env.current_song = -1;
         //if (env.number_of_songs == 0)
         {
             for (int i = 0; i < env.number_of_songs && !failed; i++)
@@ -131,11 +133,13 @@ class music_thread : public tpool::Thread
             {
                 while (env.current_song < env.number_of_songs)
                 {
+                    while (env.current_song == last_song)
+                        env.current_song = rand() % env.number_of_songs;
                     if (env.music)
                         play_music(songslist[env.current_song].command);
                     if (env.music)
                         sleep(songslist[env.current_song].length);
-                    env.current_song++;
+                    //env.current_song++;
                 }
                 env.current_song = 0; //restart the loop every time
             }
@@ -152,6 +156,7 @@ void showhelp(void)
      */
     clear();
     env.allow_refresh = false;
+    pause(); //so we don't run the timer
     //env.music = true; //ensure it actually starts //nevermind....
     cout << "Super Key Seeker 3 - Copyright © 2012 phyrrus9 <phyrrus9@gmail.com>" << endl
     << "This game is copyright to Ethan laur(phyrrus9) under modtech LLC" << endl
@@ -232,6 +237,7 @@ void showhelp(void)
         music_start();
     }
     //delete &c; //gets rid of unused var warning //nevermind: SKS3(19240) malloc: *** error for object 0x7fff655e69f7: pointer being freed was not allocated
+    unpause();
     env.allow_refresh = true;
 }
 void display(void)
@@ -246,7 +252,19 @@ void display(void)
     colorify(env.statuscolor);
     cout << setfill(' ') << left
         << setw(13) << VERSION_BUILD
-        << setw(7) << "Health:" << setw(5) << env.health << setw(7)
+        << setw(7) << "Health:";
+        colorify(GREEN);
+        if (env.health < 75)
+        {
+            colorify(BLUE);
+        }
+        if (env.health < 50)
+        {
+            colorify(RED);
+        }
+        cout << setw(5) << env.health;
+        colorify(env.statuscolor);
+        cout << setw(7)
         << "Lives:" << setw(4) << env.lives <<
         setw(7) << "Kills:" << setw(3) << right << env.kills << setw(1) << "/" << setw(4) << left << env.kills_needed
         << setw(6) << "Keys:" << setw(5) << env.keys
@@ -256,16 +274,109 @@ void display(void)
         << setw(7) << "Attack:"
         << setw(3) << env.attack
         << setw(8) << "Weapon:" << setw(5) << (env.attack * (t.strength[env.selectedweapon]))
-        << setw(7) << setprecision(6) << fixed << "Score:" << setw(8) << env.totalscore
-        << setw(6) << "Time:" << right << setw(2) << setprecision(2) << setfill('0') << env.timer.minute << ":" << right << setw(2) << env.timer.second << setfill(' ') << left << setw(5) << " "
+        << setw(7) << setprecision(6) << fixed << "Score:";
+        if (env.totalscore > 0)
+        {
+            colorify(RED);
+        }
+        if (env.totalscore > COMPETITION_MIN)
+        {
+            colorify(BLUE);
+        }
+        if (env.totalscore > COMPETITION_MAX)
+        {
+            colorify(GREEN);
+        }
+        cout << setw(8) << env.totalscore;
+        colorify(env.statuscolor);
+        cout << setw(6) << "Time:" << right << setw(2) << setprecision(2) << setfill('0') << env.timer.minute << ":" << right << setw(2) << env.timer.second << setfill(' ') << left << setw(5) << " "
         << setw(9) << "Weapons:";
     showweapons();
+    if (env.competition_mode)
+    {
+        if (env.totalscore < COMPETITION_MIN)
+        {
+            colorify(RED);
+        }
+        else
+        {
+            colorify(GREEN);
+        }
+        cout << " C";
+        colorify(env.statuscolor);
+    }
     cout << endl;
     multidisplay();
     colorify();
     if (env.paused)
         cout << "Paused..." << endl;
 }
+void displayv3(void)
+{
+    initscr();
+    refresh();
+    noecho();
+    uiwindow w;
+    w.resize(3, 70);
+    w.refresh();
+    weapons::weaponlist t;
+    weapons_init(t);
+    colorify(env.statuscolor);
+    w.print("%13s Health:", VERSION_BUILD);
+    colorifyv3(w, GREEN);
+    if (env.health < 75)
+    {
+        colorifyv3(w, BLUE);
+    }
+    if (env.health < 50)
+    {
+        colorifyv3(w, RED);
+    }
+    w.print("%5d", env.health);
+    colorifyv3(w, env.statuscolor);
+    w.print("Lives: %4d Kills: %3d/%4d ", env.lives, env.kills, env.kills_needed);
+    w.print("Keys: %5w ", env.keys);
+    w.print("Levels completed: %5d\n\r ", env.levels_completed);
+    w.print("Attack: %3d Weapon: %5d ", env.attack, (env.attack * (t.strength[env.selectedweapon])));
+    w.print("Score: ");
+    if (env.totalscore > 0)
+    {
+        colorifyv3(w, RED);
+    }
+    if (env.totalscore > COMPETITION_MIN)
+    {
+        colorifyv3(w, BLUE);
+    }
+    if (env.totalscore > COMPETITION_MAX)
+    {
+        colorifyv3(w, GREEN);
+    }
+    w.print("%8d ", env.totalscore);
+    colorifyv3(w, env.statuscolor);
+    w.print("Time: %02d:%02d ", env.timer.minute, env.timer.second);
+    w.print("Weapons: ");
+    showweaponsv3(w);
+    if (env.competition_mode)
+    {
+        if (env.totalscore < COMPETITION_MIN)
+        {
+            colorifyv3(w, RED);
+        }
+        else
+        {
+            colorifyv3(w, GREEN);
+        }
+        w.print(" C");
+        colorifyv3(w, env.statuscolor);
+    }
+    w.print("\n");
+    //multidisplay();
+    colorifyv3(w);
+    if (env.paused)
+        w.print("Paused...\n");
+    endwin();
+}
+
 void multidisplay(void)
 {
     /*

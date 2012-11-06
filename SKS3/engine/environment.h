@@ -66,6 +66,13 @@ struct _settings
     _zombie zombie;
 };
 
+struct _competition
+{
+    int number;
+    char username[30];
+    char password[30];
+};
+
 struct _environment
 {
     char version[25];
@@ -84,6 +91,10 @@ struct _environment
     game_timer timer;
     hiscore::score hiscorelist[hiscore::num_scores]; //all x high scores
     _settings settings;
-    bool developer_mode;
+    //new as of engine v3
+    bool developer_mode, can_enable_developer_mode;
+    bool competition_mode;
+    _competition competition;
+    bool allow_autosave;
 };
 #endif

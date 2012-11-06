@@ -35,10 +35,13 @@
 #include "engine.h"
 #ifndef filesystem_h
 #define filesystem_h
+#include <string.h>
+void autosave(void); //save to save slot 1
 void restore_slot(void); //restore slot
+std::string select_slot(int); //select saveslot
 void save_slot(void); //save slot
-void save(void);
-void restore(void);
+void save(void);//depricated (used in contest verification)
+void restore(void); //depricated (used in contest verification)
 void small_delay(void); //make a really small delay so we can print stuff
 void settings_write(void);
 void settings_read(void);

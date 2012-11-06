@@ -288,13 +288,14 @@ void move(direction d)
     d(RESS)
         restore_slot();
     d(RES)
-        restore();
+        restore_slot();
     d(QUI)
     {
         server_end(); //disconnect and unbind the socket
         colorify(NORMAL); //un-colorify
         if (env.music)
             kill_music("killall afplay"); //kill the music
+        wpopuperror(" Program exit", " Your game is now closed.\n Press any key to close. ", 2, 24);
         exit(EXIT_SUCCESS);
     }
     d(HLP)

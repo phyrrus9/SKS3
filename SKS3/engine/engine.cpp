@@ -89,6 +89,20 @@ void colorify(void)
     if (c == NORMAL)
         cout << "\33[0m";
 }
+void colorifyv3(uiwindow w) /*broken*/
+{
+    init_pair(1, COLOR_RED, COLOR_BLACK);
+    attroff(COLOR_PAIR(1));
+    color c = env.bgcolor;
+    if (c == RED)
+       w.print("\33[31m");
+    if (c == BLUE)
+        w.print("\33[34m");
+    if (c == GREEN)
+        w.print("\33[32m");
+    if (c == NORMAL)
+        w.print("\33[0m");
+}
 void colorify(color c)
 {
     /*
@@ -113,6 +127,21 @@ void colorify(color c)
     if (c == BORDER)
         cout << "\33[32m";
 }
+void colorifyv3(uiwindow w, color c)/*broken*/
+{
+    start_color();
+    init_pair(1, COLOR_RED, COLOR_BLACK);
+    attron(COLOR_PAIR(1));
+    refresh();
+    if (c == RED)
+        w.print("\33[31m");
+    if (c == BLUE)
+        w.print("\33[34m");
+    if (c == GREEN)
+        w.print("\33[32m");
+    if (c == NORMAL)
+        w.print("\33[0m");
+}
 void enginecmd(string c, string d)
 {
     /*
@@ -127,7 +156,7 @@ void enginecmd(string c, string d)
     if (c == "env->cheats")
     {
         extern bool multiplayer; //in main.cpp
-        if (!multiplayer)
+        if (!multiplayer && !env.competition_mode)
         {
             env.cheats = atoi(d.c_str());
         }

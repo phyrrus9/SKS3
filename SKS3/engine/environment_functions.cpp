@@ -100,10 +100,17 @@ void environment_init(_environment &t)
     hiscore::get_scores();
     //settings stuff
     settings_init(t.settings);
+    
     //devel mode
     t.developer_mode = false;
     //simple score mod
     t.score_multiplier = 1;
+    //more devel mode stuff
+    t.can_enable_developer_mode = false;
+    //prevent competition cheating
+    t.competition_mode = false;
+    //autosaves
+    t.allow_autosave = true;
 }
 
 void weapons_init(weapons::weaponlist &t)
@@ -181,6 +188,7 @@ void game_timer_increment(game_timer & t)
     if (t.second >= 60)
     {
         t.minute++;
+        autosave();
         t.second = t.second - 60;
     }
 }
@@ -206,4 +214,10 @@ void settings_init(_settings & t)
     t.keys.settings = '+';
     t.zombie.zombie_active = 4;
     settings_read();
+}
+
+void competition_init(_competition &t)
+{
+    t.number = 0;
+    strcpy(t.password, "inactive");
 }

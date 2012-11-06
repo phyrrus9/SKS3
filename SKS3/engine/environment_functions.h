@@ -43,4 +43,5 @@ void weapons_init(weapons::weaponlist &); //initializes all the weapons stuff, f
 void game_timer_init(game_timer &); //initializes the game timer with double zeros.
 void game_timer_increment(game_timer&); //adds one second
 void settings_init(_settings &); //initialize the game settings
+void competition_init(_competition &); //initialize competition stuff
 #endif

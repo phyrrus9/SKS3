@@ -50,9 +50,7 @@ void developer_settings_window(void)
     noecho();
     int height = 6, width = 42;
     int wheight = 11, wwidth = 42;
-    int starty = (LINES - height) / 2;	/* Calculating for a center placement */
-	int startx = (COLS - width) / 2;	/* of the window		*/
-    vin=newwin(wheight,wwidth,starty,startx);
+    vin = phyrrus9::nwin::wcreatewin(wheight, wwidth);
     wmove(vin,0,0);
     char tmpc;
     //first, before we can allow this to happen we need to display
@@ -68,13 +66,11 @@ void developer_settings_window(void)
                  " proceed, press any other key.");
     wrefresh(vin);
     tmpc = getch_();
-    werase(vin);
-    wrefresh(vin);
     if (tmpc != 'Q')
     {
         while (tmpc != '3')
         {
-            wresize(vin, height, width);
+            phyrrus9::nwin::wresizewindow(vin, height, width);
             setdisplay(vin, " Developer settings");
             wprintw(vin, " 1. Game settings\n");
             wprintw(vin, " 2. Engine settings\n", env.cheats);
@@ -105,14 +101,21 @@ void developer_settings_window(void)
             {
                 while (tmpc != 'z')
                 {
+                    phyrrus9::nwin::wresizewindow(vin, height + 2, width);
                     setdisplay(vin, " Engine settings");
                     wprintw(vin, " a. Modify save file location\n");
+                    wprintw(vin, " b. Modify map location\n");
+                    wprintw(vin, " y. Disable developer mode\n");
                     wprintw(vin, " z. Return to developer menu. ");
                     wrefresh(vin);
                     tmpc = getch_();
+                    werase(vin);
+                    wrefresh(vin);
+                    wresize(vin, height, width);
+                    wrefresh(vin);
                     if (tmpc == 'a')
                     {
-                        wresize(vin, height + 1, width);
+                        phyrrus9::nwin::wresizewindow(vin, height + 1, width);
                         char * tempstr = new char[30];
                         setdisplay(vin, " Engine save file");
                         wprintw(vin, " Current: %s\n", env.savefile.c_str());
@@ -132,10 +135,52 @@ void developer_settings_window(void)
                         wrefresh(vin);
                         getch_();
                         werase(vin);
+                        wrefresh(vin);
+                        wresize(vin, height, width);
+                        wrefresh(vin);
+                    }
+                    
+                    if (tmpc == 'b')
+                    {
+                        setdisplay(vin, " Modify map location");
+                        wprintw(vin, " Please enter the map location\n :");
+                        wrefresh(vin);
+                        int _location;
+                        cin >> _location;
+                        setdisplay(vin, " Modify map location");
+                        wprintw(vin, " Map location: %d\n", _location);
+                        wprintw(vin, " Current value: %c\n", env.map[_location]);
+                        wprintw(vin, " New value: ");
+                        wrefresh(vin);
+                        env.map[_location] = getch_();
+                        setdisplay(vin, " Map location modified");
+                        wprintw(vin, " Map position: %d\n", _location);
+                        wprintw(vin, " Value: %c\n", env.map[_location]);
+                        wprintw(vin, " Press any key to return... ");
+                        wrefresh(vin);
+                        getch_();
+                        werase(vin);
+                    }
+                    
+                    if (tmpc == 'y')
+                    {
+                        setdisplay(vin, " Disable developer mode");
+                        wprintw(vin, " Are you sure you want to do this?\n");
+                        wprintw(vin, " Please enter 1 (yes) or 0 (no)\n");
+                        wprintw(vin, " :");
+                        wrefresh(vin);
+                        char c = getch_();
+                        if (c == '1')
+                        {
+                            env.developer_mode = false;
+                            env.can_enable_developer_mode = true;
+                        }
                     }
                 }
+                werase(vin);
             }
         }
     }
+    werase(vin);
     cldisplay(vin);
 }

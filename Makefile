@@ -1,5 +1,5 @@
-all:
-	@echo "You must make either osx, linux, sks4200, release, or clean"
+all: linux
+	@echo "Done!"
 clean:
 	rm -rf ./Binaries
 	rm -rf ./build
@@ -12,7 +12,7 @@ osx:
 	rm -rf Build
 linux:
 	mkdir -p ./Binaries
-	g++ ./SKS3/main.cpp ./SKS3/engine/*.cpp ./SKS3/engine/windows/*.cpp  ./SKS3/ks4200/*.cpp ./SKS3/sks4200/sks4200.cpp ./SKS3/engine/streamlib/stream.a -lncurses -pthread -o ./Binaries/sks3	
+	g++ ./SKS3/main.cpp ./SKS3/engine/*.cpp ./SKS3/engine/windows/*.cpp  ./SKS3/ks4200/*.cpp ./SKS3/sks4200/sks4200.cpp ./SKS3/engine/streamlib/stream.a ./SKS3/engine/nwin/libnwin.a -lncurses -pthread -o ./Binaries/sks3	
 install:
 	sudo cp ./Binaries/* /usr/bin
 	sudo mkdir -p /usr/share/sks3

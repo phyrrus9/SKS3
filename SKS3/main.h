@@ -39,6 +39,7 @@
 #include "engine/hiscore.h"
 #include "sks4200/sks4200.h"
 #include "ks4200/ks4200.h"
+#include <signal.h>
 #define _move moving = true
 extern _environment env; //fixes issues with xcode compilations
 //external functions to control the background music threads
@@ -46,5 +47,5 @@ extern void music_start(void);
 extern void music_stop(void);
 int main(int argc, const char * argv[]); //main function
 void game(int argc, const char * argv[]); //the game itself
-void displaylauncher(void); //shows the main menu selection
+int displaylauncher(long &); //shows the main menu selection
 void selectdifficulty(void); //select some environment options

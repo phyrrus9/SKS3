@@ -12,7 +12,10 @@
 		4A11A4E315DB4DFE001057FF /* hiscore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A11A4E115DB4DFE001057FF /* hiscore.cpp */; };
 		4A1F20F315A8FB7900982D5F /* zombie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A1F20F115A8FB7900982D5F /* zombie.cpp */; };
 		4A35A0AF157E5F03006EB744 /* libncurses.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A35A0AE157E5F03006EB744 /* libncurses.dylib */; };
+		4A4A8FAD164402E100CC5B47 /* stream.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4A8FAC164402E100CC5B47 /* stream.a */; };
+		4A4A8FB01644032E00CC5B47 /* libnwin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4A8FAF1644032E00CC5B47 /* libnwin.a */; };
 		4A748946158277F80048CFF8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A748945158277F80048CFF8 /* main.cpp */; };
+		4A8B431416487AAD00CDA50C /* uinterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B431216487AAC00CDA50C /* uinterface.cpp */; };
 		4AB58230164176EB003AEC4D /* information_control_panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5822F164176EB003AEC4D /* information_control_panel.cpp */; };
 		4ABF2DBE15A7936C008E7535 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ABF2DBD15A7936C008E7535 /* main.cpp */; };
 		4ABF2DE115A79EE3008E7535 /* sks4200.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ABF2DDF15A79EE3008E7535 /* sks4200.cpp */; };
@@ -20,7 +23,6 @@
 		4AC30A1715E7CE3E005F767F /* keys_control_panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AC30A1615E7CE3E005F767F /* keys_control_panel.cpp */; };
 		4AC30A1915E7CEAD005F767F /* dev_control_panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AC30A1815E7CEAC005F767F /* dev_control_panel.cpp */; };
 		4AC30A1B15E7DF4E005F767F /* windows.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AC30A1A15E7DF4E005F767F /* windows.cpp */; };
-		4AC30A4715EC27DC005F767F /* stream.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC30A4615EC27DC005F767F /* stream.a */; };
 		4AE9022B15A4888A0079BAAF /* attack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9021D15A4888A0079BAAF /* attack.cpp */; };
 		4AE9022C15A4888A0079BAAF /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9021F15A4888A0079BAAF /* engine.cpp */; };
 		4AE9022D15A4888A0079BAAF /* filesystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AE9022315A4888A0079BAAF /* filesystem.cpp */; };
@@ -52,8 +54,12 @@
 		4A1F20F115A8FB7900982D5F /* zombie.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = zombie.cpp; sourceTree = "<group>"; };
 		4A1F20F215A8FB7900982D5F /* zombie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zombie.h; sourceTree = "<group>"; };
 		4A35A0AE157E5F03006EB744 /* libncurses.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libncurses.dylib; path = usr/lib/libncurses.dylib; sourceTree = SDKROOT; };
+		4A4A8FAC164402E100CC5B47 /* stream.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = stream.a; path = SKS3/engine/streamlib/stream.a; sourceTree = "<group>"; };
+		4A4A8FAF1644032E00CC5B47 /* libnwin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnwin.a; path = SKS3/engine/nwin/libnwin.a; sourceTree = "<group>"; };
 		4A748945158277F80048CFF8 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4A86878C159686E4001FF5E0 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		4A8B431216487AAC00CDA50C /* uinterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uinterface.cpp; sourceTree = "<group>"; };
+		4A8B431316487AAC00CDA50C /* uinterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uinterface.h; sourceTree = "<group>"; };
 		4AB5822F164176EB003AEC4D /* information_control_panel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = information_control_panel.cpp; sourceTree = "<group>"; };
 		4ABF2DBD15A7936C008E7535 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4ABF2DDF15A79EE3008E7535 /* sks4200.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sks4200.cpp; path = sks4200/sks4200.cpp; sourceTree = "<group>"; };
@@ -65,7 +71,6 @@
 		4AC30A1815E7CEAC005F767F /* dev_control_panel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dev_control_panel.cpp; sourceTree = "<group>"; };
 		4AC30A1A15E7DF4E005F767F /* windows.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = windows.cpp; sourceTree = "<group>"; };
 		4AC30A1C15E7DF5B005F767F /* windows.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = windows.h; sourceTree = "<group>"; };
-		4AC30A4615EC27DC005F767F /* stream.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = stream.a; path = SKS3/engine/stream.a; sourceTree = "<group>"; };
 		4AE9021D15A4888A0079BAAF /* attack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = attack.cpp; sourceTree = "<group>"; };
 		4AE9021E15A4888A0079BAAF /* attack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = attack.h; sourceTree = "<group>"; };
 		4AE9021F15A4888A0079BAAF /* engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = engine.cpp; sourceTree = "<group>"; };
@@ -87,7 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AC30A4715EC27DC005F767F /* stream.a in Frameworks */,
+				4A4A8FB01644032E00CC5B47 /* libnwin.a in Frameworks */,
+				4A4A8FAD164402E100CC5B47 /* stream.a in Frameworks */,
 				4A35A0AF157E5F03006EB744 /* libncurses.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,7 +104,8 @@
 		4A14DE8E157D3321007F17EB = {
 			isa = PBXGroup;
 			children = (
-				4AC30A4615EC27DC005F767F /* stream.a */,
+				4A4A8FAF1644032E00CC5B47 /* libnwin.a */,
+				4A4A8FAC164402E100CC5B47 /* stream.a */,
 				4A35A0AE157E5F03006EB744 /* libncurses.dylib */,
 				4A14DE9C157D3321007F17EB /* SKS3 */,
 				4A14DE9A157D3321007F17EB /* Products */,
@@ -183,6 +190,8 @@
 				4AE9022815A4888A0079BAAF /* socket.h */,
 				4AE9022915A4888A0079BAAF /* user.cpp */,
 				4AE9022A15A4888A0079BAAF /* user.h */,
+				4A8B431216487AAC00CDA50C /* uinterface.cpp */,
+				4A8B431316487AAC00CDA50C /* uinterface.h */,
 			);
 			path = engine;
 			sourceTree = "<group>";
@@ -255,6 +264,7 @@
 				4AC30A1915E7CEAD005F767F /* dev_control_panel.cpp in Sources */,
 				4AC30A1B15E7DF4E005F767F /* windows.cpp in Sources */,
 				4AB58230164176EB003AEC4D /* information_control_panel.cpp in Sources */,
+				4A8B431416487AAD00CDA50C /* uinterface.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +346,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/SKS3/engine\"",
+					"\"$(SRCROOT)/SKS3/engine/streamlib\"",
+					"\"$(SRCROOT)/SKS3/engine/nwin\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;
@@ -348,6 +360,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/SKS3/engine\"",
+					"\"$(SRCROOT)/SKS3/engine/streamlib\"",
+					"\"$(SRCROOT)/SKS3/engine/nwin\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;

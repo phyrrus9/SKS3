@@ -49,9 +49,7 @@ void key_settings_window(void)
     refresh();
     noecho();
     int height = 7, width = 22;
-    int starty = (LINES - height) / 2;	/* Calculating for a center placement */
-	int startx = (COLS - width) / 2;	/* of the window		*/
-    vin=newwin(height,width,starty,startx);
+    vin = phyrrus9::nwin::wcreatewin(height, width);
     wmove(vin,0,0);
     setdisplay(vin, " Key settings");
     wprintw(vin, " Up movement key\n");

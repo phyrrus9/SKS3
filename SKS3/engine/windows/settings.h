@@ -38,6 +38,8 @@
 #ifndef settings_h
 #define settings_h
 #include "windows.h"
+#include "../nwin/nwin.h"
+#include <string.h>
 void settings_window(void);
 void key_settings_window(void);
 void developer_settings_window(void);

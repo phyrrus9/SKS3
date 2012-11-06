@@ -277,7 +277,9 @@ int ladder(int prev)
     null = lvl--;
     if (null <= leveltotal)
     if (static_map)
+    {
         lvl--;
+    }
     else
     {
         file_level--;

@@ -9,9 +9,25 @@ on Mac OS X 10.8, though it should work on OSX 10.6-10.8 and most if not all lin
 
 If you cannot compile on a system, please email me! phyrrus9@gmail.com
 
+Notes about version 3.0
+------------------------
+As of SKS3 engine 3.0, there are a few changes (besides the massive modifications to the environment). I
+have now found a way to fix that pesky save issue (where saving only works once per game play on the same
+filename, save.dat). This is good right? No, because it means that there are a few hooks that have been
+broken and others that have changed. You now are required to use the save slot method (which I also fixed
+for this version) for all saves and restores. The game now saves your progress every 60 seconds (meaning
+up to 60 autosaves) into slot a(0). This is the good part. I now have implemented a lot of ncurses stuff
+and most of the game uses nwin for windows. This library must be compiled seperate (like streamlib) for
+any operating system other than OS 10. This will be the last major release of SKS3, sorry. After that we
+will simply rename the game to SKS4 and start over.
+
 Building
 --------
 I made building this beast fairly simple, using a makefile.
+
+As of version 3.0, 'make osx' became a little bit more complicated to use, so if
+you just run 'make' it will build in the 'make linux' fassion (which has now
+been removed altogether. It is but a link now.
 
 If you have ncurses and pthread libraries installed, you can just type 'make linux'
 and it will build fine, this works on osx as well. I also made a special version that

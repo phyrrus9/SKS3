@@ -37,6 +37,7 @@
  Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include "engine.h"
+#include "uinterface.h"
 #ifndef attack_h
 #define attack_h
 void attack_color_change(void);
@@ -45,5 +46,6 @@ void eat(int p);
 void attack(void);
 void increment_attack(void);
 void showweapons(void);
+void showweaponsv3(_uiwindow w);
 void setselectedweapon(int);
 #endif

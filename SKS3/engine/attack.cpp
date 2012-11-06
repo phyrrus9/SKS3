@@ -310,6 +310,10 @@ void showweapons(void)
         colorify(NORMAL);
     }
 }
+void showweaponsv3(uiwindow w)
+{
+    
+}
 void setselectedweapon(int w)
 {
     /*

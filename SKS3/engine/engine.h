@@ -69,6 +69,9 @@
 #include <netdb.h>
 #endif
 
+#include "uinterface.h"
+class _uiwindow; //fixes redef error (tempfix)
+
 #ifndef user_includes
 #define user_includes
 #include "socket.h"
@@ -83,6 +86,7 @@
 #include "hiscore.h"
 #ifndef SKS3_windows_h
 #include "windows/windows.h"
+#include "nwin/nwin.h"
 #endif
 #endif
 
@@ -99,7 +103,11 @@
 #define clear() system("clear")
 #define pause() env.paused = true
 #define unpause() env.paused = false
-#define VERSION_BUILD "SKS3 (2.0)"
+#define VERSION_BUILD "SKS3 (3.0b1)"
+
+#define COMPETITION_MIN 50000
+#define COMPETITION_MAX 250000
+
 const int portnum = 5102;
 const int time_limit = 3600; //time limit in seconds
 const char echar = '~';
@@ -112,6 +120,8 @@ void restore(void);
 void display(void);
 void colorify(void);
 void colorify(color);
+void colorifyv3(_uiwindow); /*broken*/
+void colorifyv3(_uiwindow, color); /*broken*/
 void terminate(int);
 int char_int(char);
 #endif

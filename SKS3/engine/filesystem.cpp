@@ -43,20 +43,23 @@ void save(void)
      * writes. This contains all RAM used in
      * the program that is useful to the user
      */
-    pause();
-    ofstream f(env.savefile.c_str(), ios::trunc | ios::binary);
-    if (!f)
+    save_slot();
+    /*pause();
+    char *cmd = new char[50];
+    strcpy(cmd, "rm -rf ");
+    strcat(cmd, env.savefile.c_str());
+    system(cmd);
+    FILE *f;
+    f = fopen(env.savefile.c_str(), "wb");
+    if (f == NULL)
     {
-        clear();
-        colorify(RED);
-        cout << "ERROR! Savefile could not be written" << endl
-             << "Press any key to continue your game" << endl;
-        colorify(NORMAL);
-        getch_();
+        cout << "Err!" << endl;
+        endwin();
+        exit(1);
     }
-    f.write((char *)(&env), sizeof(_environment));
-    f.close();
-    unpause();
+    fwrite((void *)&env, sizeof(_environment), 1, f);
+    fclose(f);
+    unpause();*/
 }
 void restore(void)
 {
@@ -79,6 +82,7 @@ void restore(void)
     f.read((char *)(&env), sizeof(_environment));
     f.close();
     unpause();
+    //restore_slot();
 }
 string select_slot(int slot)
 {
@@ -135,14 +139,26 @@ void restore_slot(void)
     pause();
     small_delay();
     clear();
-    cout << "Please select a slot to restore," << endl
-         << "note: all slots may not have data." << endl
-         << "Slots range from 0 to 5" << endl
-         << ">";
-    int slot = -1;
-    cin >> slot;
+    initscr();
+    refresh();
+    noecho();
+    WINDOW *w;
+    w = phyrrus9::nwin::wcreatewin(6, 35);
+    setdisplay(w, " Please select a restore slot");
+    wprintw(w, " slots range from 1 to 5\n");
+    wprintw(w, " autosaves are in slot a\n");
+    wprintw(w, " :");
+    wrefresh(w);
+    char c = getch_();
+    if (c == 'a')
+        c = '0';
+    int slot = char_int(c);
+    endwin();
     if (slot < 0 || slot > 5)
+    {
+        endwin();
         return;
+    }
     string savefile = select_slot(slot);
     ifstream f(savefile.c_str(),ios::binary);
     if (!f)
@@ -160,15 +176,20 @@ void save_slot(void)
      */
     env.allow_refresh = false;
     pause();
-    small_delay();
     clear();
-    cout << "Please select a slot to save to," << endl
-    << "note: all slots may not have data." << endl
-    << "Slots range from 0 to 5" << endl
-    << ">";
-    int slot = -1;
-    cin >> slot;
-    if (slot < 0 || slot > 5)
+    initscr();
+    refresh();
+    noecho();
+    WINDOW *w;
+    w = phyrrus9::nwin::wcreatewin(5, 35);
+    setdisplay(w, " Please select a save slot");
+    wprintw(w, " slots range from 1 to 5\n");
+    wprintw(w, " :");
+    wrefresh(w);
+    char c = getch_();
+    int slot = char_int(c);
+    endwin();
+    if (slot < 1 || slot > 5)
         return;
     string savefile = select_slot(slot);
     ofstream f(savefile.c_str(), ios::trunc | ios::binary);
@@ -219,4 +240,14 @@ void settings_read(void)
     //  return;
     in.seekg(ios::beg);
     in.read(reinterpret_cast<char *>(&env.settings), sizeof(_settings));
+}
+
+void autosave(void)
+{
+    string savefile = select_slot(0);
+    ofstream f(savefile.c_str(), ios::trunc | ios::binary);
+    if (!f)
+        exit(-1);
+    f.write((char *)(&env), sizeof(_environment));
+    f.close();
 }

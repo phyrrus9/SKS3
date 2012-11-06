@@ -57,6 +57,10 @@ bool game_initialized = false;
 extern int client_port;
 extern int server_port;
 
+inline void sighandle(int signo)
+{
+    exit(-1);
+}
 class newlevel_thread : public tpool::Thread
 {
     /*
@@ -86,7 +90,8 @@ int main(int argc, const char * argv[])
      * After everything is set up, it forwards its args to the 
      * game function and all is good.
      */
-    if (streamlib_version != GLOBAL_STREAMLIB_VERSION)
+    //if (streamlib_version != GLOBAL_STREAMLIB_VERSION)
+    if (!check_version_compadible()) //better method
     {
         cout << "Error! Streamlib error" << endl;
         exit(-1);
@@ -105,13 +110,16 @@ int main(int argc, const char * argv[])
                 seed = atol(argv[2]);
             }
         }
+        else
+        {
+            seed = atol(argv[1]);
+        }
     }
     /* END DEVELOPER MODE CHECK */
-    clear();
-    displaylauncher();
-    cout << ">";
-    int selection;
-    cin >> selection;
+    //clear();
+    int selection = -1;
+    while (selection == -1)
+        selection = displaylauncher(seed);
     extern int playernum;
     extern char * hostname;
     //env.allow_refresh = false;
@@ -199,10 +207,6 @@ int main(int argc, const char * argv[])
     }
     if (selection >= 9 || selection <= 0)
         exit(EXIT_SUCCESS);
-    if (argc > 1 && !env.developer_mode)
-    {
-        seed = atoi(argv[1]);
-    }
     srand((int)seed);
     showhelp();
     game(argc, argv);
@@ -276,6 +280,7 @@ void game(int argc, const char * argv[])
         {
             if (env.lives <= 0 || env.time_up)
             {
+                env.allow_autosave = false; //make it so that they can't autosave when dead
                 env.allow_refresh = false;
                 //clear();
                 if (env.lives <= 0 && env.health <= 0)
@@ -420,7 +425,9 @@ void game(int argc, const char * argv[])
                 if (env.music)
                 {
                     music_stop();
-                    env.current_song++;
+                    int last_song = env.current_song;
+                    while (env.current_song == last_song)
+                        env.current_song = rand() % env.number_of_songs;
                     if (env.current_song >= env.number_of_songs)
                         env.current_song = 0;
                     env.music = true;
@@ -497,6 +504,7 @@ void selectdifficulty(void)
         c = getch_();
         if (c == 'Q')
         {
+            wpopuperror(" Program exit", " Your game is now closed.\n Press any key to close. ", 2, 24);
             _exit(1);
         }
         if (c == '1')
@@ -618,32 +626,192 @@ void selectdifficulty(void)
             }
         }
     }
+    werase(vin);
+    cldisplay(vin);
     endwin();
 }
 
-void displaylauncher(void)
+int displaylauncher(long &seed)
 {
     /*
      * This is a pretty simple function, just displays a menu allowing
      * the user to select what he/she wants to do with the game. Options
-     * parsed in main function.
+     * parsed in main function. Using ncurses and nwin we can display a
+     * bunch of options and get rid of that annoying cout stuff we were
+     * using back in engine < 1.9.2
      */
-    cout << "#######################################################" << endl
-         << "#Welcome  to  Super  Key  Seeker  3  ©  2012  phyrrus9#" << endl
-         << "#This game has several modes to select, but if for you#" << endl
-         << "#want to play the older games, there is a downloader  #" << endl
-         << "#in this menu, it requires internet to work. Thanks :)#" << endl
-         << "#Please select an option from the list below to start #" << endl
-         << "#1. Single player (local) game                        #" << endl
-         << "#2. Single player (local) game no sound (OSX only)    #" << endl
-         << "#3. Miltiplayer (local) game                          #" << endl
-         << "#4. Multiplayer (online) game                         #" << endl
-         << "#5. Play KS4200                                       #" << endl
-         << "#6. Play SKS4200                                      #" << endl
-         << "#7. Enable fastboot                                   #" << endl
-         << "#8. Disable fastboot                                  #" << endl
-         << "#9. Exit                                              #" << endl
-         << "*** Note: you can specify a seed by running \"sks3 #\"  #" << endl
-         << "*** ->seeds make the map the same across all games    #" << endl
-         << "#######################################################" << endl;
+    
+    signal(SIGSEGV, sighandle);
+    
+    char selection;
+    int ret;
+    initscr();
+    refresh();
+    noecho();
+    WINDOW *vin;
+    while (true)
+    {
+        vin = phyrrus9::nwin::wcreatewin(20, 65);
+        setdisplay(vin, " Welcome  to  Super  Key  Seeker  3  ©  2012  phyrrus9");
+        wprintw(vin, " This game has several modes to select, but if for you\n "
+                    "want to play the older games, there is a downloader\n "
+                    "in this menu, it requires internet to work. Thanks :)\n "
+                    "Please select an option from the list below to start\n "
+                    "1. Single player (local) game\n "
+                    "2. Single player (local) game no sound (OSX only)\n "
+                    "3. Miltiplayer (local) game\n "
+                    "4. Multiplayer (online) game\n "
+                    "5. Play KS4200\n "
+                    "6. Play SKS4200\n "
+                    "7. Enable fastboot\n "
+                    "8. Disable fastboot\n "
+                    "9. Exit\n "
+                    "** You can pass a parameter to this game as a seed\n "
+                    "*** You may also press S to set the seed from this menu\n "
+                    "*** Press C to enter competition mode now.\n "
+                    ">");
+        wrefresh(vin);
+        selection = getch_();
+        phyrrus9::nwin::wcldisplay(vin);
+        if (selection == 'S')
+        {
+            WINDOW *w;
+            w = phyrrus9::nwin::wcreatewin(5, 30);
+            setdisplay(w, " Seed input dialog");
+            wprintw(w, " Current seed: %d\n", seed);
+            wprintw(w, " New: ");
+            wrefresh(w);
+            cin >> seed;
+            phyrrus9::nwin::wcldisplay(w);
+        }
+        else if (selection == 'C')
+        {
+            WINDOW *w;
+            w = phyrrus9::nwin::wcreatewin(4, 35);
+            setdisplay(w, " Competition mode setup");
+            wprintw(w, " Competition number: ");
+            wrefresh(w);
+            cin >> env.competition.number;
+            wclear(w);
+            setdisplay(w, " Competition mode setup");
+            wprintw(w, " Competition password: ");
+            wrefresh(w);
+            cin >> env.competition.password;
+            setdisplay(w, " Competition mode setup");
+            wprintw(w, " Username: ");
+            wrefresh(w);
+            cin >> env.competition.username;
+            wclear(w);
+            phyrrus9::nwin::wresizewindow(w, 7, 35);
+            wclear(w);
+            setdisplay(w, " Competition settings");
+            wprintw(w, " Number: %d\n", env.competition.number);
+            wprintw(w, " Password: %s\n", env.competition.password);
+            wprintw(w, " User: %s\n", env.competition.username);
+            wprintw(w, " Press any key to start. ");
+            wrefresh(w);
+            getch_();
+            
+            env.competition_mode = true;
+            env.developer_mode = false;
+            env.cheats = false;
+            env.multiplayer = false;
+            multiplayer = false;
+            
+            wclear(w);
+            phyrrus9::nwin::wresizewindow(w, 6, 35);
+            setdisplay(w, " Sound settings");
+            wprintw(w, " Y. Play with sound\n");
+            wprintw(w, " N. Play without sound\n");
+            wprintw(w, " :");
+            wrefresh(w);
+            char sound = toupper(getch_());
+            ret = sound == 'Y' ? 1 : 2; // mode 1 = sound, 2 = no sound
+            break;
+        }
+        else if (selection == 'D' && env.developer_mode)
+        {
+            game_initialized = true;
+            WINDOW *w;
+            w = phyrrus9::nwin::wcreatewin(4, 35);
+            setdisplay(w, " Competition reader");
+            wprintw(w, " filename: ");
+            wrefresh(w);
+            cin >> env.savefile;
+            wclear(w);
+            
+            phyrrus9::nwin::wresizewindow(w, 3, 20);
+            setdisplay(w, " Checking file...");
+            wrefresh(w);
+            restore();
+            sleep(1);
+            bool valid = true;
+            if (env.cheats)
+                valid = false;
+            if (env.developer_mode)
+                valid = false;
+            if (env.multiplayer)
+                valid = false;
+            if (!env.competition_mode)
+                valid = false;
+            if (env.can_enable_developer_mode)
+                valid = false;
+            if (env.totalscore < COMPETITION_MIN)
+                valid = false;
+            for (int i = 0; i < 900; i++)
+            {
+                //any error checking for the map goes here
+            }
+            wclear(w);
+            
+            if (valid)
+            {
+                phyrrus9::nwin::wresizewindow(w, 9, 35);
+                setdisplay(w, " File information");
+                wprintw(w, " Score: %d\n", env.totalscore);
+                wprintw(w, " Time: %d:%d\n", env.timer.minute, env.timer.second);
+                wprintw(w, " Number: %d\n", env.competition.number);
+                wprintw(w, " Password: %s\n", env.competition.password);
+                wprintw(w, " Username: %s\n", env.competition.username);
+                wprintw(w, " Press any key to return ");
+                wrefresh(w);
+                getch_();
+            }
+            else
+            {
+                phyrrus9::nwin::wresizewindow(w, 4, 25);
+                setdisplay(w, " This file is invalid!");
+                wprintw(w, " Press any key to return ");
+                wrefresh(w);
+                getch_();
+            }
+            
+            cldisplay(w);
+            
+            ret = -1;
+        }
+        else if (selection == 'F')
+        {
+            initscr();
+            refresh();
+            noecho();
+            uiwindow w;
+            w.resize(4, 35);
+            w.title("Hello World!");
+            //colorifyv3(w, BLUE);
+            w.print("This is a test!\n");
+            //colorifyv3(w);
+            w.refresh();
+            getch_();
+            w.empty();
+            endwin();
+        }
+        else
+        {
+            ret = char_int(selection);
+            break;
+        }
+    }
+    endwin();
+    return ret;
 }

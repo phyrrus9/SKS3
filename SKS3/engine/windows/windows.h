@@ -45,4 +45,5 @@
 #define SKS3_windows_h
 void setdisplay(WINDOW *, const char *);
 void cldisplay(WINDOW *);
+char wpopuperror(const char *, const char *, int, int); //char * title, char * text, int height, int width
 #endif
