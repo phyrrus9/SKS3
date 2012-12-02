@@ -17,5 +17,8 @@ install:
 	sudo cp ./Binaries/* /usr/bin
 	sudo mkdir -p /usr/share/sks3
 	sudo cp ./music/sks3/* /usr/share/sks3
+	sudo cp ./mods/sks3/*.conf /usr/share/sks3
+	sudo mkdir -p /usr/share/sks3/mods
+	sudo cp ./mods/sks3/mods/*.conf /usr/share/sks3/mods
 release: clean sks4200 linux
 	@echo "Ready to build"

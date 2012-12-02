@@ -84,6 +84,7 @@ class _uiwindow; //fixes redef error (tempfix)
 #include "zombie.h"
 #include "Thread.h"
 #include "hiscore.h"
+//#include "devmod.h"
 #ifndef SKS3_windows_h
 #include "windows/windows.h"
 #include "nwin/nwin.h"
@@ -103,7 +104,7 @@ class _uiwindow; //fixes redef error (tempfix)
 #define clear() system("clear")
 #define pause() env.paused = true
 #define unpause() env.paused = false
-#define VERSION_BUILD "SKS3 (3.0b1)"
+#define VERSION_BUILD "SKS3 (3.0b2)"
 
 #define COMPETITION_MIN 50000
 #define COMPETITION_MAX 250000

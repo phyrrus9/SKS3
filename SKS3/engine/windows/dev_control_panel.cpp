@@ -48,7 +48,7 @@ void developer_settings_window(void)
     initscr();
     refresh();
     noecho();
-    int height = 6, width = 42;
+    int height = 7, width = 42;
     int wheight = 11, wwidth = 42;
     vin = phyrrus9::nwin::wcreatewin(wheight, wwidth);
     wmove(vin,0,0);
@@ -68,13 +68,14 @@ void developer_settings_window(void)
     tmpc = getch_();
     if (tmpc != 'Q')
     {
-        while (tmpc != '3')
+        while (tmpc != '4')
         {
             phyrrus9::nwin::wresizewindow(vin, height, width);
             setdisplay(vin, " Developer settings");
             wprintw(vin, " 1. Game settings\n");
             wprintw(vin, " 2. Engine settings\n", env.cheats);
-            wprintw(vin, " 3. Return ");
+            wprintw(vin, " 3. Developer mods\n");
+            wprintw(vin, " 4. Return ");
             wrefresh(vin);
             tmpc = getch_();
         
@@ -178,6 +179,53 @@ void developer_settings_window(void)
                     }
                 }
                 werase(vin);
+            }
+            if (tmpc == '3')
+            {
+                int dmheight = 7;
+                int dmwidth = 50;
+                dmheight += env.modcount;
+                phyrrus9::nwin::wresizewindow(vin, dmheight, dmwidth);
+                setdisplay(vin, " Developer mods");
+                wprintw(vin, " Please select mod to enable.\n");
+                wprintw(vin, " Enabled mods cannot be disabled (yet)\n");
+                wprintw(vin, " * denotes an enabled mod\n");
+                if (env.modcount > 0)
+                {
+                    for (int i = 0; i < env.modcount; i++)
+                    {
+                        wprintw(vin, " %d Name: %s", i + 1, env.modlist[i].name);
+                        if (env.modlist[i].enabled == true)
+                        {
+                            wprintw(vin, "*");
+                        }
+                        wprintw(vin, "\n");
+                    }
+                    wprintw(vin, " :");
+                    wrefresh(vin);
+                    char modnum = 0;
+                    do
+                    {
+                        modnum = getch_();
+                    } while (modnum < '0' && modnum > env.modcount + 48);
+                    int mod_number = char_int(modnum) - 1;
+                    if (env.modlist[mod_number].enabled == false)
+                    {
+                        phyrrus9::nwin::wresizewindow(vin, 4, 35);
+                        setdisplay(vin, " Mod enabled");
+                        wprintw(vin, " %s enabled\n", env.modlist[mod_number].name);
+                        env.modlist[mod_number].enabled = true;
+                        enablemod(mod_number);
+                    }
+                    else
+                    {
+                        phyrrus9::nwin::wresizewindow(vin, 4, 35);
+                        setdisplay(vin, " Error!");
+                        wprintw(vin, " %s is already enabled\n", env.modlist[mod_number].name);
+                    }
+                }
+                wrefresh(vin);
+                getch_();
             }
         }
     }

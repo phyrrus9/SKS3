@@ -44,6 +44,7 @@
 #include "engine.h"
 #endif
 _environment env; //global var
+developermod gmodl[10];
 int client_port, server_port, playernum;
 char * hostname = new char[256];
 void terminate(int param) //segmentation fault on clean exit (unalloc from restore bug tempfix)

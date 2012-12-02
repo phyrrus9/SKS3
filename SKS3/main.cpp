@@ -59,6 +59,7 @@ extern int server_port;
 
 inline void sighandle(int signo)
 {
+    endwin(); //so we dont break our teminal
     exit(-1);
 }
 class newlevel_thread : public tpool::Thread

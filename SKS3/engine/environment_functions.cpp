@@ -48,6 +48,9 @@ void environment_init(_environment &t)
      * it would not compile for any system other than mac os x
      * that way, and even then it threw a few hundred warnings.
      */
+    /* BEGIN DEVELOPER STUFF */
+    mod_init();
+    /* END DEVELOPER STUFF */
     strcpy(t.version, VERSION_BUILD);
     t.zombies = 0;
     t.paused = false;
@@ -111,6 +114,8 @@ void environment_init(_environment &t)
     t.competition_mode = false;
     //autosaves
     t.allow_autosave = true;
+    //3.0.1 modifications
+    //t.modcount = 0;
 }
 
 void weapons_init(weapons::weaponlist &t)

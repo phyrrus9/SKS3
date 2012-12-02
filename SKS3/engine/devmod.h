@@ -28,76 +28,38 @@
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
  =================================================================
- File: environment.h
- Description: General definitions for the main RAM of the game.
- This is probably the most important header file in the code as it
- defines all of our global data which hopefully in SKS4 I will 
- change this so it is all private data and cant be corrupted as
- easily as it can right now.
+ File: devmod.h
+ Description: Function definition and type definitions for the mod
+ system. Very minimal as of version 3.0b2
  Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
-#include "engine.h"
-#ifndef environment_h
-#define environment_h
-#include "hiscore.h"
-#include "devmod.h"
-struct game_timer
-{
-    int second, minute, clock;
-};
+#ifndef devmod
+#define devmod
 
-struct _keys
-{
-    char attack, pause, quit, engine;
-    char w, a, s, d;
-    char i, j, k, l;
-    char S, R;
-    char ss, rs;
-    char settings;
-};
+enum modtype { NOMOD, ENVMOD };
 
-struct _zombie
+struct developermod
 {
-    int zombie_active;
-};
-
-struct _settings
-{
-    _keys keys;
-    _zombie zombie;
-};
-
-struct _competition
-{
-    int number;
-    char username[30];
-    char password[30];
-};
-
-struct _environment
-{
-    char version[25];
-    bool paused, music, socket_paused, multiplayer, time_up;
-    char map[900], grid[900];
-    char * view;
-    bool showmap, single, cheats, zombies_do_damage, refresh_screen, allow_refresh;
-    bool weapons[weapons::num_of_weapons];
-    int health, lives, score, position, moves, kills, kills_needed, total_enemies, levels_completed, attack,
-    totalscore, selectedweapon, min_zombie_does_damage_level, keys, number_of_songs, current_song, zombies, score_multiplier;
-    std::string savefile;
-    color bgcolor, playercolor, statuscolor;
-    character::player player;
-    character::difficulty difficulty;
-    char socket_message[256];
-    game_timer timer;
-    hiscore::score hiscorelist[hiscore::num_scores]; //all x high scores
-    _settings settings;
-    //new as of engine v3
-    bool developer_mode, can_enable_developer_mode;
-    bool competition_mode;
-    _competition competition;
-    bool allow_autosave;
-    int modcount;
-    developermod modlist[10];
+    char name[30];
+    char filename[50];
+    modtype type;
+    bool enabled;
 };
 #endif
+
+
+#ifndef __SKS3__devmod__
+#define __SKS3__devmod__
+
+#include <cstdio>
+#include "engine.h"
+#include "uinterface.h"
+#include <iostream>
+
+#define MODFILE_LOCATION "/usr/share/sks3/mods.conf"
+
+void mod_init(void);
+void readmods(developermod *modlist);
+void enablemod(int modnum);
+
+#endif /* defined(__SKS3__devmod__) */
