@@ -57,6 +57,8 @@
 #include <time.h>
 #endif
 
+#include <unistd.h> //linux compile
+
 #define WALL (0)
 #define OPEN (1)
 #define COIN (3)
