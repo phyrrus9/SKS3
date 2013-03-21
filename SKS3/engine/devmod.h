@@ -47,6 +47,13 @@ struct developermod
 };
 #endif
 
+#ifndef modparam
+#define modparam
+struct mod_parameters
+{
+    bool disable_mod;
+};
+#endif
 
 #ifndef __SKS3__devmod__
 #define __SKS3__devmod__

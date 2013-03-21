@@ -127,6 +127,74 @@ void enablemod(int modnum)
                     //printf("lives\n");
                     fscanf(modfile, "%d", &env.lives);
                 }
+                //below are the map management functions
+                fieldparse("zombie")
+                {
+                    int spawn_location;
+                    fscanf(modfile, "%d", &spawn_location);
+                    env.map[spawn_location] = env.grid[spawn_location] = 'z';
+                    env.map[0] = env.grid[0] = '~'; //bigfix?
+                    zombie z(spawn_location);
+                }
+                fieldparse("map") //set a location of the map
+                {
+                    int map_location;
+                    char map_display;
+                    fscanf(modfile, "%d %c", &map_location, &map_display); // map <location> <display>
+                    env.map[map_location] = env.grid[map_location] = map_display;
+                }
+                //misc below
+                fieldparse("//") //comment
+                {
+                    char comment_tmp = 0;
+                    while (fscanf(modfile, "%c", &comment_tmp) != EOF && comment_tmp != '\n') {}
+                }
+                fieldparse("global")
+                {
+                    char global[15];
+                    fscanf(modfile, "%s", global);
+                    if (strcmp(global, "noblock") == 0)
+                    {
+                        env.modlist[modnum].enabled = false; //allow enabling again
+                    }
+                }
+                fieldparse("require")
+                {
+                    /*
+                     * "require" allows you to set depends on mods. This is very useful
+                     * for defining custom game modes (that will rewrite the entire map)
+                     * currently, the format is as follows:
+                     * require <field> <operator> <value>
+                     * fields are as follows:
+                     * env->position (the location of the player)
+                     * operators are as follows:
+                     * = (equals)
+                     * < (less than, not equal to)
+                     * > (greater than, not equal to)
+                     * values are integers
+                     */
+                    char depend[15], dep_op;
+                    fscanf(modfile, "%s %c", depend, &dep_op);
+                    /*FILE *f = fopen("log_.txt", "w");
+                    fprintf(f, "Require: %s \n", depend);
+                    fclose(f);*/
+                    if (strcmp(depend, "env->position") == 0)
+                    {
+                        int tmp_value = 0;
+                        fscanf(modfile, "%d", &tmp_value);
+
+                        if  (
+                            (env.position != tmp_value && dep_op == '=') ||
+                            (env.position < tmp_value && dep_op == '>') ||
+                            (env.position > tmp_value && dep_op == '<')
+                            )
+                        {
+                            printf("DEPEND ERROR\n");
+                            env.modlist[modnum].enabled = false;
+                            return;
+                        }
+                    }
+                }
             }
             break;
     }

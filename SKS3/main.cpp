@@ -106,6 +106,7 @@ int main(int argc, const char * argv[])
         if (strcmp(argv[1], "developer-mode") == 0)
         {
             env.developer_mode = true;
+            devsettings();
             if (argc > 2)
             {
                 seed = atol(argv[2]);
@@ -815,4 +816,41 @@ int displaylauncher(long &seed)
     }
     endwin();
     return ret;
+}
+
+void devsettings(void)
+{
+    initscr();
+    refresh();
+    noecho();
+    WINDOW *w;
+    w = phyrrus9::nwin::wcreatewin(4, 50);
+    setdisplay(w, " Developer setup");
+    wprintw(w, "Press S to configure, any other key to continue ");
+    wrefresh(w);
+    char c = getch();
+    if (c == 'S')
+    {
+        phyrrus9::nwin::wresizewindow(w, 9, 50);
+        char done = 0;
+        while (done == 0)
+        {
+            setdisplay(w, " Developer setup");
+            wprintw(w, "Enable cheats? 0 (1/0) ");
+            wrefresh(w);
+            env.cheats = getch() - 48;
+            wprintw(w, "%d\n", env.cheats);
+            wrefresh(w);
+            wprintw(w, "Disable fog? 0 (1/0) ");
+            wrefresh(w);
+            env.showmap = getch() - 48;
+            wprintw(w, "%d\n", env.showmap);
+            wrefresh(w);
+            done = 1;
+        }
+    }
+    werase(w);
+    wclear(w);
+    wrefresh(w);
+    delwin(w);
 }

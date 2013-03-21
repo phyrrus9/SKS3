@@ -211,7 +211,7 @@ void developer_settings_window(void)
                     int mod_number = char_int(modnum) - 1;
                     if (env.modlist[mod_number].enabled == false)
                     {
-                        phyrrus9::nwin::wresizewindow(vin, 4, 35);
+                        phyrrus9::nwin::wresizewindow(vin, 4 + env.modcount, 35);
                         setdisplay(vin, " Mod enabled");
                         wprintw(vin, " %s enabled\n", env.modlist[mod_number].name);
                         env.modlist[mod_number].enabled = true;
