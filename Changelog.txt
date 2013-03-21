@@ -1,0 +1,33 @@
+Version 3.0.2:
+	Developer mode changes. Mods can now use the following commands:
+		maprange <int start>-<int finish> <char display> (set a range on the map)
+		map <int position> <char display> (set specific location)
+		enginecmd <string command> <string value> (run engine command)
+		if <string condition> <char op> <int value> (conditional statement, see below)
+	Added to global:
+		global constant (make mod auto reload on new level, useful for custom game modes)
+	changed zombie:
+		You may place zombies anywhere (randomly) on the map by using a negative number
+		zombie -1
+	CONDITIONAL STATEMENTS
+		Conditional statements are useful in custom game modes, as they allow the programmer to
+		define new functionality for different ideas. These follow the same procedure as require
+		but with an entirely new set of "fields", called conditions. Currently the conditions are
+		as follows:
+			env->lc (completed levels)
+	*NOTE* 3.0.1 save files are NOT compadible with 3.0.2+ files
+
+Version 3.0.1:
+	Developer mode changes. Mods can now use the following commands:
+	zombie <int location> (create a zombie)
+	global <string field>
+		fields:
+			noblock (allow re-enabling)
+	require <string field> <char op> <int value>
+		fields:
+			env->position (position environment variable)
+		ops:
+			=
+			<
+			>
+		values: 0 <= x

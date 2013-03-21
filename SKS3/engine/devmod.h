@@ -44,6 +44,7 @@ struct developermod
     char filename[50];
     modtype type;
     bool enabled;
+    bool constant;
 };
 #endif
 
@@ -67,6 +68,7 @@ struct mod_parameters
 
 void mod_init(void);
 void readmods(developermod *modlist);
-void enablemod(int modnum);
+void enablemod(int modnum, bool override = false);
+void rerunmods(developermod *modlist);
 
 #endif /* defined(__SKS3__devmod__) */

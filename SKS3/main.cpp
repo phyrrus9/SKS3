@@ -255,6 +255,7 @@ void game(int argc, const char * argv[])
             env.position = 0;
             env.score += env.kills;
             populate();
+            rerunmods(env.modlist);
             continue;
         }
         if (env.keys >= 500)

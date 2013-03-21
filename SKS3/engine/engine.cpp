@@ -143,7 +143,7 @@ void colorifyv3(uiwindow w, color c)/*broken*/
     if (c == NORMAL)
         w.print("\33[0m");
 }
-void enginecmd(string c, string d)
+void enginecmd(string c, string d, bool override)
 {
     /*
      * Called when the user presses '/', this just
@@ -157,12 +157,12 @@ void enginecmd(string c, string d)
     if (c == "env->cheats")
     {
         extern bool multiplayer; //in main.cpp
-        if (!multiplayer && !env.competition_mode)
+        if ((!multiplayer && !env.competition_mode) || override)
         {
             env.cheats = atoi(d.c_str());
         }
     }
-    if (env.cheats)
+    if (env.cheats || override)
     {
         if (c == "env->health")
             env.health = atoi(d.c_str());

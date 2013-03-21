@@ -104,7 +104,7 @@ class _uiwindow; //fixes redef error (tempfix)
 #define clear() system("clear")
 #define pause() env.paused = true
 #define unpause() env.paused = false
-#define VERSION_BUILD "SKS3 (3.0.1)"
+#define VERSION_BUILD "SKS3 (3.0.2)"
 
 #define COMPETITION_MIN 50000
 #define COMPETITION_MAX 250000
@@ -114,7 +114,7 @@ const int time_limit = 3600; //time limit in seconds
 const char echar = '~';
 using namespace std;
 char getch_(void);
-void enginecmd(string, string);
+void enginecmd(string, string, bool override = false);
 void showhelp(void);
 void save(void);
 void restore(void);

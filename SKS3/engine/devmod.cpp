@@ -74,13 +74,14 @@ void readmods(developermod *modlist)
         strcpy(modlist[loop].name, modnameid);
         strcpy(modlist[loop].filename, modfilename);
         modlist[loop].enabled = false;
+        modlist[loop].constant = false;
         loop++;
     }
     fclose(modfile);
     
 }
 
-void enablemod(int modnum)
+void enablemod(int modnum, bool override)
 {
     FILE *modfile;
     modfile = fopen(env.modlist[modnum].filename, "r");
@@ -90,6 +91,7 @@ void enablemod(int modnum)
         //file does not exist like it is supposed to
         return;
     }
+    bool execute = true;
     switch (env.modlist[modnum].type)
     {
         case NOMOD:
@@ -107,6 +109,14 @@ void enablemod(int modnum)
                        fscanf(a, "%d", booltmp);\
                        b = *booltmp == 1 ? 1 : 0;\
                        delete booltmp;
+                if (strcmp(field, "endif") == 0)
+                {
+                    execute = true;
+                }
+                if (execute == false)
+                {
+                    continue;
+                }
                 fieldparse("developer_mode")
                 {
                     //printf("developer_mode\n");
@@ -127,11 +137,26 @@ void enablemod(int modnum)
                     //printf("lives\n");
                     fscanf(modfile, "%d", &env.lives);
                 }
+                fieldparse("enginecmd")
+                {
+                    std::string command;
+                    std::string parameter;
+                    char command_c[30], parameter_c[30];
+                    fscanf(modfile, "%s %s", command_c, parameter_c);
+                    command = command_c;
+                    parameter = parameter_c;
+                    enginecmd(command, parameter, true);
+                }
                 //below are the map management functions
                 fieldparse("zombie")
                 {
                     int spawn_location;
                     fscanf(modfile, "%d", &spawn_location);
+                    if (spawn_location <= 0)
+                    {
+                        srand((unsigned int)time(0));
+                        spawn_location = rand() % 890 + 3;
+                    }
                     env.map[spawn_location] = env.grid[spawn_location] = 'z';
                     env.map[0] = env.grid[0] = '~'; //bigfix?
                     zombie z(spawn_location);
@@ -142,6 +167,16 @@ void enablemod(int modnum)
                     char map_display;
                     fscanf(modfile, "%d %c", &map_location, &map_display); // map <location> <display>
                     env.map[map_location] = env.grid[map_location] = map_display;
+                }
+                fieldparse("maprange") //set a large range of map data
+                {
+                    int map_start = 0, map_end = 0;
+                    char map_display;
+                    fscanf(modfile, "%d-%d %c", &map_start, &map_end, &map_display); // map <range> <value>
+                    for (int i = map_start; i <= map_end; i++)
+                    {
+                        env.map[i] = env.grid[i] = map_display;
+                    }
                 }
                 //misc below
                 fieldparse("//") //comment
@@ -157,7 +192,12 @@ void enablemod(int modnum)
                     {
                         env.modlist[modnum].enabled = false; //allow enabling again
                     }
+                    if (strcmp(global, "constant") == 0)
+                    {
+                        env.modlist[modnum].constant = true; //auto-enable
+                    }
                 }
+                if (!override) //basically, require only works on first try
                 fieldparse("require")
                 {
                     /*
@@ -167,6 +207,7 @@ void enablemod(int modnum)
                      * require <field> <operator> <value>
                      * fields are as follows:
                      * env->position (the location of the player)
+                     * env->cheats (1=on, 0=off [status])
                      * operators are as follows:
                      * = (equals)
                      * < (less than, not equal to)
@@ -178,16 +219,31 @@ void enablemod(int modnum)
                     /*FILE *f = fopen("log_.txt", "w");
                     fprintf(f, "Require: %s \n", depend);
                     fclose(f);*/
+                    /* checkdepends, failure condition */
+#define checkdepends(a, b, c)\
+if  (\
+        (a != c && b == '=') ||\
+        (a < c && b == '>') ||\
+        (a > c && b == '<')\
+    )
                     if (strcmp(depend, "env->position") == 0)
                     {
                         int tmp_value = 0;
                         fscanf(modfile, "%d", &tmp_value);
 
-                        if  (
-                            (env.position != tmp_value && dep_op == '=') ||
-                            (env.position < tmp_value && dep_op == '>') ||
-                            (env.position > tmp_value && dep_op == '<')
-                            )
+                        checkdepends(env.position, dep_op, tmp_value)
+                        {
+                            printf("DEPEND ERROR\n");
+                            env.modlist[modnum].enabled = false;
+                            return;
+                        }
+                    }
+                    if (strcmp(depend, "env->cheats") == 0)
+                    {
+                        int tmp_value = 0;
+                        fscanf(modfile, "%d", &tmp_value);
+                        
+                        checkdepends(env.cheats, dep_op, tmp_value)
                         {
                             printf("DEPEND ERROR\n");
                             env.modlist[modnum].enabled = false;
@@ -195,7 +251,36 @@ void enablemod(int modnum)
                         }
                     }
                 }
+                fieldparse("if")
+                {
+                    // stub (future completion)
+#define checkif(a,b,c) checkdepends(a,b,c)
+                    char condition[15], if_op;
+                    int if_value = 0;
+                    fscanf(modfile, "%s %c %d", condition, &if_op, &if_value);
+                    if (strcmp(condition, "env->lc") == 0)
+                    {
+                        checkif(env.levels_completed, if_op, if_value) { execute = false; }
+                        else { execute = true; }
+                    }
+                }
             }
             break;
+    }
+}
+
+void rerunmods(developermod *modlist)
+{
+    /*
+     * Simple function to run through the list of mods and
+     * re run those that are static (like custom game modes)
+     * First appear in version 3.0.2
+     */
+    for (int i = 0; i < 10; i++)
+    {
+        if (modlist[i].constant)
+        {
+            enablemod(i, true);
+        }
     }
 }
