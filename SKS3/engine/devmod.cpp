@@ -218,6 +218,11 @@ void enablemod(int modnum, bool override)
                         env.modlist[modnum].constant = true; //auto-enable
                     }
                 }
+                fieldparse("endgame")
+                {
+                    env.health = -1;
+                    env.lives = -1;
+                }
                 if (!override) //basically, require only works on first try
                 fieldparse("require")
                 {
