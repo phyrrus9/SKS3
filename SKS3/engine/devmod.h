@@ -36,7 +36,7 @@
 #ifndef devmod
 #define devmod
 
-enum modtype { NOMOD, ENVMOD };
+enum modtype { NOMOD, ENVMOD, GAMEMOD };
 
 struct developermod
 {

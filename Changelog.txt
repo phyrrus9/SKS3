@@ -1,3 +1,13 @@
+Version 3.0.3:
+	Developer mode changes. Mods can now use the following commands:
+		increment <string field>
+		decrement <string field>
+		Fields:
+			env->health
+			env->lives
+			env->kills_needed
+			env->attack
+
 Version 3.0.2:
 	Developer mode changes. Mods can now use the following commands:
 		maprange <int start>-<int finish> <char display> (set a range on the map)

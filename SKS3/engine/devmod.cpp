@@ -98,6 +98,7 @@ void enablemod(int modnum, bool override)
             return;
             break;
         case ENVMOD:
+        case GAMEMOD:
             char *field = new char[30];
             while (fscanf(modfile, "%s :", field) != EOF)
             {
@@ -146,6 +147,26 @@ void enablemod(int modnum, bool override)
                     command = command_c;
                     parameter = parameter_c;
                     enginecmd(command, parameter, true);
+                }
+                if (strcmp(field, "increment") == 0 || strcmp(field, "decrement") == 0)
+                {
+                    /*
+                     * ++ or -- operators for health, lives, attack, and needed kills
+                     */
+                    int inc_level = 1;
+                    if (strcmp(field, "decrement") == 0)
+                    {
+                        inc_level = -1;
+                    }
+                    char inc_field[30];
+                    fscanf(modfile, "%s", inc_field);
+                    int *ptr;
+#define increment(a,b); if (strcmp(inc_field, a) == 0) { ptr = &b; }
+                    increment("env->health", env.health);
+                    increment("env->lives", env.lives);
+                    increment("env->attack", env.attack);
+                    increment("env->kills_needed", env.kills_needed);
+                    *ptr = *ptr + inc_level;
                 }
                 //below are the map management functions
                 fieldparse("zombie")
