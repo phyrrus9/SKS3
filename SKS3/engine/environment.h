@@ -74,6 +74,11 @@ struct _competition
     char password[30];
 };
 
+struct _modification_settings
+{
+    char game_mode[30];
+};
+
 struct _environment
 {
     char version[25];
@@ -99,5 +104,6 @@ struct _environment
     bool allow_autosave;
     int modcount;
     developermod modlist[10];
+    _modification_settings modification_settings;
 };
 #endif

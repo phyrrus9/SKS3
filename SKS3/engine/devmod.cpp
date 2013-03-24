@@ -217,6 +217,11 @@ void enablemod(int modnum, bool override)
                     {
                         env.modlist[modnum].constant = true; //auto-enable
                     }
+                    if (strcmp(global, "gamemode") == 0)
+                    {
+                        fscanf(modfile, "%s", env.modification_settings.game_mode); //allow the developer to set the game mode
+                                                                                    //found in the highscore list
+                    }
                 }
                 fieldparse("endgame")
                 {

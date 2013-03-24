@@ -226,3 +226,8 @@ void competition_init(_competition &t)
     t.number = 0;
     strcpy(t.password, "inactive");
 }
+
+void modifications_init(_modification_settings &t)
+{
+    strcpy(t.game_mode, "Default");
+}

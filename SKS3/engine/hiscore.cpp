@@ -62,7 +62,8 @@ namespace hiscore
             for (int i = 0; i < hiscore::num_scores; i++)
             {
                 strcpy(env.hiscorelist[i].name, "NAME");
-                env.hiscorelist[i].score = 50;
+                strcpy(env.hiscorelist[i].gamemode, "Default");
+                env.hiscorelist[i].score = 1;
                 hs_ofstream.write((char *)(&env.hiscorelist[i]), sizeof(hiscore::score)); //binary write
             }
             hs_ofstream.close();
@@ -106,6 +107,10 @@ namespace hiscore
                     strcpy(temp_c, env.hiscorelist[i].name); //swap
                     strcpy(env.hiscorelist[i].name, env.hiscorelist[j].name);
                     strcpy(env.hiscorelist[j].name, temp_c);
+                    char temp_gamemode[30];
+                    strcpy(temp_gamemode, env.hiscorelist[i].gamemode); //swap
+                    strcpy(env.hiscorelist[i].gamemode, env.hiscorelist[j].gamemode);
+                    strcpy(env.hiscorelist[j].gamemode, temp_gamemode);
                 }
                 
             }
@@ -142,11 +147,12 @@ namespace hiscore
         get_scores(); //re-read in case of a bad save
         env.allow_refresh = false;
         clear();
-        cout << setw(7) << "Name" << setw(9) << right << "Score" << endl << left
-        << setw(18) << setfill('#') << "" << endl << setfill(' ');
+        cout << setw(7) << "Name" << setw(9) << right << "Score" << setw(30) << "Game Mode" << endl << left
+        << setw(48) << setfill('#') << "" << endl << setfill(' ');
         for (int i = 0; i < num_scores; i++)
         {
-            cout << setw(7) << env.hiscorelist[i].name << setw(9) << right << env.hiscorelist[i].score << endl << left;
+            cout << setw(7) << env.hiscorelist[i].name << setw(9) << right << env.hiscorelist[i].score << setw(30)
+                 << env.hiscorelist[i].gamemode << endl << left;
         }
         cout << "Press any key to continue..." << endl;
         getch_();
@@ -178,6 +184,7 @@ namespace hiscore
         if (location != -1)
         {
             strcpy(env.hiscorelist[location].name, name);
+            strcpy(env.hiscorelist[location].gamemode, env.modification_settings.game_mode);
             env.hiscorelist[location].score = env.totalscore;
             hiscore::save();
         }

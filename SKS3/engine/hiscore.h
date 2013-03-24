@@ -62,6 +62,7 @@ namespace hiscore
     {
         char name[15]; //the name on the score (10 chars max)
         int score; //the score to display
+        char gamemode[30]; //name of the game type (custom game modes set this)
     };
     #endif
     void get_scores(void);
