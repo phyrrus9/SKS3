@@ -1,3 +1,13 @@
+Version 3.0.4:
+	Developer mode changes. Mods can now use the following commands:
+		endgame (ends the game and displays high scores if needed)
+	Added to global:
+		gamemode <string gamemode> (set the name shown in high scores).
+			The default is "Default", if using a custom game mode, it is reccommended
+			that you define a gamemode to distinguish your scores from the global ones.
+	Added .deb binary installer. Just run make deb after make release
+	*NOTE* 3.0.4+ save files are NOT compadible with earlier ones!
+
 Version 3.0.3:
 	Developer mode changes. Mods can now use the following commands:
 		increment <string field>
