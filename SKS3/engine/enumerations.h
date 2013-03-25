@@ -40,12 +40,12 @@ enum color { RED, GREEN, BLUE, NORMAL, BORDER };
 namespace character
 {
     enum player { N, S, E, W};
-    enum target { TELEPORT, SMALLBUG, LARGEBUG, WORM, PITBULL, ZOMBIE = 15};
-    enum difficulty { NORMAL, PRO };
+    enum target { TELEPORT, SMALLBUG = 2, LARGEBUG = 4, WORM = 6, PITBULL = 8, ZOMBIE = 15, GAURD = 30};
+    enum difficulty { NIL, NORMAL = 2, PRO = 4 };
 }
 namespace targetnoms
 {
-    enum target { TELEPORT = 250, SMALLBUG = 25, LARGEBUG = 50, WORM = 75, PITBULL = 100};
+    enum target { TELEPORT = 250, SMALLBUG = 25, LARGEBUG = 50, WORM = 75, PITBULL = 100, GAURD = 500 };
 }
 namespace weapons
 {

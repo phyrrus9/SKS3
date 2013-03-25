@@ -201,6 +201,7 @@ void showhelp(void)
     << "~ - Neutral (empty)                 % - Large bug" << endl
     << "& - Small bug                       $ - Worm" << endl
     << "! - Vicious pitbull                 z - Zombie" << endl
+    << "g - Guard (very powerful" << endl
     << "k - Key. Eat 500 of these for a massive score boost" << endl
     << "@ - Teleport ****** The teleport will instantly push you to the next level" << endl
     << "    If you were to eat this, you get a massive score boost." << endl;

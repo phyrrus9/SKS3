@@ -101,7 +101,7 @@ void populate(void)
         for (int i = 1; i < 900; i++)
         {
             env.grid[i] = '?';
-            int r = rand() % 32;
+            int r = rand() % 42;
             env.map[i] = echar;
             if (r == 1)
             {
@@ -149,7 +149,13 @@ void populate(void)
             {
                 env.map[i] = 'k'; //don't place a whole lot of keys
             }
-            if (r >= 8 && r <= 11)
+            if (r == 8)
+            {
+                env.map[i] = 'g';
+                env.health++; //just give a little boost
+                env.score++; //a little score boost too
+            }
+            if (r >= 9 && r <= 11)
                 env.map[i] = '#';
             if (env.difficulty >= character::PRO)
             {
@@ -169,6 +175,12 @@ void populate(void)
                 {
                     env.map[i] = '$';
                     env.kills_needed++;
+                }
+                if (r > 30 && r < 40)
+                {
+                    env.map[i] = 'g';
+                    env.kills_needed++;
+                    env.health += (r / 4);
                 }
             }
         }
@@ -353,15 +365,25 @@ void showmap(void)
         {
             if (env.view[i] != '~' && env.view[i] != '#' && env.view[i] != '?')
             {
-                if (env.view[i] != '+')
+                if (env.view[i] == '+')
+                {
+                    colorify(BLUE);
+                }
+                else
                 {
                     if (env.view[i] == '@') //teleport
+                    {
                         colorify(RED);
+                    }
+                    else if (env.view[i] == 'g') //guard
+                    {
+                        colorify(BLUE);
+                    }
                     else
+                    {
                         colorify(GREEN);
+                    }
                 }
-                if (env.view[i] == '+')
-                    colorify(BLUE);
             }
             cout << env.view[i] << "  ";
             colorify();

@@ -145,7 +145,7 @@ int main(int argc, const char * argv[])
                 << "--> Hard also has around 2.5x more enemies" << endl;
             cin >> difficulty_selection;*/
         }
-        env.difficulty = (character::difficulty)(difficulty_selection - 1);
+        env.difficulty = (character::difficulty)(difficulty_selection);
     }
     if (selection == 3)
     {

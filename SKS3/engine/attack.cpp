@@ -125,6 +125,13 @@ void eat(int p)
         attack_color_change();
         ate = true;
     }
+    if (env.map[p] == 'g')
+    {
+        env.health -= 100; //take an entire life
+        env.score += (targetnoms::GAURD * env.score_multiplier) / 3;
+        attack_color_change();
+        ate = true;
+    }
     /*
      * The following statements are used for special characters
      * these do not have the standard effect as they do the
@@ -132,7 +139,7 @@ void eat(int p)
      */
     if (env.map[p] == '+')
     {
-        env.lives++;
+        env.lives += 1; //bug fix
         ate = true;
         clrthread_lif *clrchg = new clrthread_lif;
         clrchg->Run();
@@ -206,6 +213,12 @@ void attack(void)
         gain = 0;
         attack_color_change();
     }
+    if (env.view[location] == 'g')
+    {
+        t = character::GAURD;
+        gain = targetnoms::GAURD;
+        attack_color_change();
+    }
     if (env.view[location] == '@') //eat the teleport
     {
         t = character::TELEPORT; //they have a strength of 0
@@ -219,7 +232,10 @@ void attack(void)
     }
     if (env.view[location] == echar || env.view[location] == '#')
         return;
-    int strength = (env.levels_completed * t) * env.difficulty;
+    int strength = (env.levels_completed * t) * (env.difficulty);
+    //FILE *f = fopen("_log.txt", "wa");
+    //fprintf(f, "Strength: %d lc: %d t: %d diff: %d\n", strength, env.levels_completed, t, env.difficulty);
+    //fclose(f);
     int attack = env.attack;
     weapons::weaponlist weapon;
     weapons_init(weapon);
@@ -228,6 +244,10 @@ void attack(void)
     {
         kill(location);
         env.score += gain;
+    }
+    else
+    {
+        eat(location);
     }
 }
 void increment_attack(void)
