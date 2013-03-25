@@ -263,19 +263,12 @@ void display(void)
         {
             colorify(RED);
         }
-        cout << setw(5) << env.health;
+    printf("%5d ", env.health);
         colorify(env.statuscolor);
-        cout << setw(7)
-        << "Lives:" << setw(4) << env.lives <<
-        setw(7) << "Kills:" << setw(3) << right << env.kills << setw(1) << "/" << setw(4) << left << env.kills_needed
-        << setw(6) << "Keys:" << setw(5) << env.keys
-        << setw(20) << "Levels completed:" << setw(5) << env.levels_completed
-        << "\n\r"
-        << setw(13) << " " /*make some blank space so it looks good*/
-        << setw(7) << "Attack:"
-        << setw(3) << env.attack
-        << setw(8) << "Weapon:" << setw(5) << (env.attack * (t.strength[env.selectedweapon]))
-        << setw(7) << setprecision(6) << fixed << "Score:";
+    printf("Lives: %-2d Kills: %3d/%-3d ", env.lives, env.kills, env.kills_needed);
+    printf("Keys: %-4d Levels completed: %5d\n\r", env.keys, env.levels_completed);
+    printf("%13c", ' '); //blank padding
+    printf("Attack:%4d  Weapon: %-3d Score: ", env.attack, (env.attack * (t.strength[env.selectedweapon])));
         if (env.totalscore > 0)
         {
             colorify(RED);
@@ -288,10 +281,9 @@ void display(void)
         {
             colorify(GREEN);
         }
-        cout << setw(8) << env.totalscore;
+    printf("%-6d", env.totalscore);
         colorify(env.statuscolor);
-        cout << setw(6) << "Time:" << right << setw(2) << setprecision(2) << setfill('0') << env.timer.minute << ":" << right << setw(2) << env.timer.second << setfill(' ') << left << setw(5) << " "
-        << setw(9) << "Weapons:";
+    printf("Time: %02d:%02d Weapons: ", env.timer.minute, env.timer.second);
     showweapons();
     if (env.competition_mode)
     {
