@@ -132,6 +132,13 @@ void eat(int p)
         attack_color_change();
         ate = true;
     }
+    if (env.map[p] == 'b')
+    {
+        env.lives -= 2;
+        env.score += (targetnoms::BOSS * env.score_multiplier) / 2;
+        attack_color_change();
+        ate = true;
+    }
     /*
      * The following statements are used for special characters
      * these do not have the standard effect as they do the
@@ -217,6 +224,12 @@ void attack(void)
     {
         t = character::GAURD;
         gain = targetnoms::GAURD;
+        attack_color_change();
+    }
+    if (env.view[location] == 'b')
+    {
+        t = character::BOSS;
+        gain = targetnoms::BOSS;
         attack_color_change();
     }
     if (env.view[location] == '@') //eat the teleport

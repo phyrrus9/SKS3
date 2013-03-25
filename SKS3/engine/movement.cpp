@@ -155,7 +155,12 @@ void populate(void)
                 env.health++; //just give a little boost
                 env.score++; //a little score boost too
             }
-            if (r >= 9 && r <= 11)
+            if (r == 9)
+            {
+                env.map[i] == 'b';
+                env.score += 10;
+            }
+            if (r >= 10 && r <= 14)
                 env.map[i] = '#';
             if (env.difficulty >= character::PRO)
             {
@@ -181,6 +186,12 @@ void populate(void)
                     env.map[i] = 'g';
                     env.kills_needed++;
                     env.health += (r / 4);
+                }
+                if (r > 40 && r < 50)
+                {
+                    env.map[i] = 'b';
+                    env.kills_needed += 2;
+                    env.health += (r / 6);
                 }
             }
         }
@@ -378,6 +389,10 @@ void showmap(void)
                     else if (env.view[i] == 'g') //guard
                     {
                         colorify(BLUE);
+                    }
+                    else if (env.view[i] == 'b') //boss
+                    {
+                        colorify(RED);
                     }
                     else
                     {
