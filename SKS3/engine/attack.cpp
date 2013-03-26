@@ -139,6 +139,12 @@ void eat(int p)
         attack_color_change();
         ate = true;
     }
+    if (env.map[p] == '-')
+    {
+        env.tapeworm_count++;
+        ate = true;
+        user_status *s = new user_status("Oh no, you got tapeworm!");
+    }
     /*
      * The following statements are used for special characters
      * these do not have the standard effect as they do the
@@ -150,6 +156,11 @@ void eat(int p)
         ate = true;
         clrthread_lif *clrchg = new clrthread_lif;
         clrchg->Run();
+        if (env.tapeworm_count > 0)
+        {
+            env.tapeworm_count--;
+            user_status *s = new user_status("Cleaned 1 tapeworm");
+        }
     }
     if (env.map[p] == '@')
     {

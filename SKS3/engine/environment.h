@@ -105,5 +105,7 @@ struct _environment
     int modcount;
     developermod modlist[10];
     _modification_settings modification_settings;
+    int tapeworm_count;
+    char status_message[90]; //displayed underneath the map for 5 seconds
 };
 #endif

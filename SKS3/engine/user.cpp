@@ -158,7 +158,7 @@ void showhelp(void)
     env.allow_refresh = false;
     pause(); //so we don't run the timer
     //env.music = true; //ensure it actually starts //nevermind....
-    cout << "Super Key Seeker 3 - Copyright © 2012 phyrrus9 <phyrrus9@gmail.com>" << endl
+    cout << "Super Key Seeker 3 - Copyright © 2012-2013 phyrrus9 <phyrrus9@gmail.com>" << endl
     << "This game is copyright to Ethan laur(phyrrus9) under modtech LLC" << endl
     << "Background Music (mac os x only) copyright 2006-2012, 2008-2012 Goukisan" << endl
     << "Sound effects are music found in the public domain and are mac os only" << endl
@@ -201,7 +201,8 @@ void showhelp(void)
     << "~ - Neutral (empty)                 % - Large bug" << endl
     << "& - Small bug                       $ - Worm" << endl
     << "! - Vicious pitbull                 z - Zombie" << endl
-    << "g - Guard (very powerful            b - Boss (dont trip on one)" << endl
+    << "g - Guard (very powerful)           b - Boss (dont trip on one)" << endl
+    << "- - Tapeworm (stay away, they hurt)" << endl
     << "k - Key. Eat 500 of these for a massive score boost" << endl
     << "@ - Teleport ****** The teleport will instantly push you to the next level" << endl
     << "    If you were to eat this, you get a massive score boost." << endl;
@@ -209,13 +210,15 @@ void showhelp(void)
     {
         cout << "Press these keys to diaplay other help dialogs " << endl;
         cout << "H - Engine commands                 Z - Zombies" << endl;
-        cout << "C - Credits                                    " << endl;
+        cout << "C - Credits                         T - Tapeworms" << endl;
         cout << "Good luck! Press any other key to exit help.." << endl;
         char c = getch_(); //just got rid of char c = to fix the err below
         if (c == 'H')
             enginecmd_display();
         if (c == 'Z')
             about_zombie();
+        if (c == 'T')
+            about_tapeworm();
         if (c == 'C')
             copyright();
     }
@@ -421,6 +424,7 @@ void enginecmd_display(void)
          << "   zom->min_damagelevel                     Displays when zombies attack  " << endl
          << "   zom->damage                              Weather they attack or not    " << endl
          << "   zom->active                              Display # of active zombies   " << endl
+         << "   env->tapeworms                           Display # of infections       " << endl
          << "/zombie                 <int>               Create a zombie at location   " << endl
          << "<color> is filled by a color (red, green, blue, normal)                   " << endl;
     colorify(RED);
@@ -469,6 +473,29 @@ void about_zombie(void)
          << "maximum. Zombies will move once every two seconds using the clock as an AI   " << endl
          << "base and will only move in blank squares or on you (which will hurt).        " << endl
          << "Thank you for reading my brief explanation of the zombies in this game       " << endl
+         << endl
+         << "Press any key to exit this dialog..." << endl;
+    getch_();
+    env.allow_refresh = true;
+}
+void about_tapeworm(void)
+{
+    /*
+     * Function that describes how the tapeworm system works
+     */
+    env.allow_refresh = false;
+    clear();
+    cout << "Tapeworms have always been a problem when traveling, so they will be a problem" << endl
+         << "in this game as well. Tapeworms can be identified by a - on the map, which was" << endl
+         << "done intentionally to make it harder to accidently walk on one. Tapeworms will" << endl
+         << "take a bite out of you once every minute for each tapeworm. The only way to   " << endl
+         << "get rid of the worms is to find a life pack (+) and eat it. This will get rid " << endl
+         << "exactly one tapeworm from your system. To check if you have any infections you" << endl
+         << "can run the engine command /get env->tapeworms and it will tell you. The best " << endl
+         << "method of prevention is to just not do it (yes, the sex talk from high school)" << endl
+         << "they have a strength multiplier of 0, so you can attack them, but I would just" << endl
+         << "simply stay away from them. There is no enabled AI yet, but there may be one  " << endl
+         << "later on in the future.                                                       " << endl
          << endl
          << "Press any key to exit this dialog..." << endl;
     getch_();

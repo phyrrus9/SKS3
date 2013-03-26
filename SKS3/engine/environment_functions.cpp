@@ -195,6 +195,12 @@ void game_timer_increment(game_timer & t)
         t.minute++;
         autosave();
         t.second = t.second - 60;
+        if (env.tapeworm_count > 0)
+        {
+            env.health -= env.tapeworm_count;
+            attack_color_change();
+            user_status *s = new user_status("Ouch! Those tapeworms bite!");
+        }
     }
 }
 

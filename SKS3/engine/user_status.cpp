@@ -28,23 +28,26 @@
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
  =================================================================
- File: user.h
- Description: Function prototypes for the user interface and the
- help, instructional, and settings dialogs for the user to use at
- will when keys are pressed and functions are triggered.
+ File: engine.h
+ Description: Prototypes, constants, macros, and file includes used
+ across the entire game (because we only need to include engine.h
+ on any file that needs pretty much anything from the game and it
+ wont throw errors because we use ifdefs so it wont include twice
  Authors: phyrrus9 <phyrrus9@gmail.com>
+ the GNU Project (ncurses)
  *****************************************************************/
-#include "engine.h"
-#ifndef user_h
-#define user_h
-void showhelp(void); //shows the help screen
-void display(void); //shows the bar at top of screen
-void display_v3(void); //ncurses version of display (enginev3)
-void multidisplay(void); //for multiplayer
-void enginecmd_display(void);
-void about_zombie(void);
-void about_tapeworm(void);
-void copyright(void);
-void music_stop(void); //stop the music
-void music_start(void); //start the music
-#endif
+#include "user_status.h"
+user_status::user_status(const char * _message)
+{
+    strcpy(message, _message);
+    Run();
+}
+void user_status::Entry()
+{
+    env.refresh_screen = true;
+    strcpy(env.status_message, message);
+    sleep(5);
+    strcpy(env.status_message, "");
+    env.refresh_screen = true;
+    delete this;
+}

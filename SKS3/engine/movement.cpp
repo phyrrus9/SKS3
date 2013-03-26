@@ -160,7 +160,11 @@ void populate(void)
                 env.map[i] == 'b';
                 env.score += 10;
             }
-            if (r >= 10 && r <= 14)
+            if (r == 10)
+            {
+                env.map[i] = '-';
+            }
+            if (r >= 11 && r <= 14)
                 env.map[i] = '#';
             if (env.difficulty >= character::PRO)
             {
@@ -431,6 +435,7 @@ void showmap(void)
     }
     cout << endl;
     colorify();
+    cout << "\r" << env.status_message << endl;
 }
 void showplayer(void)
 {

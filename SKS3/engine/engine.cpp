@@ -271,6 +271,8 @@ void enginecmd(string c, string d, bool override)
             cout << env.zombies_do_damage << endl;
         if (d == "zom->active")
             cout << env.zombies << endl;
+        if (d == "env->tapeworms")
+            cout << "You have " << env.tapeworm_count << " infections" << endl;
         cout << "Press any key to continue..." << endl;
         getch_(); //char c = ...
     }

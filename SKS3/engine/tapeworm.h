@@ -28,23 +28,17 @@
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
  =================================================================
- File: user.h
- Description: Function prototypes for the user interface and the
- help, instructional, and settings dialogs for the user to use at
- will when keys are pressed and functions are triggered.
+ File: tapeworm.h
+ Description: Function prototypes for checking tapeworm locations,
+ doing damage to players.
  Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
 #include "engine.h"
-#ifndef user_h
-#define user_h
-void showhelp(void); //shows the help screen
-void display(void); //shows the bar at top of screen
-void display_v3(void); //ncurses version of display (enginev3)
-void multidisplay(void); //for multiplayer
-void enginecmd_display(void);
-void about_zombie(void);
-void about_tapeworm(void);
-void copyright(void);
-void music_stop(void); //stop the music
-void music_start(void); //start the music
+#ifndef tapeworm_classes
+#define tapeworm_classes
+//class tapeworm
+//{
+//public:
+    void tapeworm(int);
+//}//;
 #endif

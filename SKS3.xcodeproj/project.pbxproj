@@ -17,6 +17,8 @@
 		4A4A8FB01644032E00CC5B47 /* libnwin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4A8FAF1644032E00CC5B47 /* libnwin.a */; };
 		4A748946158277F80048CFF8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A748945158277F80048CFF8 /* main.cpp */; };
 		4A8B431416487AAD00CDA50C /* uinterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A8B431216487AAC00CDA50C /* uinterface.cpp */; };
+		4AB520561701F7AF003EC258 /* tapeworm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AB520541701F7AF003EC258 /* tapeworm.cpp */; };
+		4AB5205A17020B73003EC258 /* user_status.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5205817020B72003EC258 /* user_status.cpp */; };
 		4AB58230164176EB003AEC4D /* information_control_panel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4AB5822F164176EB003AEC4D /* information_control_panel.cpp */; };
 		4ABF2DBE15A7936C008E7535 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ABF2DBD15A7936C008E7535 /* main.cpp */; };
 		4ABF2DE115A79EE3008E7535 /* sks4200.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4ABF2DDF15A79EE3008E7535 /* sks4200.cpp */; };
@@ -63,6 +65,10 @@
 		4A86878C159686E4001FF5E0 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		4A8B431216487AAC00CDA50C /* uinterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uinterface.cpp; sourceTree = "<group>"; };
 		4A8B431316487AAC00CDA50C /* uinterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uinterface.h; sourceTree = "<group>"; };
+		4AB520541701F7AF003EC258 /* tapeworm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tapeworm.cpp; sourceTree = "<group>"; };
+		4AB520551701F7AF003EC258 /* tapeworm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tapeworm.h; sourceTree = "<group>"; };
+		4AB5205817020B72003EC258 /* user_status.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = user_status.cpp; sourceTree = "<group>"; };
+		4AB5205917020B73003EC258 /* user_status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = user_status.h; sourceTree = "<group>"; };
 		4AB5822F164176EB003AEC4D /* information_control_panel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = information_control_panel.cpp; sourceTree = "<group>"; };
 		4ABF2DBD15A7936C008E7535 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4ABF2DDF15A79EE3008E7535 /* sks4200.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sks4200.cpp; path = sks4200/sks4200.cpp; sourceTree = "<group>"; };
@@ -185,6 +191,8 @@
 				4AE9022015A4888A0079BAAF /* engine.h */,
 				4AE9022115A4888A0079BAAF /* enumerations.h */,
 				4AE9022215A4888A0079BAAF /* environment.h */,
+				4AB5205817020B72003EC258 /* user_status.cpp */,
+				4AB5205917020B73003EC258 /* user_status.h */,
 				4AE9022315A4888A0079BAAF /* filesystem.cpp */,
 				4A24EEFA164AA3B900893C7C /* devmod.cpp */,
 				4A24EEFB164AA3B900893C7C /* devmod.h */,
@@ -197,6 +205,8 @@
 				4AE9022A15A4888A0079BAAF /* user.h */,
 				4A8B431216487AAC00CDA50C /* uinterface.cpp */,
 				4A8B431316487AAC00CDA50C /* uinterface.h */,
+				4AB520541701F7AF003EC258 /* tapeworm.cpp */,
+				4AB520551701F7AF003EC258 /* tapeworm.h */,
 			);
 			path = engine;
 			sourceTree = "<group>";
@@ -271,6 +281,8 @@
 				4AB58230164176EB003AEC4D /* information_control_panel.cpp in Sources */,
 				4A8B431416487AAD00CDA50C /* uinterface.cpp in Sources */,
 				4A24EEFC164AA3B900893C7C /* devmod.cpp in Sources */,
+				4AB520561701F7AF003EC258 /* tapeworm.cpp in Sources */,
+				4AB5205A17020B73003EC258 /* user_status.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

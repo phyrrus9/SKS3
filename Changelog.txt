@@ -1,3 +1,22 @@
+Version 3.1:
+	Added new characters:
+		g - Gaurd (powerful)
+		b - Boss (very powerful)
+		- - Tapeworm (see tapeworm help)
+	Updated Copyright
+	Updated help screen (with new characters and tapeworm help)
+	Added new class to the engine:
+		class user_status : private tpool::Thread
+		{
+			char message[90]; //temp holder
+			void Entry();
+		public:
+			user_status(const char * _message);
+		};
+		Simply add user_status *s = new user_status("Test"); to display "Test" below
+			the map for five seconds.
+	*NOTE* 3.1+ save files are NOT compadible with 3.0.x files
+
 Version 3.0.4:
 	Developer mode changes. Mods can now use the following commands:
 		endgame (ends the game and displays high scores if needed)
