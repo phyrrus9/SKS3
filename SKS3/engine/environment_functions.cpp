@@ -116,6 +116,9 @@ void environment_init(_environment &t)
     t.allow_autosave = true;
     //3.0.1 modifications
     //t.modcount = 0;
+    env.disease_level = weapons::NONE;
+    
+    env.dragons = (dragon *)malloc(sizeof(dragon) * 10);
 }
 
 void weapons_init(weapons::weaponlist &t)
@@ -127,6 +130,7 @@ void weapons_init(weapons::weaponlist &t)
     //{ 2, 4, 8, 16, 32, 64 }
     for (int i = 0, j = 2; i < weapons::num_of_weapons; i++, j *= 2) //all powers of two
         t.strength[i] = j; //its all easier this way for adding say 128 weapons :P
+    //env.disease_level = weapons::NONE;
 }
 
 class timer_thread : public tpool::Thread
@@ -190,6 +194,10 @@ void game_timer_increment(game_timer & t)
      */
     t.second++;
     t.clock++;
+    if (env.disease_level > weapons::NONE)
+    {
+        do_disease_damage();
+    }
     if (t.second >= 60)
     {
         t.minute++;
@@ -200,6 +208,15 @@ void game_timer_increment(game_timer & t)
             env.health -= env.tapeworm_count;
             attack_color_change();
             user_status *s = new user_status("Ouch! Those tapeworms bite!");
+            if (env.tapeworm_count > 5 && env.disease_level < weapons::DEATH)
+            {
+                increment_disease(&env.disease_level);
+                if (env.disease_level == weapons::TERMINAL)
+                {
+                    user_status *s = new user_status("You now have a terminal illness.. I'm sorry");
+                    env.disease_level = weapons::TERMINAL;
+                }
+            }
         }
     }
 }
@@ -236,4 +253,9 @@ void competition_init(_competition &t)
 void modifications_init(_modification_settings &t)
 {
     strcpy(t.game_mode, "Default");
+}
+
+void dragon_data_init(_dragon_data &t)
+{
+    t.number_of_dragons = 0;
 }

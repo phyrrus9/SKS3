@@ -254,6 +254,13 @@ void attack(void)
         gain = 0;
         env.keys++;
     }
+    if (env.view[location] == 'd')
+    {
+        if (find_dragon(location) == -1)
+            user_status *s = new user_status("Error cannot find dragon!");
+        else
+            env.dragons[find_dragon(location)].hit();
+    }
     if (env.view[location] == echar || env.view[location] == '#')
         return;
     int strength = (env.levels_completed * t) * (env.difficulty);

@@ -195,6 +195,10 @@ void enginecmd(string c, string d, bool override)
             env.min_zombie_does_damage_level = atoi(d.c_str());
         if (c == "zom->damage")
             env.zombies_do_damage = atoi(d.c_str());
+        if (c == "env->tapeworms")
+            env.tapeworm_count = atoi(d.c_str());
+        if (c == "env->disease_level")
+            env.disease_level = (weapons::_disease_level)atoi(d.c_str());
     }
     if (c == "zombie")
     {
@@ -273,6 +277,8 @@ void enginecmd(string c, string d, bool override)
             cout << env.zombies << endl;
         if (d == "env->tapeworms")
             cout << "You have " << env.tapeworm_count << " infections" << endl;
+        if (d == "env->disease_level")
+            cout << env.disease_level << endl;
         cout << "Press any key to continue..." << endl;
         getch_(); //char c = ...
     }

@@ -55,5 +55,6 @@ namespace weapons
         int strength[num_of_weapons]; //some standards
     };
     //D(fist) x(throwing star) |(sword) ©(gun) {}(cannon) ~(laser) √(stocking) ø(admin gun)
+    enum _disease_level { NONE, STAGE1, STAGE2, STAGE3, STAGE4, TERMINAL, DEATH };
 }
 #endif

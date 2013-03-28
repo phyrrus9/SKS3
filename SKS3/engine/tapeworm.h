@@ -39,6 +39,8 @@
 //class tapeworm
 //{
 //public:
-    void tapeworm(int);
+void tapeworm(int);
+void do_disease_damage(void);
+void increment_disease(weapons::_disease_level *);
 //}//;
 #endif

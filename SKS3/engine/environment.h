@@ -41,6 +41,7 @@
 #define environment_h
 #include "hiscore.h"
 #include "devmod.h"
+#include "dragon.h"
 struct game_timer
 {
     int second, minute, clock;
@@ -79,6 +80,13 @@ struct _modification_settings
     char game_mode[30];
 };
 
+struct _dragon_data
+{
+    const static int max_dragons = 10;
+    int number_of_dragons;
+    _internal_dragon_data backup_db[max_dragons];
+};
+
 struct _environment
 {
     char version[25];
@@ -106,6 +114,9 @@ struct _environment
     developermod modlist[10];
     _modification_settings modification_settings;
     int tapeworm_count;
+    weapons::_disease_level disease_level;
     char status_message[90]; //displayed underneath the map for 5 seconds
+    _dragon_data dragon_data;
+    dragon *dragons;// = (dragon *)malloc(sizeof(dragon) * 10);
 };
 #endif

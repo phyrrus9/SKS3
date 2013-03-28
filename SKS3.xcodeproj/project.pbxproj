@@ -13,6 +13,7 @@
 		4A1F20F315A8FB7900982D5F /* zombie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A1F20F115A8FB7900982D5F /* zombie.cpp */; };
 		4A24EEFC164AA3B900893C7C /* devmod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A24EEFA164AA3B900893C7C /* devmod.cpp */; };
 		4A35A0AF157E5F03006EB744 /* libncurses.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A35A0AE157E5F03006EB744 /* libncurses.dylib */; };
+		4A383A641703905B00715E46 /* dragon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A383A621703905A00715E46 /* dragon.cpp */; };
 		4A4A8FAD164402E100CC5B47 /* stream.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4A8FAC164402E100CC5B47 /* stream.a */; };
 		4A4A8FB01644032E00CC5B47 /* libnwin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A4A8FAF1644032E00CC5B47 /* libnwin.a */; };
 		4A748946158277F80048CFF8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4A748945158277F80048CFF8 /* main.cpp */; };
@@ -59,6 +60,8 @@
 		4A24EEFA164AA3B900893C7C /* devmod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = devmod.cpp; sourceTree = "<group>"; };
 		4A24EEFB164AA3B900893C7C /* devmod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = devmod.h; sourceTree = "<group>"; };
 		4A35A0AE157E5F03006EB744 /* libncurses.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libncurses.dylib; path = usr/lib/libncurses.dylib; sourceTree = SDKROOT; };
+		4A383A621703905A00715E46 /* dragon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dragon.cpp; sourceTree = "<group>"; };
+		4A383A631703905B00715E46 /* dragon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dragon.h; sourceTree = "<group>"; };
 		4A4A8FAC164402E100CC5B47 /* stream.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = stream.a; path = SKS3/engine/streamlib/stream.a; sourceTree = "<group>"; };
 		4A4A8FAF1644032E00CC5B47 /* libnwin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libnwin.a; path = SKS3/engine/nwin/libnwin.a; sourceTree = "<group>"; };
 		4A748945158277F80048CFF8 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -206,6 +209,8 @@
 				4A8B431216487AAC00CDA50C /* uinterface.cpp */,
 				4A8B431316487AAC00CDA50C /* uinterface.h */,
 				4AB520541701F7AF003EC258 /* tapeworm.cpp */,
+				4A383A621703905A00715E46 /* dragon.cpp */,
+				4A383A631703905B00715E46 /* dragon.h */,
 				4AB520551701F7AF003EC258 /* tapeworm.h */,
 			);
 			path = engine;
@@ -283,6 +288,7 @@
 				4A24EEFC164AA3B900893C7C /* devmod.cpp in Sources */,
 				4AB520561701F7AF003EC258 /* tapeworm.cpp in Sources */,
 				4AB5205A17020B73003EC258 /* user_status.cpp in Sources */,
+				4A383A641703905B00715E46 /* dragon.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

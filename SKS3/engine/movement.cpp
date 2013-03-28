@@ -101,7 +101,7 @@ void populate(void)
         for (int i = 1; i < 900; i++)
         {
             env.grid[i] = '?';
-            int r = rand() % 42;
+            int r = rand() % 52;
             env.map[i] = echar;
             if (r == 1)
             {
@@ -198,9 +198,10 @@ void populate(void)
                     env.health += (r / 6);
                 }
             }
+                env.dragons = new dragon[10];
         }
     }
-    else 
+    else
     {
         //??
     }

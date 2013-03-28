@@ -41,3 +41,77 @@ void tapeworm(int position)
      */
     env.grid[position] = env.map[position] = '-';
 }
+
+void do_disease_damage(void)
+{
+    long t = time(0);
+    switch (env.disease_level)
+    {
+        case weapons::NONE:
+            return;
+            break;
+        case weapons::STAGE1:
+            if (t % 2 == 0) //every 2 mins
+            {
+                env.health--;
+            }
+            break;
+        case weapons::STAGE2:
+            if (t % 59 == 0) //~ 1 min
+            {
+                env.health--;
+            }
+            break;
+        case weapons::STAGE3:
+            if (t % 30 == 0) //every 30 secs
+            {
+                env.health -= 2;
+            }
+            break;
+        case weapons::STAGE4:
+            if (t % 30 == 0) //same
+            {
+                env.health -= 5;
+            }
+            break;
+        case weapons::TERMINAL:
+            if (t % 15 == 0) //every 15 secs
+            {
+                env.health -= 5;
+            }
+            break;
+        case weapons::DEATH:
+            env.health -= 5; //every second
+            env.statuscolor = RED;
+            break;
+    }
+    if (env.health < 0)
+    {
+        if (env.lives > 0)
+        {
+            env.health = 100;
+            env.lives--;
+        }
+        else
+        {
+            move(NIL);
+        }
+    }
+}
+
+void increment_disease(weapons::_disease_level *t)
+{
+    //user_status *s = new user_status("Your disease has advanced!");
+    if (env.disease_level == weapons::NONE)
+        *t = weapons::STAGE1;
+    else if (env.disease_level == weapons::STAGE1)
+        *t = weapons::STAGE2;
+    else if (env.disease_level == weapons::STAGE2)
+        *t = weapons::STAGE3;
+    else if (env.disease_level == weapons::STAGE3)
+        *t = weapons::STAGE4;
+    else if (env.disease_level == weapons::STAGE4)
+        *t = weapons::TERMINAL;
+    else
+        return;
+}
