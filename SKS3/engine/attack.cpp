@@ -261,6 +261,43 @@ void attack(void)
         else
             env.dragons[find_dragon(location)].hit();
     }
+    if (env.view[location] == 'M')
+    {
+        env.map[location] = env.grid[location] = echar;
+        //t = character::NIL;
+        int key = rand() % question::question_count;
+        env.allow_refresh = false;
+        clear();
+        printf("You have found a mystery box!\r\n"
+               "Health: %d\tLives : %d\r\n"
+               "Score : %d\tAttack: %d\r\n"
+               "%s\n%s\n>",
+               question::gains[key].health,
+               question::gains[key].lives,
+               question::gains[key].score,
+               question::gains[key].attack,
+               question::instructions[key],
+               question::questions[key]);
+        char q_answer[50];
+        //cin.getline(q_answer, 49, '\n');
+        cin.getline(q_answer, 49);
+        //env.allow_refresh = true;
+        if (strcmp(q_answer, question::answers[key]) == 0)
+        {
+            printf("You got it right! Here is your reward:\r\n");
+            env.health += question::gains[key].health;
+            env.lives += question::gains[key].lives;
+            env.score += question::gains[key].score;
+            env.attack += question::gains[key].attack;
+        }
+        else
+        {
+            printf("Sorry, you got it wrong!\n"
+                   "Press any key to continue...");
+        }
+        //getch_();
+        env.allow_refresh = true;
+    }
     if (env.view[location] == echar || env.view[location] == '#')
         return;
     int strength = (env.levels_completed * t) * (env.difficulty);

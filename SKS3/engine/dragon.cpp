@@ -27,7 +27,8 @@
 
 dragon::dragon(void)
 {
-    dragon(rand() % 899 + 1);
+    // dragons broken atm... will fix this sh** someday..
+    //dragon(rand() % 899 + 1);
 }
 
 dragon::dragon(int position)
@@ -42,6 +43,8 @@ dragon::dragon(int position, int strength)
 
 dragon::dragon(int position, int strength, int attack)
 {
+    if (env.dragon_data.number_of_dragons > 9)
+        return;
     internal_dragon_data.position = position;
     internal_dragon_data.strength;
     internal_dragon_data.attack = attack;

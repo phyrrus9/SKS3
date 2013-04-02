@@ -83,6 +83,7 @@
 		4AC30A1815E7CEAC005F767F /* dev_control_panel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dev_control_panel.cpp; sourceTree = "<group>"; };
 		4AC30A1A15E7DF4E005F767F /* windows.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = windows.cpp; sourceTree = "<group>"; };
 		4AC30A1C15E7DF5B005F767F /* windows.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = windows.h; sourceTree = "<group>"; };
+		4AD87767170A1FAB00A8A1C1 /* questions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = questions.h; sourceTree = "<group>"; };
 		4AE9021D15A4888A0079BAAF /* attack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = attack.cpp; sourceTree = "<group>"; };
 		4AE9021E15A4888A0079BAAF /* attack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = attack.h; sourceTree = "<group>"; };
 		4AE9021F15A4888A0079BAAF /* engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = engine.cpp; sourceTree = "<group>"; };
@@ -210,6 +211,7 @@
 				4A8B431316487AAC00CDA50C /* uinterface.h */,
 				4AB520541701F7AF003EC258 /* tapeworm.cpp */,
 				4A383A621703905A00715E46 /* dragon.cpp */,
+				4AD87767170A1FAB00A8A1C1 /* questions.h */,
 				4A383A631703905B00715E46 /* dragon.h */,
 				4AB520551701F7AF003EC258 /* tapeworm.h */,
 			);

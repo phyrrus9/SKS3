@@ -198,7 +198,11 @@ void populate(void)
                     env.health += (r / 6);
                 }
             }
-                env.dragons = new dragon[10];
+            if (r > 50)
+            {
+                env.map[i] = 'M';
+            }
+                //env.dragons = new dragon[10];
         }
     }
     else
@@ -363,9 +367,9 @@ void showmap(void)
      */
     colorify();
     colorify(BORDER);
-    cout << "#  ";
-    for (int i = 0; i < 46; i++)
-        cout << "# ";
+    //cout << "#  ";
+    //for (int i = 0; i < 46; i++)
+      //  cout << "# ";
     colorify();
     cout << "\n\r";
     for (int i = 0, j = 1; i < 900; i++, j++)
@@ -373,13 +377,13 @@ void showmap(void)
         if (i % 30 == 0)
         {
             colorify(BORDER);
-            cout << "#";
+            //cout << "#";
             colorify();
             cout << "  ";
         }
         if (i != env.position)
         {
-            if (env.view[i] != '~' && env.view[i] != '#' && env.view[i] != '?')
+            if (env.view[i] != echar && env.view[i] != '#' && env.view[i] != '?')
             {
                 if (env.view[i] == '+')
                 {
@@ -405,7 +409,14 @@ void showmap(void)
                     }
                 }
             }
-            cout << env.view[i] << "  ";
+            if (env.view[i] != '?' && env.view == env.map)
+            {
+                cout << env.view[i] << "  ";
+            }
+            else
+            {
+                cout << "   ";
+            }
             colorify();
         }
         else
@@ -419,19 +430,20 @@ void showmap(void)
         if (j == 30)
         {
             colorify(BORDER);
-            cout << '#' << "\n\r";
+            //cout << '#' << "\n\r";
+            cout << "\n\r";
             colorify();
             j = 0;
         }
     }
     colorify(BORDER);
-    cout << "#";
+    //cout << "#";
     colorify();
     cout << "  ";
     for (int i = 0; i < 46; i++)
     {
         colorify(BORDER);
-        cout << "# ";
+        //cout << "# ";
         colorify();
     }
     cout << endl;

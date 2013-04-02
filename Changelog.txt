@@ -1,3 +1,10 @@
+Version 3.1.2 & 3.1.1:
+	Added riddles (Mystery boxes M)
+	Diseases, if you leave tapeworms in your system, you will contract a 
+		disease, which will become fatal after 5 minutes.
+	Dragons are implemented, but to buggy to be used.
+	*NOTE* 3.1.1 save files are incompadible with older files
+
 Version 3.1:
 	Added new characters:
 		g - Gaurd (powerful)

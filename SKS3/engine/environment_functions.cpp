@@ -118,7 +118,7 @@ void environment_init(_environment &t)
     //t.modcount = 0;
     env.disease_level = weapons::NONE;
     
-    env.dragons = (dragon *)malloc(sizeof(dragon) * 10);
+    //env.dragons = (dragon *)malloc(sizeof(dragon) * 10);
 }
 
 void weapons_init(weapons::weaponlist &t)
