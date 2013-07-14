@@ -157,7 +157,7 @@ void populate(void)
             }
             if (r == 9)
             {
-                env.map[i] == 'b';
+                env.map[i] = 'b';
                 env.score += 10;
             }
             if (r == 10)

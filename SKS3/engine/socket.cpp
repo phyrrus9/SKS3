@@ -37,7 +37,7 @@
  *****************************************************************/
 #include "socket.h"
 extern _environment env; //global data
-bool running = false, end = false;
+bool running = false, endSocket = false;
 int serv_sockfd, cli_sockfd;
 bool debug = false;
 void error(const char *msg)
@@ -135,7 +135,7 @@ void server(int port)
         if (n < 0) error("ERROR writing to socket");
         close(newsockfd);
     }
-    if (end)
+    if (endSocket)
         close(serv_sockfd);
 }
 
