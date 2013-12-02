@@ -100,6 +100,8 @@ void populate(void)
         env.kills_needed = env.kills = 0;
         for (int i = 1; i < 900; i++)
         {
+	    if (env.map[i] == 'd')
+		continue;
             env.grid[i] = '?';
             int r = rand() % 52;
             env.map[i] = echar;
@@ -202,7 +204,11 @@ void populate(void)
             {
                 env.map[i] = 'M';
             }
-                //env.dragons = new dragon[10];
+            //env.dragons = new dragon[10];
+	    for (int d = 0; d < 10; d++)
+	    {
+		//env.dragons[d];
+	    }
         }
     }
     else

@@ -108,7 +108,7 @@ class _uiwindow; //fixes redef error (tempfix)
 #define clear() system("clear")
 #define pause() env.paused = true
 #define unpause() env.paused = false
-#define VERSION_BUILD "SKS3 (3.2)"
+#define VERSION_BUILD "SKS3 (3.3)"
 
 #define COMPETITION_MIN 50000
 #define COMPETITION_MAX 250000

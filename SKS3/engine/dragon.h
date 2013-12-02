@@ -51,10 +51,11 @@ class dragon
     struct _internal_dragon_data internal_dragon_data;
 public:
          dragon(void);
-         //dragon(dragon &old);
+         dragon(dragon &old);
          dragon(int position);
          dragon(int position, int strength);
          dragon(int position, int strength, int attack);
+    void init(int position, int strength, int attack);
     void hit(void);
     void blowback(void);
     void die(void); //for developer stuff

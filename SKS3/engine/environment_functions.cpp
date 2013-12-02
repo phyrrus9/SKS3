@@ -117,7 +117,12 @@ void environment_init(_environment &t)
     //3.0.1 modifications
     //t.modcount = 0;
     env.disease_level = weapons::NONE;
-    
+
+    env.dragons = new dragon[10];
+    for (int d = 0; d < 10; d++)
+    {
+	env.dragons[d].init(0, 0, 0);
+    }
     //env.dragons = (dragon *)malloc(sizeof(dragon) * 10);
 }
 
@@ -259,5 +264,5 @@ void modifications_init(_modification_settings &t)
 
 void dragon_data_init(_dragon_data &t)
 {
-    t.number_of_dragons = 0;
+    t.number_of_dragons = 10;
 }

@@ -75,6 +75,8 @@ void kill(int p)
      * This will increment your kills, start the attack thread,
      * and then it will return so the engine can call the eat function
      */
+    if (env.map[p] == 'd')
+	return;
     if (env.map[p] != echar || env.map[p] != '#')
     {
         env.map[p] = env.grid[p] = echar;
@@ -144,6 +146,12 @@ void eat(int p)
         env.tapeworm_count++;
         ate = true;
         user_status *s = new user_status("Oh no, you got tapeworm!");
+    }
+    if (env.map[p] == 'd')
+    {
+	env.dragons[find_dragon(p)].eaten();
+        attack_color_change();
+        ate = true;
     }
     /*
      * The following statements are used for special characters
@@ -315,7 +323,8 @@ void attack(void)
     }
     else
     {
-        eat(location);
+	if (env.view[location] != 'd')
+        	eat(location);
     }
 }
 void increment_attack(void)
