@@ -56,7 +56,7 @@ void terminate(int param) //segmentation fault on clean exit (unalloc from resto
      */
     kill(getpid(), SIGTERM);
 }
-int getch_()
+char getch_()
 {
     /*
      * Get a single character using the ncurses functions
@@ -65,7 +65,7 @@ int getch_()
      * here just makes it a lot easier to grab a character
      * instead of pasting this code everywhere we needed it
      */
-    int c;
+    char c;
     initscr();
     cbreak();
     c = getch();
@@ -294,42 +294,4 @@ int char_int(char c)
         ret = c - 48;
     }
     return ret;
-}
-
-int getche()
-{
-	int c = getch_();
-	if (c == 27)
-	{
-		nodelay(stdscr, true);
-		c = getch_();
-		if (c == ERR)
-			c = 27;
-		else if (c == 91)
-		{
-			c = getch_();
-			if (c < 65 || c > 68)
-			{
-				ungetch(c);
-			}
-			switch (c)
-			{
-				case 65:
-					c = ARROW_UP;
-					break;
-				case 66:
-					c = ARROW_DOWN;
-					break;
-				case 67:
-					c = ARROW_RIGHT;
-					break;
-				case 68:
-					c = ARROW_LEFT;
-					break;
-			}
-		}
-		nodelay(stdscr, false);
-	}
-	//nocbreak();
-	return c;
 }

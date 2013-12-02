@@ -284,7 +284,7 @@ void attack(void)
         //env.allow_refresh = true;
         if (strcmp(q_answer, question::answers[key]) == 0)
         {
-            user_status *s = new user_status("You got it right! Here is your reward:");
+            printf("You got it right! Here is your reward:\r\n");
             env.health += question::gains[key].health;
             env.lives += question::gains[key].lives;
             env.score += question::gains[key].score;
@@ -292,7 +292,8 @@ void attack(void)
         }
         else
         {
-            user_status *s = new user_status("Sorry, you got it wrong!");
+            printf("Sorry, you got it wrong!\n"
+                   "Press any key to continue...");
         }
         //getch_();
         env.allow_refresh = true;

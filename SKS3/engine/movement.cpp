@@ -94,7 +94,7 @@ void populate(void)
      * at least 50.)
      */
     int health_i = 0;
-    //env.map[0] = env.grid[0] = '@';
+    env.map[0] = env.grid[0] = '@';
     if (!env.single)
     {
         env.kills_needed = env.kills = 0;
@@ -207,40 +207,7 @@ void populate(void)
     }
     else
     {
-		char mapname[150];
-		int sp_max = 0;
-		FILE *f;
-		sprintf(mapname, "/usr/share/sks3/maps/%d.map", env.levels_completed);
-		f = fopen(mapname, "r");
-		if (f == NULL)
-		{
-			clear();
-			env.allow_refresh = false;
-			env.allow_autosave = false;
-			initscr();
-			WINDOW *v = newwin(6, 28, LINES / 2, COLS / 2);
-			wclear(v);
-			setdisplay(v, " Yay :)");
-			wprintw(v, " Congrats! You win!\n");
-			wprintw(v, " Your score was: %07d\n", env.totalscore);
-			wprintw(v, " Press any key to exit.");
-			wborder(v, 0, 0, 0, 0, 0, 0, 0, 0);
-			wrefresh(v);
-			wrefresh(v);
-			getch();
-			hiscore::user_save();
-			hiscore::display();
-			endwin();
-			exit(0);
-		}
-		for (int i = 0; i < 900; i++)
-		{
-			fscanf(f, "%c  ", &env.map[i]);
-			env.grid[i] = '?';
-		}
-        env.kills_needed = 3000;
-		fclose(f);
-		env.position = 0;
+        //??
     }
     env.total_enemies = env.kills_needed; //record what the full total is before subtraction
     /* do the subtraction */
@@ -380,7 +347,7 @@ void move(direction d)
     {
         env.player = (character::player)(d);
         env.map[prev] = env.grid[prev] = echar;
-        //env.view[env.position] = '@';
+        env.view[env.position] = '@';
         light(env.position);
         env.moves += 1;
         if (!thread_started)

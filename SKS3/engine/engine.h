@@ -113,16 +113,11 @@ class _uiwindow; //fixes redef error (tempfix)
 #define COMPETITION_MIN 50000
 #define COMPETITION_MAX 250000
 
-#define ARROW_UP -1
-#define ARROW_DOWN -2
-#define ARROW_LEFT -3
-#define ARROW_RIGHT -4
-
 const int portnum = 5102;
 const int time_limit = 3600; //time limit in seconds
 const char echar = '~';
 using namespace std;
-int getch_(void);
+char getch_(void);
 void enginecmd(string, string, bool override = false);
 void showhelp(void);
 void save(void);
@@ -134,5 +129,4 @@ void colorifyv3(_uiwindow); /*broken*/
 void colorifyv3(_uiwindow, color); /*broken*/
 void terminate(int);
 int char_int(char);
-int getche(); //get with escape detection (arrow keys and such)
 #endif

@@ -207,7 +207,7 @@ int main(int argc, const char * argv[])
         system("rm .sksfastboot");
         exit(EXIT_SUCCESS);
     }
-    if ((selection >= 9 || selection <= 0) && selection != 10)
+    if (selection >= 9 || selection <= 0)
         exit(EXIT_SUCCESS);
     srand((int)seed);
     showhelp();
@@ -256,7 +256,6 @@ void game(int argc, const char * argv[])
             env.score += env.kills;
             populate();
             rerunmods(env.modlist);
-			env.kills = 0;
             continue;
         }
         if (env.keys >= 500)
@@ -312,33 +311,13 @@ void game(int argc, const char * argv[])
         if (run)
         {
             env.refresh_screen = true;
-            int a = getche();
+            char a = getch_();
             bool turning = false, moving = false;
             direction t;
             if (char_int(a) != -1)
                 for (int i = 0; i < weapons::num_of_weapons + 1; i++)
                     if (char_int(a) == i)
                         setselectedweapon(i - 1);
-			/*if (a == ARROW_UP)
-			{
-				t = N;
-				moving = true;
-			}
-			if (a == ARROW_DOWN)
-			{
-				t = S;
-				moving = true;
-			}
-			if (a == ARROW_LEFT)
-			{
-				t = E;
-				moving = true;
-			}
-			if (a == ARROW_RIGHT)
-			{
-				t = W;
-				moving = true;
-			}*/
             if (a == env.settings.keys.w)
             {
                 t = N;
@@ -675,7 +654,7 @@ int displaylauncher(long &seed)
     WINDOW *vin;
     while (true)
     {
-        vin = phyrrus9::nwin::wcreatewin(21, 65);
+        vin = phyrrus9::nwin::wcreatewin(20, 65);
         setdisplay(vin, " Welcome  to  Super  Key  Seeker  3  ©  2012  phyrrus9");
         wprintw(vin, " This game has several modes to select, but if for you\n "
                     "want to play the older games, there is a downloader\n "
@@ -693,17 +672,10 @@ int displaylauncher(long &seed)
                     "** You can pass a parameter to this game as a seed\n "
                     "*** You may also press S to set the seed from this menu\n "
                     "*** Press C to enter competition mode now.\n "
-					"*** Press s to enter story mode\n "
-                    " >");
+                    ">");
         wrefresh(vin);
         selection = getch_();
         phyrrus9::nwin::wcldisplay(vin);
-		if (selection == 's')
-		{
-			env.single = true;
-			selectdifficulty();
-			return 10;
-		}
         if (selection == 'S')
         {
             WINDOW *w;
