@@ -198,6 +198,8 @@ void game_timer_increment(game_timer & t)
     {
         do_disease_damage();
     }
+    if (env.competition_mode && t.second % 15 == 0)
+        autosave();
     if (t.second >= 60)
     {
         t.minute++;
