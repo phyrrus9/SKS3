@@ -1,3 +1,7 @@
+Version 3.2:
+	Fixed the map errors, dragons will come back soon.
+	Working on mp3 auto detection, for now, not implemented
+
 Version 3.1.2 & 3.1.1:
 	Added riddles (Mystery boxes M)
 	Diseases, if you leave tapeworms in your system, you will contract a 
