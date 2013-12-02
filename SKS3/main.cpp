@@ -789,11 +789,6 @@ int displaylauncher(long &seed)
                 valid = false;
             if (env.totalscore < COMPETITION_MIN)
                 valid = false;
-	    for (int i = 0; i < env.modcount; i++)
-	    {
-		if (env.modlist[i].enabled)
-			valid = false;
-	    }
             for (int i = 0; i < 900; i++)
             {
                 //any error checking for the map goes here

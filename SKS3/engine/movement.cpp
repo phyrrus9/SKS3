@@ -444,11 +444,11 @@ void showmap(void)
             }
             if (env.view[i] != '?' && env.view == env.map)
             {
-                cout << env.view[i] << "   ";
+                cout << env.view[i] << "  ";
             }
             else
             {
-                cout << env.grid[i] << "   ";
+                cout << "   ";
             }
             colorify();
         }
@@ -458,7 +458,7 @@ void showmap(void)
             //cout <<  "@";
             showplayer();
             colorify();
-            cout << "   ";
+            cout << "  ";
         }
         if (j == 30)
         {
