@@ -245,7 +245,7 @@ void settings_read(void)
 void autosave(void)
 {
     string savefile = select_slot(0);
-    if (env.competition_mode)
+    if (env.competition)
     {
        savefile = env.competition.username;
     }
