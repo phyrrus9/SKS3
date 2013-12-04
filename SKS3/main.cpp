@@ -686,7 +686,7 @@ int displaylauncher(long &seed)
                     "Please select an option from the list below to start\n "
                     "1. Single player (infinite) game (OSX only)\n "
                     "2. Single player (infinite) game no sound\n "
-					"s. Single player (story mode)\n"
+					"s. Single player (story mode)\n "
                     "3. Miltiplayer (local) game\n "
                     "4. Multiplayer (online) game\n "
                     "5. Play KS4200\n "
@@ -698,6 +698,7 @@ int displaylauncher(long &seed)
                     "*** You may also press S to set the seed from this menu\n "
                     "*** Press C to enter competition mode now.\n "
                     " >");
+		wborder(vin, 0, 0, 0, 0, 0, 0, 0, 0);
         wrefresh(vin);
         selection = getch_();
         phyrrus9::nwin::wcldisplay(vin);
@@ -734,37 +735,53 @@ int displaylauncher(long &seed)
         {
             WINDOW *w;
             w = phyrrus9::nwin::wcreatewin(4, 35);
-            setdisplay(w, " Competition mode setup");
-            wprintw(w, " Competition number: ");
-            wrefresh(w);
-            cin >> env.competition.number;
-            wclear(w);
-            setdisplay(w, " Competition mode setup");
-            wprintw(w, " Competition password: ");
-            wrefresh(w);
-            cin >> env.competition.password;
-            setdisplay(w, " Competition mode setup");
-            wprintw(w, " Username: ");
-            wrefresh(w);
-            cin >> env.competition.username;
-            wclear(w);
-            phyrrus9::nwin::wresizewindow(w, 7, 35);
-            wclear(w);
-            setdisplay(w, " Competition settings");
-            wprintw(w, " Number: %d\n", env.competition.number);
-            wprintw(w, " Password: %s\n", env.competition.password);
-            wprintw(w, " User: %s\n", env.competition.username);
-            wprintw(w, " Press any key to start. ");
-            wrefresh(w);
-            getch_();
+			setdisplay(w, " Competition mode");
+			wprintw(w, " Resume an old game?\n"
+					" Y/N");
+			wrefresh(w);
+			char res = 0;
+			res = getch();
+			if (tolower(res) != 'n')
+			{
+				wprintw(w, " User: ");
+				wrefresh(w);
+				cin >> env.savefile;
+				restore();
+			}
+			else
+			{
+				wclear(w);
+    	        setdisplay(w, " Competition mode setup");
+				wprintw(w, " Competition number: ");
+	            wrefresh(w);
+	            cin >> env.competition.number;
+	            wclear(w);
+	            setdisplay(w, " Competition mode setup");
+            	wprintw(w, " Competition password: ");
+            	wrefresh(w);
+            	cin >> env.competition.password;
+            	setdisplay(w, " Competition mode setup");
+            	wprintw(w, " Username: ");
+            	wrefresh(w);
+            	cin >> env.competition.username;
+            	wclear(w);
+            	phyrrus9::nwin::wresizewindow(w, 7, 35);
+            	wclear(w);
+            	setdisplay(w, " Competition settings");
+            	wprintw(w, " Number: %d\n", env.competition.number);
+            	wprintw(w, " Password: %s\n", env.competition.password);
+            	wprintw(w, " User: %s\n", env.competition.username);
+            	wprintw(w, " Press any key to start. ");
+            	wrefresh(w);
+            	getch_();
             
-            env.competition_mode = true;
-            env.developer_mode = false;
-            env.cheats = false;
-            env.multiplayer = false;
-            multiplayer = false;
-            
-            wclear(w);
+            	env.competition_mode = true;
+            	env.developer_mode = false;
+            	env.cheats = false;
+            	env.multiplayer = false;
+            	multiplayer = false;
+			}
+			wclear(w);
             phyrrus9::nwin::wresizewindow(w, 6, 35);
             setdisplay(w, " Sound settings");
             wprintw(w, " Y. Play with sound\n");
