@@ -28,78 +28,20 @@
  you can just cd into the source directory and run the following
  find . -type f -print0 | xargs -0 cat | wc -l
  =================================================================
- File: questions.h
- Description: Holds structures and databases for the mystery boxes
+ File: singlemap.h
+ Description: Definition for the singlemap structure. Used to store
+ information about single player maps.
  Authors: phyrrus9 <phyrrus9@gmail.com>
  *****************************************************************/
-#ifndef SKS3_questions_h
-#define SKS3_questions_h
 
-namespace question
+#ifndef SKS3_singlemap_h
+#define SKS3_singlemap_h
+
+struct singlemap
 {
-    
-    struct bonus
-    {
-        int health;
-        int lives;
-        int score;
-        int attack;
-    };
-
-#define q_complete "Complete the statement:"
-#define q_answerme "Answer me this:"
-#define q_boolean  "True (1) or false (0):"
-    
-    const static int question_count = 8;
-
-    static char instructions[question_count][50] =
-    {
-        q_complete,
-        q_boolean,
-        q_answerme,
-        q_answerme,
-        q_answerme,
-        q_answerme,
-        q_answerme,
-		q_complete
-    };
-
-    static char questions[question_count][80] =
-    {
-        "Hello, ",
-        "Division by zero is possible",
-        "What is the square root an empty return value",
-        "What has a foot, but no legs",
-        "Poor people have it. Rich people need it. If you eat it you die.",
-        "What comes down but never goes up",
-        "Mary’s father has 5 daughters: Nana, Nene, Nini, Nono. Who is the fifth?",
-		"_ _ _ _ _ _ _ _ _ _ is like farts, if you have to force it, it's probably shit."
-    };
-
-    static char answers[question_count][20] =
-    {
-        "World",
-        "1",
-        "i",
-        "a snail",
-        "nothing",
-        "rain",
-        "Mary",
-		"Creativity"
-    };
-    
-    static bonus gains[question_count] =
-    {
-        { 0,     1,    150,   0  },
-        { 50,    0,    300,   0  },
-        { 100,   2,    5000,  2  },
-        { 250,   2,    7000,  4  },
-        { 500,   4,    9000,  8  },
-        { 50,    2,    500,   0  },
-        { 100,   0,    900,   1  },
-		{ 100,   6,    50000, 10 }
-    };
-    
-}
+	char name[32];
+	char dev[64];
+	char map[900];
+};
 
 #endif

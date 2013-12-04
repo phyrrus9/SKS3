@@ -209,7 +209,10 @@ int main(int argc, const char * argv[])
     }
     if ((selection >= 9 || selection <= 0) && selection != 10)
         exit(EXIT_SUCCESS);
-    srand((int)seed);
+	if (!env.competition_mode)
+    	srand((int)seed);
+	else
+		srand(env.competition.number); //seed so everybody has the same map
     showhelp();
     game(argc, argv);
 }
@@ -681,8 +684,9 @@ int displaylauncher(long &seed)
                     "want to play the older games, there is a downloader\n "
                     "in this menu, it requires internet to work. Thanks :)\n "
                     "Please select an option from the list below to start\n "
-                    "1. Single player (local) game\n "
-                    "2. Single player (local) game no sound (OSX only)\n "
+                    "1. Single player (infinite) game (OSX only)\n "
+                    "2. Single player (infinite) game no sound\n "
+					"s. Single player (story mode)\n"
                     "3. Miltiplayer (local) game\n "
                     "4. Multiplayer (online) game\n "
                     "5. Play KS4200\n "
@@ -693,7 +697,6 @@ int displaylauncher(long &seed)
                     "** You can pass a parameter to this game as a seed\n "
                     "*** You may also press S to set the seed from this menu\n "
                     "*** Press C to enter competition mode now.\n "
-					"*** Press s to enter story mode\n "
                     " >");
         wrefresh(vin);
         selection = getch_();
@@ -702,6 +705,18 @@ int displaylauncher(long &seed)
 		{
 			env.single = true;
 			selectdifficulty();
+			WINDOW *w = phyrrus9::nwin::wcreatewin(1, 1);
+			wclear(w);
+            phyrrus9::nwin::wresizewindow(w, 6, 35);
+            setdisplay(w, " Sound settings");
+            wprintw(w, " Y. Play with sound\n");
+            wprintw(w, " N. Play without sound\n");
+            wprintw(w, " :");
+            wrefresh(w);
+			wclear(w);
+			delwin(w);
+            char sound = toupper(getch_());
+            env.music = sound == 'Y' ? true : false;
 			return 10;
 		}
         if (selection == 'S')
@@ -789,11 +804,11 @@ int displaylauncher(long &seed)
                 valid = false;
             if (env.totalscore < COMPETITION_MIN)
                 valid = false;
-	    for (int i = 0; i < env.modcount; i++)
-	    {
-		if (env.modlist[i].enabled)
-			valid = false;
-	    }
+	    	for (int i = 0; i < env.modcount; i++)
+	    	{
+				if (env.modlist[i].enabled)
+					valid = false;
+	    	}
             for (int i = 0; i < 900; i++)
             {
                 //any error checking for the map goes here
@@ -802,14 +817,16 @@ int displaylauncher(long &seed)
             
             if (valid)
             {
-                phyrrus9::nwin::wresizewindow(w, 9, 35);
+                phyrrus9::nwin::wresizewindow(w, 11, 35);
                 setdisplay(w, " File information");
                 wprintw(w, " Score: %d\n", env.totalscore);
                 wprintw(w, " Time: %d:%d\n", env.timer.minute, env.timer.second);
                 wprintw(w, " Number: %d\n", env.competition.number);
                 wprintw(w, " Password: %s\n", env.competition.password);
                 wprintw(w, " Username: %s\n", env.competition.username);
+				wprintw(w, " Time: %02d:%02d\n", env.timer.minute, env.timer.second);
                 wprintw(w, " Press any key to return ");
+				wborder(w, 0, 0, 0, 0, 0, 0, 0, 0);
                 wrefresh(w);
                 getch_();
             }

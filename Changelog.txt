@@ -1,3 +1,14 @@
+Version 3.3.2:
+	Added a touch more code, a singleplayer mode, etc..
+
+Version 3.3.1:
+	Added some improvements
+	Support for arrow keys
+	Updated mod language, you can now use the following in if statements
+		env->cheats
+		env->health
+		env->lives
+		env->attack
 Version 3.3:
 	Fixed the dragons! :)
 

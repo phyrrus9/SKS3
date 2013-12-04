@@ -247,6 +247,7 @@ void populate(void)
         env.kills_needed = 3000;
 		fclose(f);
 		env.position = 0;
+		return;
     }
     env.total_enemies = env.kills_needed; //record what the full total is before subtraction
     /* do the subtraction */
@@ -275,7 +276,15 @@ void populate(void)
          fifty, because 150 is easier than 200
          ********************************************/
     }
-    env.map[rand() % 400] = '@'; //randomly place a teleport
+	if (!env.single)
+	{
+    	env.map[rand() % 400] = '@'; //randomly place a teleport
+	}
+	else
+	{
+		//make sure there is no teleport at 0
+		env.map[0] = echar;
+	}
     /*
      * This part is where we will check to make
      * sure that the map is playable, because
@@ -341,15 +350,25 @@ void move(direction d)
     d(E)
         if (env.map[env.position - 1] != '#' && (env.position - 1 > 0))
         {
-            eat(env.position - 1);
-            env.position -= 1;
+			if (env.single && (env.position - 1) % 299 == 0)
+			{}
+			else
+			{
+            	eat(env.position - 1);
+            	env.position -= 1;
+			}
             moved = true;
         }
     d(W)
         if (env.map[env.position + 1] != '#' && (env.position + 1 < 900))
         {
-            eat(env.position+ 1);
-            env.position += 1;
+			if (env.single && (env.position - 1) % 300 == 0)
+			{}
+			else
+			{
+            	eat(env.position+ 1);
+            	env.position += 1;
+			}
             moved = true;
         }
     d(SAV)
@@ -529,4 +548,27 @@ void light(int p)
         env.grid[p + 30] = env.map[p + 30];
     if ((p + 31) < 900)
         env.grid[p + 31] = env.map[p + 31];
+	if (env.single) //you get more light (1 x sq)
+	{
+		if ((p - 60) >= 0)
+		{
+			if (env.map[p - 30] != '#')
+				env.grid[p - 60] = env.map[p - 60];
+		}
+		if ((p - 2) >= 0)
+		{
+			if (env.map[p - 1] != '#')
+				env.grid[p - 2] = env.map[p - 2];
+		}
+		if ((p + 2) < 900)
+		{
+			if (env.map[p + 1] != '#')
+				env.grid[p + 2] = env.map[p + 2];
+		}
+		if ((p + 60) < 900)
+		{
+			if (env.map[p + 30] != '#')
+				env.grid[p + 60] = env.map[p + 60];
+		}
+	}
 }

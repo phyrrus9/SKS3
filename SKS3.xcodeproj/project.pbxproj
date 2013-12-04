@@ -68,6 +68,7 @@
 		4A86878C159686E4001FF5E0 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		4A8B431216487AAC00CDA50C /* uinterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uinterface.cpp; sourceTree = "<group>"; };
 		4A8B431316487AAC00CDA50C /* uinterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = uinterface.h; sourceTree = "<group>"; };
+		4AB3F9CD184D6B82008BC0B8 /* singlemap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = singlemap.h; sourceTree = "<group>"; };
 		4AB520541701F7AF003EC258 /* tapeworm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tapeworm.cpp; sourceTree = "<group>"; };
 		4AB520551701F7AF003EC258 /* tapeworm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tapeworm.h; sourceTree = "<group>"; };
 		4AB5205817020B72003EC258 /* user_status.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = user_status.cpp; sourceTree = "<group>"; };
@@ -214,6 +215,7 @@
 				4AD87767170A1FAB00A8A1C1 /* questions.h */,
 				4A383A631703905B00715E46 /* dragon.h */,
 				4AB520551701F7AF003EC258 /* tapeworm.h */,
+				4AB3F9CD184D6B82008BC0B8 /* singlemap.h */,
 			);
 			path = engine;
 			sourceTree = "<group>";

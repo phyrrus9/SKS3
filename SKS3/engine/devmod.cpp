@@ -294,6 +294,26 @@ if  (\
                         checkif(env.levels_completed, if_op, if_value) { execute = false; }
                         else { execute = true; }
                     }
+					if (strcmp(condition, "env->cheats") == 0)
+					{
+						checkif(env.cheats, if_op, if_value) { execute = false; }
+						else { execute = true; }
+					}
+					if (strcmp(condition, "env->health") == 0)
+					{
+						checkif(env.cheats, if_op, if_value) { execute = false; }
+						else { execute = true; }
+					}
+					if (strcmp(condition, "env->lives") == 0)
+					{
+						checkif(env.cheats, if_op, if_value) { execute = false; }
+						else { execute = true; }
+					}
+					if (strcmp(condition, "env->attack") == 0)
+					{
+						checkif(env.cheats, if_op, if_value) { execute = false; }
+						else { execute = true; }
+					}
                 }
             }
             break;
