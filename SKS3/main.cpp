@@ -734,7 +734,7 @@ int displaylauncher(long &seed)
         else if (selection == 'C')
         {
             WINDOW *w;
-            w = phyrrus9::nwin::wcreatewin(4, 35);
+            w = phyrrus9::nwin::wcreatewin(9, 35);
 			setdisplay(w, " Competition mode");
 			wprintw(w, " Resume an old game?\n"
 					" Y/N");
@@ -750,6 +750,7 @@ int displaylauncher(long &seed)
 			}
 			else
 			{
+				phyrrus9::nwin::wresizewindow(w, 7, 35);
 				wclear(w);
     	        setdisplay(w, " Competition mode setup");
 				wprintw(w, " Competition number: ");
