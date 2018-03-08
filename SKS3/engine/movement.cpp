@@ -415,7 +415,7 @@ void showmap(void)
             }
             else
             {
-                cout << "   ";
+                cout << env.grid[i] << "  ";
             }
             colorify();
         }

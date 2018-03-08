@@ -171,7 +171,7 @@ int main(int argc, const char * argv[])
         char * host = new char[255];
         cin >> host;
         strcpy(hostname, host);
-        delete host;
+        delete[] host;
     }
     if (selection == 3 || selection == 4)
     {
@@ -844,7 +844,7 @@ void devsettings(void)
             wrefresh(w);
             wprintw(w, "Disable fog? 0 (1/0) ");
             wrefresh(w);
-            env.showmap = getch() - 48;
+            env.showmap = !(getch() - 48);
             wprintw(w, "%d\n", env.showmap);
             wrefresh(w);
             done = 1;

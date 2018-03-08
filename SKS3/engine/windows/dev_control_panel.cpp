@@ -126,7 +126,7 @@ void developer_settings_window(void)
                         wrefresh(vin);
                         scanf("%s", tempstr);
                         env.savefile = tempstr;
-                        delete tempstr;
+                        delete[] tempstr;
                         werase(vin);
                         wrefresh(vin);
                         wresize(vin, height, width);

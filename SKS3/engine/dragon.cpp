@@ -46,7 +46,7 @@ dragon::dragon(int position, int strength, int attack)
     if (env.dragon_data.number_of_dragons > 9)
         return;
     internal_dragon_data.position = position;
-    internal_dragon_data.strength;
+    //internal_dragon_data.strength;
     internal_dragon_data.attack = attack;
     env.map[internal_dragon_data.position] = env.grid[internal_dragon_data.position] = 'd';
     env.dragon_data.number_of_dragons++;

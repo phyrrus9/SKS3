@@ -260,15 +260,17 @@ int ladder(int prev)
   {
     null = lvl + 1;
     if (null <= leveltotal)
-    if (static_map)
     {
+    	if (static_map)
+    	{
         lvl++;
         intermission(lvl);
-    }
-    else
-    {
+    	}
+    	else
+    	{
         file_level++;
         read_map(".ksmapfile");
+	}
     }
     pos = start[lvl];
   }
@@ -276,14 +278,16 @@ int ladder(int prev)
   {
     null = lvl--;
     if (null <= leveltotal)
-    if (static_map)
     {
+    	if (static_map)
+    	{
         lvl--;
-    }
-    else
-    {
+    	}
+    	else
+    	{
         file_level--;
         read_map(".ksmapfile");
+    	}
     }
     pos = start[lvl];
   }
